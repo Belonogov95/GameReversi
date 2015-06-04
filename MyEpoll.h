@@ -3,11 +3,14 @@
 //
 #include <sys/epoll.h>
 #include <map>
+//#include <bits/shared_ptr.h>
 #include "MySocket.h"
 #include "MyClient.h"
+#include <memory>
 
 #ifndef HWW2_MYEPOLL_H
 #define HWW2_MYEPOLL_H
+#define db(x) cerr << #x << " = " << x << endl
 
 const int MAX_EVENTS = 2;
 const int WAITING_ACCEPT = 1;
@@ -17,19 +20,26 @@ const int WAITING_READ_OR_WRITE = 2;
 using namespace std;
 
 class MyEpoll {
+private:
     int epollDescriptor;
     bool closed;
-    map < int, void (*) (MyClient) > onAcceptMap;
-    map < int, void (*) (MyClient) > onReceiveMap;
+    map < int, void (*) (shared_ptr < MyClient > ) > onAcceptMap;
+    map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
     map < int, int > socketDescriptorType;
-    MyEpoll();
+    map < int, int > portFromDescriptor;
+    map < int, shared_ptr < MyClient > > clientFromDescriptor;
 
 public:
 
-    void add(MySocket mySocket, void (*onAccept)(MyClient), void (*onReceive)(MyClient));
 
     void start();
 
+    MyEpoll();
+
+
+    void write(shared_ptr<MyClient> myClient);
+
+    void add(MySocket mySocket, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>));
 };
 
 

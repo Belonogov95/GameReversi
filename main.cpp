@@ -7,50 +7,66 @@
 #include <assert.h>
 #include <thread>
 #include <unistd.h>
+#include <fcntl.h>
+#include "MySocket.h"
+#include "MyEpoll.h"
 //#include <map>
 
 using namespace std;
 
 #define db(x) cerr << #x << " = " << x << endl
 
-int main() {
+void onAC(MyClient cl) {
+    db("onAC");
+    char * s = (char *) string("abacaba").c_str();
+}
 
+void onRC(MyClient cl) {
+    db("onRC");
+}
+
+
+void test() {
+    MySocket sc(7777);
+    MyEpoll ep;
+
+    cerr << "before\n";
+    //ep.add(sc, onAC, onRC);
+    cerr << "added\n";
+    ep.start();
+    exit(0);
+}
+
+int main() {
+    test();
 
     int sd = socket(AF_INET, SOCK_STREAM, 0);
     db(sd);
     sockaddr_in address;
     memset(&address, 0, sizeof(address));
     address.sin_family = AF_INET;
-    address.sin_port = htons(40001);
+    address.sin_port = htons(39005);
     address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
     assert(bind(sd, (const sockaddr *) &address, sizeof(address)) == 0);
-    cerr << "sdf\n";
-    assert(listen(sd, 5) == 0);
-    cerr << "after \n";
-    for (int i = 0; i < 1; i++) {
-        cerr << "next step\n";
-        this_thread::sleep_for(chrono::milliseconds(1000));
-    }
+    int res = listen(sd, 5);
+    db(res);
+    assert(res == 0);
     sockaddr_storage outAddr;
     socklen_t len = sizeof outAddr;
-    db("before");
+
     int new_sd = accept(sd, (sockaddr*)&outAddr, &len);
-    db(new_sd);
-    char *s = "8888";
-    int bytes_sent = (int) send(new_sd, s, strlen(s), 0);
-    db(bytes_sent);
-
-    for (int i = 0; i < 1; i++) {
-        cerr << "next step\n";
-        this_thread::sleep_for(chrono::milliseconds(1000));
-    }
-
+    //char *s = (char *) string("8888").c_str();
+    //int bytes_sent = (int) send(new_sd, s, strlen(s), 0);
 
     int L = 10;
     char buff[L];
     for (int i = 0; i < L; i++)
         buff[i] = '_';
+    db("before recv");
+
+    int mask = fcntl(new_sd, F_GETFL, 0);
+    //fcntl(new_sd, F_SETFL, mask | O_NONBLOCK);
     int sz = (int) recv(new_sd, buff, (size_t) L, 0);
     db(sz);
     cerr << "|";
@@ -61,13 +77,13 @@ int main() {
     cerr << ":" << buff << ":" << endl;
     close(new_sd);
     close(sd);
-    while (true);
 
 
     //db(errno);
     //perror("sdf");
     //strerror(errno);
     //while (true);
+
 
     return 0;
 }

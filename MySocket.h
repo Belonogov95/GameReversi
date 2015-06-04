@@ -5,22 +5,22 @@
 #ifndef HWW2_MYSOCKET_H
 #define HWW2_MYSOCKET_H
 
+const int BACK_LOG = 10;
 
 class MySocket {
     int socketDescriptor;
     int port;
 
 public:
-    int getSocketDescriptor() const {
-        return socketDescriptor;
-    }
+    int getSocketDescriptor() const ;
+    int getPort() const ;
+    void makeSocketNonBlocking();
 
-    int getPort() const {
-        return port;
-    }
 
+    MySocket();
     MySocket(int port);
     MySocket(int port, int socketDescriptor);
+    MySocket operator = (MySocket other);
 };
 
 
