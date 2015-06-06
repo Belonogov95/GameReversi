@@ -22,7 +22,7 @@ using namespace std;
 class MyEpoll {
 private:
     int epollDescriptor;
-    bool closed;
+    bool running;
     map < int, void (*) (shared_ptr < MyClient > ) > onAcceptMap;
     map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
     map < int, int > socketDescriptorType;
@@ -35,7 +35,7 @@ public:
     void start();
 
     MyEpoll();
-
+    ~MyEpoll();
 
     void write(shared_ptr<MyClient> myClient);
 

@@ -9,7 +9,11 @@
 #include <array>
 #include <vector>
 #include "MySocket.h"
+#include <iostream>
+
 using namespace std;
+
+#define db(x) cerr << #x << " = " << x << endl
 
 class MyClient {
 private:
@@ -21,6 +25,7 @@ public:
     MySocket mySocket;
     vector < char > buffer;
     int bufferCursor;
+    bool closed;
     MyClient();
     MyClient(MySocket mySocket, int epollDescriptor);
     MyClient(const MyClient & myClient);
@@ -35,6 +40,9 @@ public:
     int readyToWrite();
 
     int read(vector<char> &buffer);
+
+
+    void closeClient();
 };
 
 

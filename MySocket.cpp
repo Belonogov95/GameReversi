@@ -27,7 +27,9 @@ MySocket::MySocket(int port) : port(port) {
 }
 
 
-MySocket::MySocket(int port, int socketDescriptor) : port(port), socketDescriptor(socketDescriptor) { }
+MySocket::MySocket(int port, int socketDescriptor) : port(port), socketDescriptor(socketDescriptor) {
+    makeSocketNonBlocking();
+}
 
 MySocket::MySocket(): port(-1), socketDescriptor(-1) { }
 
