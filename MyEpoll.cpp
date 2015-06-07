@@ -8,7 +8,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "MyEpoll.h"
-#include "debug.h"
 
 
 MyEpoll::MyEpoll() {
@@ -24,7 +23,7 @@ MyEpoll::~MyEpoll() {
     assert(close(epollDescriptor) == 0);
 }
 
-void MyEpoll::add(int port, void (*onAccept)(shared_ptr < MyClient > ), void (*onReceive)(shared_ptr < MyClient > )) {
+void MyEpoll::add(int port, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>)) {
     MyClient myClient(port);
 
     epoll_event epollEvent;
@@ -34,18 +33,20 @@ void MyEpoll::add(int port, void (*onAccept)(shared_ptr < MyClient > ), void (*o
     onReceiveMap[myClient.getSocketDescriptor()] = onReceive;
     socketDescriptorType[myClient.getSocketDescriptor()] = WAITING_ACCEPT;
     portFromDescriptor[myClient.getSocketDescriptor()] = myClient.getPort();
+    //clientFromDescriptor[myClient.getSocketDescriptor()] =
 
     epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, myClient.getSocketDescriptor(), &epollEvent);
 
 }
 
+
 void MyEpoll::start() {
     for (; running;) {
         epoll_event events[MAX_EVENTS];
-        cerr << "before wait\n";
+//        cerr << "before wait\n";
         int eventsSize = epoll_wait(epollDescriptor, events, MAX_EVENTS, -1);
-        cerr << "after wait\n";
-        db(eventsSize);
+//        cerr << "after wait\n";
+//        db(eventsSize);
         for (int i = 0; i < eventsSize; i++) {
             int socketDescriptor = events[i].data.fd;
             db(socketDescriptor);
@@ -56,10 +57,18 @@ void MyEpoll::start() {
                     cerr << "no such comand :" << s << ":\n";
                 }
                 else {
+//                    vector < MyClient * > clients;
+//                    for (auto x: clientFromDescriptor) {
+//                        clients.push_back(x.second.get());
+//                        db2("socketDescriptor", x.first);
+//                    }
+//                    for (auto x: clients)
+//                        x->closeClient();
+//                    running = false;
                     cerr << "success\n";
                 }
             }
-            else  if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {
+            else if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {
 //                db("new accept");
                 assert(events[i].events & EPOLLIN);
                 sockaddr_storage sockAddrStorage;
@@ -68,7 +77,8 @@ void MyEpoll::start() {
 
                 int port = portFromDescriptor[socketDescriptor];
 //                db(newSocketDescriptor);
-                shared_ptr < MyClient > newClient(new MyClient(port, newSocketDescriptor, epollDescriptor));
+                shared_ptr<MyClient> newClient(
+                        new MyClient(port, newSocketDescriptor, epollDescriptor, this));
                 //newClient.get
 
                 onAcceptMap[newSocketDescriptor] = NULL;
@@ -89,10 +99,10 @@ void MyEpoll::start() {
             }
             else if (socketDescriptorType[socketDescriptor] == WAITING_READ_OR_WRITE) {
 //                cerr << "here\n";
-                shared_ptr < MyClient > myClient = clientFromDescriptor[socketDescriptor];
+                shared_ptr<MyClient> myClient = clientFromDescriptor[socketDescriptor];
 //                db(myClient.use_count());
                 //cerr << "here\n";
-                write(myClient);
+                write(myClient.get());
 //                cerr << "here\n";
 
                 onReceiveMap[socketDescriptor](myClient);
@@ -106,20 +116,15 @@ void MyEpoll::start() {
 
 }
 
-void MyEpoll::write(shared_ptr < MyClient > myClient) {
+void MyEpoll::write(MyClient * myClient) {
     assert(!myClient->closed);
     if (myClient->readyToWrite() == 0)
         myClient->setWrite(0);
     else {
-//        db2(myClient->buffer.size(), myClient->bufferCursor);
-        int len = (int) send(myClient->getSocketDescriptor(), (void*)&(myClient->buffer[myClient->bufferCursor]),
+        int len = (int) send(myClient->getSocketDescriptor(), (void *) &(myClient->buffer[myClient->bufferCursor]),
                              (size_t) myClient->readyToWrite(), 0);
-//        db(errno);
-//        cerr << strerror(errno) << endl;
         assert(len >= 0);
         myClient->bufferCursor += len;
-//        db2(myClient->buffer.size(), myClient->bufferCursor);
-//        db(len);
     }
 }
 

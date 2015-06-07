@@ -10,7 +10,6 @@
 #include <fcntl.h>
 #include <netinet/in.h>
 #include "MyClient.h"
-#include "debug.h"
 
 
 MyClient::MyClient(int port) : port(port), epollDescriptor(-1), flagMask(0) {
@@ -27,13 +26,19 @@ MyClient::MyClient(int port) : port(port), epollDescriptor(-1), flagMask(0) {
     makeSocketNonBlocking();
 }
 
-MyClient::MyClient(int port, int socketDescriptor, int epollDescriptor):port(port), socketDescriptor(socketDescriptor),
-              epollDescriptor(epollDescriptor), flagMask(0), bufferCursor(0), closed(0) {
+MyClient::MyClient(int port, int socketDescriptor,
+                   int epollDescriptor, MyEpoll * myEpoll) : port(port),
+                                                                       socketDescriptor(socketDescriptor),
+                                                                       epollDescriptor(epollDescriptor),
+                                                                       flagMask(0),
+                                                                       bufferCursor(0),
+                                                                       closed(0),
+                                                                       myEpoll(myEpoll) {
     makeSocketNonBlocking();
 }
 
 
-int MyClient::read(vector < char > & buffer) {
+int MyClient::read(vector<char> &buffer) {
     cerr << "b\n";
     int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
     cerr << "a\n";
@@ -42,32 +47,27 @@ int MyClient::read(vector < char > & buffer) {
 }
 
 
-void MyClient::write(vector < char > data) {
+void MyClient::write(vector<char> data) {
     int oldLen = (int) buffer.size();
     buffer.resize(buffer.size() + data.size());
-    for (int i = 0; i < (int)data.size(); i++)
+    for (int i = 0; i < (int) data.size(); i++)
         buffer[oldLen + i] = data[i];
-    if (bufferCursor * 2 > (int)buffer.size()) {
-        for (int i = bufferCursor; i < (int)buffer.size(); i++)
+    if (bufferCursor * 2 > (int) buffer.size()) {
+        for (int i = bufferCursor; i < (int) buffer.size(); i++)
             buffer[i - bufferCursor] = buffer[i];
         buffer.resize(buffer.size() - bufferCursor);
         bufferCursor = 0;
     }
-//    cerr << "client:\n";
-//    db2(buffer.size(), bufferCursor);
     setWrite(1);
-//    shared_ptr < MyClient > ptr(this);
-    //void MyEpoll::write(shared_ptr < MyClient > myClient) {
-//    myEpoll->write(shared_ptr < MyClient > (this));
-//    myEpoll->write();
+    myEpoll->write(this);
 }
 
 int MyClient::readyToWrite() {
-    assert(bufferCursor <= (int)buffer.size());
-    return (int)buffer.size() - bufferCursor;
+    assert(bufferCursor <= (int) buffer.size());
+    return (int) buffer.size() - bufferCursor;
 }
 
-void MyClient ::setRead(int flag) {
+void MyClient::setRead(int flag) {
     assert(flag == 0 || flag == 1);
     flagMask |= EPOLLIN;
     if (flag == 0) {
@@ -79,7 +79,7 @@ void MyClient ::setRead(int flag) {
     assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
-void MyClient :: setWrite(int flag) {
+void MyClient::setWrite(int flag) {
     assert(flag == 0 || flag == 1);
     //db(flagMask);
     flagMask |= EPOLLOUT;
@@ -92,13 +92,36 @@ void MyClient :: setWrite(int flag) {
 }
 
 
-void MyClient:: closeClient() {
+void MyClient::closeClient() {
     cerr << "close client\n";
     assert(!closed);
     assert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
+    assert(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
+    myEpoll->onReceiveMap.erase(socketDescriptor);
+    assert(myEpoll->onAcceptMap.count(socketDescriptor) == 1);
+    myEpoll->onAcceptMap.erase(socketDescriptor);
+    assert(myEpoll->clientFromDescriptor.count(socketDescriptor) == 1);
+    myEpoll->clientFromDescriptor.erase(socketDescriptor);
+
     closed = true;
     assert(close(socketDescriptor) == 0);
 }
+
+
+//void MyClient::makeSocketNonBlocking() {
+//    int flags = fcntl(socketDescriptor, F_GETFL, 0);
+//    assert(flags >= 0);
+//    flags |= O_NONBLOCK;
+//    assert(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
+//}
+//
+//int MyClient::getSocketDescriptor() {
+//    return socketDescriptor;
+//}
+//
+//int MyClient::getPort() {
+//    return port;
+//}
 
 
 
@@ -118,7 +141,7 @@ int MyClient::getPort() {
 }
 
 void MyClient::write(string s) {
-    vector < char > buf;
+    vector<char> buf;
     for (auto x: s)
         buf.push_back(x);
     write(buf);

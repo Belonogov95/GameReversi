@@ -1,32 +1,22 @@
 #include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <string.h>
-#include <netdb.h>
-#include <arpa/inet.h>
 #include <assert.h>
 #include <thread>
-#include <unistd.h>
-#include <fcntl.h>
 #include "MyEpoll.h"
-#include "debug.h"
-#include <vector>
-//#include <map>
 
 using namespace std;
 
 #define db(x) cerr << #x << " = " << x << endl
 
-vector < char > strToVector(string s) {
-    vector < char > g;
-    for (auto x: s)
-        g.push_back(x);
-    return g;
-}
+//vector<char> strToVector(string s) {
+//    vector<char> g;
+//    for (auto x: s)
+//        g.push_back(x);
+//    return g;
+//}
 
-map < int, int > cnt;
+map<int, int> cnt;
 
-void onAC(shared_ptr < MyClient > cl) {
+void onAC(shared_ptr<MyClient> cl) {
     db("onAC");
     cnt[cl->getSocketDescriptor()] = 0;
 
@@ -35,23 +25,24 @@ void onAC(shared_ptr < MyClient > cl) {
 }
 
 
-string toString(vector < char > y) {
+string toString(vector<char> y) {
     string t;
-    for (int i = 0; i < (int)y.size(); i++)
+    for (int i = 0; i < (int) y.size(); i++)
         t += y[i];
     return t;
 }
 
-void onRC(shared_ptr < MyClient > cl) {
-    db2("onRC", cl->getSocketDescriptor());
 
-    vector < char > buffer(10);
+void onRC(shared_ptr<MyClient> cl) {
+//    db2("onRC", cl->getSocketDescriptor());
+
+    vector<char> buffer(10);
     int sz = cl->read(buffer);
     sz = max(sz, 0);
     if (sz == 0) return;
-    db2("--------------", sz);
+//    db2("--------------", sz);
 //    db("after read");
-    buffer.resize(sz);
+    buffer.resize((unsigned long) sz);
     cout << toString(buffer) << endl;
     cl->write("hello, " + toString(buffer));
     cnt[cl->getSocketDescriptor()]++;
@@ -63,7 +54,7 @@ void onRC(shared_ptr < MyClient > cl) {
 
 
 void test() {
-    int shift = 0;
+    int shift = 1;
     MyEpoll ep;
 
     ep.add(7770 + shift, onAC, onRC);

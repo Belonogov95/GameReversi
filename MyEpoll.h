@@ -1,6 +1,8 @@
 //
 // Created by vanya on 02.06.15.
 //
+
+
 #include <sys/epoll.h>
 #include <map>
 #include "MyClient.h"
@@ -16,6 +18,8 @@ const int WAITING_READ_OR_WRITE = 2;
 
 using namespace std;
 
+class MyClient;
+
 class MyEpoll {
 private:
     int epollDescriptor;
@@ -26,13 +30,16 @@ private:
     map < int, int > portFromDescriptor;
     map < int, shared_ptr < MyClient > > clientFromDescriptor;
 public:
+    friend class MyClient;
+
+
 
     void start();
 
     MyEpoll();
     ~MyEpoll();
 
-    void write(shared_ptr<MyClient> myClient);
+    void write(MyClient * myClient);
 
     void add(int port, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>));
 };
