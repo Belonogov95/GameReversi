@@ -3,14 +3,11 @@
 //
 #include <sys/epoll.h>
 #include <map>
-//#include <bits/shared_ptr.h>
-#include "MySocket.h"
 #include "MyClient.h"
 #include <memory>
 
 #ifndef HWW2_MYEPOLL_H
 #define HWW2_MYEPOLL_H
-#define db(x) cerr << #x << " = " << x << endl
 
 const int MAX_EVENTS = 2;
 const int WAITING_ACCEPT = 1;
@@ -28,9 +25,7 @@ private:
     map < int, int > socketDescriptorType;
     map < int, int > portFromDescriptor;
     map < int, shared_ptr < MyClient > > clientFromDescriptor;
-
 public:
-
 
     void start();
 
@@ -39,7 +34,7 @@ public:
 
     void write(shared_ptr<MyClient> myClient);
 
-    void add(MySocket mySocket, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>));
+    void add(int port, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>));
 };
 
 

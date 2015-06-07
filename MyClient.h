@@ -8,41 +8,54 @@
 
 #include <array>
 #include <vector>
-#include "MySocket.h"
 #include <iostream>
+#include <memory>
+//#include "MyEpoll.h"
 
 using namespace std;
 
 #define db(x) cerr << #x << " = " << x << endl
+const int BACK_LOG = 10;
 
 class MyClient {
 private:
 
+    int port;
+    int socketDescriptor;
     int epollDescriptor;
     u_int32_t flagMask;
-
-public:
-    MySocket mySocket;
     vector < char > buffer;
     int bufferCursor;
     bool closed;
-    MyClient();
-    MyClient(MySocket mySocket, int epollDescriptor);
-    MyClient(const MyClient & myClient);
+    MyClient(int port, int socketDescriptor, int epollDescriptor);
+//    shared_ptr < MyEpoll > myEpoll;
 
+public:
+    //MyClient();
+    //MyClient(const MyClient & myClient);
+    friend class MyEpoll;
+
+    MyClient(int port);
 
     void setRead(int flag);
 
     void setWrite(int flag);
 
-    int write(vector<char> data);
+    void write(vector<char> data);
 
     int readyToWrite();
 
     int read(vector<char> &buffer);
 
-
     void closeClient();
+
+    void makeSocketNonBlocking();
+
+    int getSocketDescriptor();
+
+    int getPort();
+
+    void write(string s);
 };
 
 

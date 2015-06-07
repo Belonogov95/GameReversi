@@ -8,8 +8,8 @@
 #include <thread>
 #include <unistd.h>
 #include <fcntl.h>
-#include "MySocket.h"
 #include "MyEpoll.h"
+#include "debug.h"
 #include <vector>
 //#include <map>
 
@@ -24,11 +24,16 @@ vector < char > strToVector(string s) {
     return g;
 }
 
+map < int, int > cnt;
+
 void onAC(shared_ptr < MyClient > cl) {
     db("onAC");
-    vector < char > data = strToVector("abacaba2");
-    cl->write(data);
+    cnt[cl->getSocketDescriptor()] = 0;
+
+    //vector < char > data = strToVector("abacaba2");
+//    cl->write(data);
 }
+
 
 string toString(vector < char > y) {
     string t;
@@ -38,29 +43,31 @@ string toString(vector < char > y) {
 }
 
 void onRC(shared_ptr < MyClient > cl) {
-    //db("onRC");
+    db2("onRC", cl->getSocketDescriptor());
+
     vector < char > buffer(10);
-//    cerr << "before read\n";
     int sz = cl->read(buffer);
     sz = max(sz, 0);
-//    cerr << "after read\n";
-    //db(sz);
+    if (sz == 0) return;
+    db2("--------------", sz);
+//    db("after read");
     buffer.resize(sz);
-    //db(buffer.size());
     cout << toString(buffer) << endl;
-
+    cl->write("hello, " + toString(buffer));
+    cnt[cl->getSocketDescriptor()]++;
+    if (cnt[cl->getSocketDescriptor()] == 3)
+        cl->closeClient();
+    assert(cnt[cl->getSocketDescriptor()] <= 3);
+//    db("=aaaaaa");
 }
 
 
 void test() {
-    int shift = 3;
-    MySocket sc(7770 + shift);
-    MySocket sc1(8880 + shift);
+    int shift = 0;
     MyEpoll ep;
 
-    //cerr << "before\n";
-    ep.add(sc, onAC, onRC);
-    ep.add(sc1, onAC, onRC);
+    ep.add(7770 + shift, onAC, onRC);
+    ep.add(8880 + shift, onAC, onRC);
 
     ep.start();
     exit(0);

@@ -8,12 +8,15 @@
 #include <string.h>
 #include <unistd.h>
 #include "MyEpoll.h"
-
+#include "debug.h"
 
 
 MyEpoll::MyEpoll() {
     epollDescriptor = epoll_create(1);
-    //db(epollDescriptor);
+    epoll_event event;
+    event.data.fd = 0;
+    event.events = EPOLLIN;
+    epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, 0, &event);
     running = true;
 }
 
@@ -21,17 +24,18 @@ MyEpoll::~MyEpoll() {
     assert(close(epollDescriptor) == 0);
 }
 
-void MyEpoll::add(MySocket mySocket, void (*onAccept)(shared_ptr < MyClient > ), void (*onReceive)(shared_ptr < MyClient > )) {
+void MyEpoll::add(int port, void (*onAccept)(shared_ptr < MyClient > ), void (*onReceive)(shared_ptr < MyClient > )) {
+    MyClient myClient(port);
+
     epoll_event epollEvent;
     epollEvent.events = EPOLLIN;
-    epollEvent.data.fd = mySocket.getSocketDescriptor();
-    onAcceptMap[mySocket.getSocketDescriptor()] = onAccept;
-    onReceiveMap[mySocket.getSocketDescriptor()] = onReceive;
-    socketDescriptorType[mySocket.getSocketDescriptor()] = WAITING_ACCEPT;
-    portFromDescriptor[mySocket.getSocketDescriptor()] = mySocket.getPort();
+    epollEvent.data.fd = myClient.getSocketDescriptor();
+    onAcceptMap[myClient.getSocketDescriptor()] = onAccept;
+    onReceiveMap[myClient.getSocketDescriptor()] = onReceive;
+    socketDescriptorType[myClient.getSocketDescriptor()] = WAITING_ACCEPT;
+    portFromDescriptor[myClient.getSocketDescriptor()] = myClient.getPort();
 
-
-    epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, mySocket.getSocketDescriptor(), &epollEvent);
+    epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, myClient.getSocketDescriptor(), &epollEvent);
 
 }
 
@@ -40,21 +44,31 @@ void MyEpoll::start() {
         epoll_event events[MAX_EVENTS];
         cerr << "before wait\n";
         int eventsSize = epoll_wait(epollDescriptor, events, MAX_EVENTS, -1);
-//        cerr << "after wait\n";
+        cerr << "after wait\n";
         db(eventsSize);
         for (int i = 0; i < eventsSize; i++) {
             int socketDescriptor = events[i].data.fd;
             db(socketDescriptor);
-            if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {
-                db("new accept");
+            if (socketDescriptor == 0) {
+                string s;
+                getline(cin, s);
+                if (s != "exit") {
+                    cerr << "no such comand :" << s << ":\n";
+                }
+                else {
+                    cerr << "success\n";
+                }
+            }
+            else  if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {
+//                db("new accept");
                 assert(events[i].events & EPOLLIN);
                 sockaddr_storage sockAddrStorage;
                 socklen_t sockLen = sizeof(sockAddrStorage);
                 int newSocketDescriptor = accept(socketDescriptor, (sockaddr *) &sockAddrStorage, &sockLen);
 
                 int port = portFromDescriptor[socketDescriptor];
-                db(newSocketDescriptor);
-                shared_ptr < MyClient > newClient(new MyClient(MySocket(port, newSocketDescriptor), epollDescriptor));
+//                db(newSocketDescriptor);
+                shared_ptr < MyClient > newClient(new MyClient(port, newSocketDescriptor, epollDescriptor));
                 //newClient.get
 
                 onAcceptMap[newSocketDescriptor] = NULL;
@@ -72,20 +86,9 @@ void MyEpoll::start() {
 
                 newClient->setRead(1);
 
-                //epollEvent.events = EPOLLIN;
-
-                //assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, newSocketDescriptor, &epollEvent) == 0);
-                //epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, newSocketDescriptor, &epollEvent);
-                //db(errno);
-                //cerr << strerror(errno) << endl;
-                //assert(false);
-
-
-                //assert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, newSocketDescriptor, NULL) == 0);
-
             }
             else if (socketDescriptorType[socketDescriptor] == WAITING_READ_OR_WRITE) {
-                cerr << "here\n";
+//                cerr << "here\n";
                 shared_ptr < MyClient > myClient = clientFromDescriptor[socketDescriptor];
 //                db(myClient.use_count());
                 //cerr << "here\n";
@@ -104,22 +107,19 @@ void MyEpoll::start() {
 }
 
 void MyEpoll::write(shared_ptr < MyClient > myClient) {
-//    db(myClient->readyToWrite());
+    assert(!myClient->closed);
     if (myClient->readyToWrite() == 0)
         myClient->setWrite(0);
     else {
-//        void * ptr = &(myClient->buffer[myClient->bufferCursor]);
-//        int l = myClient->readyToWrite();
-//        db(l);
-//        for (int i = 0; i < l; i++)
-//            cerr << (int)((char *)ptr)[i] << " ";
-//        cerr << endl;
-
-        int len = (int) send(myClient->mySocket.getSocketDescriptor(), (void*)&(myClient->buffer[myClient->bufferCursor]),
+//        db2(myClient->buffer.size(), myClient->bufferCursor);
+        int len = (int) send(myClient->getSocketDescriptor(), (void*)&(myClient->buffer[myClient->bufferCursor]),
                              (size_t) myClient->readyToWrite(), 0);
-        //db(len);
+//        db(errno);
+//        cerr << strerror(errno) << endl;
         assert(len >= 0);
         myClient->bufferCursor += len;
+//        db2(myClient->buffer.size(), myClient->bufferCursor);
+//        db(len);
     }
 }
 

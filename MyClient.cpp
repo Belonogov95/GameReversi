@@ -7,27 +7,42 @@
 #include <sys/epoll.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <netinet/in.h>
 #include "MyClient.h"
+#include "debug.h"
 
-MyClient::MyClient(MySocket mySocket, int epollDescriptor):mySocket(mySocket), epollDescriptor(epollDescriptor), flagMask(0),
-                                                           bufferCursor(0), closed(0) {  }
 
-MyClient::MyClient(const MyClient & myClient): mySocket(myClient.mySocket), epollDescriptor(myClient.epollDescriptor),
-                        flagMask(myClient.flagMask), bufferCursor(myClient.bufferCursor), closed(myClient.closed){ }
+MyClient::MyClient(int port) : port(port), epollDescriptor(-1), flagMask(0) {
+    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    sockaddr_in address;
+    memset(&address, 0, sizeof(address));
 
-MyClient::MyClient() { }
+    address.sin_family = AF_INET;
+    address.sin_port = htons((uint16_t) port);
+    address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
+    assert(bind(socketDescriptor, (const sockaddr *) &address, sizeof(address)) == 0);
+    assert(listen(socketDescriptor, BACK_LOG) == 0);
+    makeSocketNonBlocking();
+}
+
+MyClient::MyClient(int port, int socketDescriptor, int epollDescriptor):port(port), socketDescriptor(socketDescriptor),
+              epollDescriptor(epollDescriptor), flagMask(0), bufferCursor(0), closed(0) {
+    makeSocketNonBlocking();
+}
 
 
 int MyClient::read(vector < char > & buffer) {
-    int readLen = (int) recv(mySocket.getSocketDescriptor(), &buffer[0], buffer.size(), 0);
-    //db(errno);
-    //db(strerror(errno));
+    cerr << "b\n";
+    int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
+    cerr << "a\n";
     assert(readLen != -1 || errno == 11);
     return readLen;
 }
 
-int MyClient::write(vector < char > data) {
+
+void MyClient::write(vector < char > data) {
     int oldLen = (int) buffer.size();
     buffer.resize(buffer.size() + data.size());
     for (int i = 0; i < (int)data.size(); i++)
@@ -35,11 +50,16 @@ int MyClient::write(vector < char > data) {
     if (bufferCursor * 2 > (int)buffer.size()) {
         for (int i = bufferCursor; i < (int)buffer.size(); i++)
             buffer[i - bufferCursor] = buffer[i];
+        buffer.resize(buffer.size() - bufferCursor);
+        bufferCursor = 0;
     }
-    buffer.resize(buffer.size() - bufferCursor);
-    bufferCursor = 0;
-
+//    cerr << "client:\n";
+//    db2(buffer.size(), bufferCursor);
     setWrite(1);
+//    shared_ptr < MyClient > ptr(this);
+    //void MyEpoll::write(shared_ptr < MyClient > myClient) {
+//    myEpoll->write(shared_ptr < MyClient > (this));
+//    myEpoll->write();
 }
 
 int MyClient::readyToWrite() {
@@ -54,39 +74,54 @@ void MyClient ::setRead(int flag) {
         flagMask ^= EPOLLIN;
     }
     epoll_event event;
-    event.data.fd = mySocket.getSocketDescriptor();
+    event.data.fd = socketDescriptor;
     event.events = flagMask;
-    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, mySocket.getSocketDescriptor(), &event) == 0);
+    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
 void MyClient :: setWrite(int flag) {
     assert(flag == 0 || flag == 1);
-    db(flagMask);
+    //db(flagMask);
     flagMask |= EPOLLOUT;
     if (flag == 0)
         flagMask ^= EPOLLOUT;
     epoll_event event;
-    event.data.fd = mySocket.getSocketDescriptor();
+    event.data.fd = socketDescriptor;
     event.events = flagMask;
-    //db(flagMask);
-    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, mySocket.getSocketDescriptor(), &event) == 0);
-//    db(epollDescriptor);
-//    db(mySocket.getSocketDescriptor());
-//    (epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, mySocket.getSocketDescriptor(), NULL) == 0);
-//    db(errno);
-//    cerr << strerror(errno) << endl;
-//    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, mySocket.getSocketDescriptor(), &event) == 0);
-//    //epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, mySocket.getSocketDescriptor(), &event);
+    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
 
 void MyClient:: closeClient() {
-    if(closed) return;
-    epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, mySocket.getSocketDescriptor(), 0);
+    cerr << "close client\n";
+    assert(!closed);
+    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
     closed = true;
-    assert(close(mySocket.getSocketDescriptor()) == 0);
+    assert(close(socketDescriptor) == 0);
 }
 
 
+
+void MyClient::makeSocketNonBlocking() {
+    int flags = fcntl(socketDescriptor, F_GETFL, 0);
+    assert(flags >= 0);
+    flags |= O_NONBLOCK;
+    assert(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
+}
+
+int MyClient::getSocketDescriptor() {
+    return socketDescriptor;
+}
+
+int MyClient::getPort() {
+    return port;
+}
+
+void MyClient::write(string s) {
+    vector < char > buf;
+    for (auto x: s)
+        buf.push_back(x);
+    write(buf);
+}
 
 
