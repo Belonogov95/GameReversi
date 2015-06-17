@@ -212,43 +212,6 @@ void init() {
 }
 
 
-State generateStartBoard() {
-    int data[8][8];
-    memset(data, 0, sizeof(data));
-    data[3][3] = 1;
-    data[4][4] = 1;
-    data[3][4] = 2;
-    data[4][3] = 2;
-
-    State tmp;
-    tmp.code(data);
-    return tmp;
-}
-
-void printBoard(State pos) {
-    int data[8][8];
-    pos.decode(data);
-    printf("#");
-    for (int i = 0; i < 8; i++)
-        printf("%d", i);
-    printf("<-y\n");
-    for (int i = 0; i < 8; i++) {
-        printf("%d", i);
-        for (int j = 0; j < 8; j++) {
-            if (data[i][j] == 0) 
-                printf(".");
-            else if (data[i][j] == 1)
-                printf("W");
-            else
-                printf("B");
-        }
-        printf("\n");
-    }
-    printf("^\n");
-    printf("|\n");
-    printf("x\n");
-
-}
 
 void read() {
 
@@ -276,15 +239,12 @@ void solve() {
                     State next;  
                     if (!pos.go(x, y, next)) {
                         flag = 1;
-                   }
+                    }
                 }
                 if (flag)
                     printf("Incorrect turn. Try again\n");         
             }
-            
         }
-
-
     }
 }
 

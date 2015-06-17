@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp
+CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp
+CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer
 
 #=============================================================================
 # Target rules for target CMakeFiles/HWW2.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp
 CMakeFiles/HWW2.dir/all:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/depend
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles  1 2 3 4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles  1 2 3
 	@echo "Built target HWW2"
 .PHONY : CMakeFiles/HWW2.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/HWW2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/HWW2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/HWW2.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles 0
 .PHONY : CMakeFiles/HWW2.dir/rule
 
 # Convenience name for target.

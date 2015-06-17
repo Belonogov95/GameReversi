@@ -14,7 +14,6 @@
 
 using namespace std;
 
-#define db(x) cerr << #x << " = " << x << endl
 const int BACK_LOG = 10;
 
 class MyEpoll;
@@ -48,8 +47,6 @@ public:
 
     int readyToWrite();
 
-    int read(vector<char> &buffer);
-
     void closeClient();
 
     void makeSocketNonBlocking();
@@ -59,6 +56,8 @@ public:
     int getPort();
 
     void write(string s);
+
+    int read(string &buffer);
 };
 
 

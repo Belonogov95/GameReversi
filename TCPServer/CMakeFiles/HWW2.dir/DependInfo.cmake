@@ -4,10 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vanya/Documents/prog/C/homeWorkCpp/MyClient.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles/HWW2.dir/MyClient.cpp.o"
-  "/home/vanya/Documents/prog/C/homeWorkCpp/MyEpoll.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
-  "/home/vanya/Documents/prog/C/homeWorkCpp/MySocket.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles/HWW2.dir/MySocket.cpp.o"
-  "/home/vanya/Documents/prog/C/homeWorkCpp/main.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles/HWW2.dir/main.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyClient.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

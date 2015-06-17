@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp
+CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp
+CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer
 
 # Include any dependencies generated for this target.
 include CMakeFiles/HWW2.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/HWW2.dir/flags.make
 
 CMakeFiles/HWW2.dir/main.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/main.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/main.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp
 
 CMakeFiles/HWW2.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/main.cpp > CMakeFiles/HWW2.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp > CMakeFiles/HWW2.dir/main.cpp.i
 
 CMakeFiles/HWW2.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/main.cpp -o CMakeFiles/HWW2.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp -o CMakeFiles/HWW2.dir/main.cpp.s
 
 CMakeFiles/HWW2.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/HWW2.dir/main.cpp.o.requires
@@ -74,17 +74,17 @@ CMakeFiles/HWW2.dir/main.cpp.o.provides.build: CMakeFiles/HWW2.dir/main.cpp.o
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyEpoll.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/MyEpoll.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/MyEpoll.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/MyEpoll.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/MyEpoll.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/MyEpoll.cpp > CMakeFiles/HWW2.dir/MyEpoll.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp > CMakeFiles/HWW2.dir/MyEpoll.cpp.i
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/MyEpoll.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/MyEpoll.cpp -o CMakeFiles/HWW2.dir/MyEpoll.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp -o CMakeFiles/HWW2.dir/MyEpoll.cpp.s
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o.requires:
 .PHONY : CMakeFiles/HWW2.dir/MyEpoll.cpp.o.requires
@@ -95,42 +95,19 @@ CMakeFiles/HWW2.dir/MyEpoll.cpp.o.provides: CMakeFiles/HWW2.dir/MyEpoll.cpp.o.re
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o.provides.build: CMakeFiles/HWW2.dir/MyEpoll.cpp.o
 
-CMakeFiles/HWW2.dir/MySocket.cpp.o: CMakeFiles/HWW2.dir/flags.make
-CMakeFiles/HWW2.dir/MySocket.cpp.o: MySocket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/MySocket.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/MySocket.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/MySocket.cpp
-
-CMakeFiles/HWW2.dir/MySocket.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/MySocket.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/MySocket.cpp > CMakeFiles/HWW2.dir/MySocket.cpp.i
-
-CMakeFiles/HWW2.dir/MySocket.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/MySocket.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/MySocket.cpp -o CMakeFiles/HWW2.dir/MySocket.cpp.s
-
-CMakeFiles/HWW2.dir/MySocket.cpp.o.requires:
-.PHONY : CMakeFiles/HWW2.dir/MySocket.cpp.o.requires
-
-CMakeFiles/HWW2.dir/MySocket.cpp.o.provides: CMakeFiles/HWW2.dir/MySocket.cpp.o.requires
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MySocket.cpp.o.provides.build
-.PHONY : CMakeFiles/HWW2.dir/MySocket.cpp.o.provides
-
-CMakeFiles/HWW2.dir/MySocket.cpp.o.provides.build: CMakeFiles/HWW2.dir/MySocket.cpp.o
-
 CMakeFiles/HWW2.dir/MyClient.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/MyClient.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/MyClient.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/MyClient.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/MyClient.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp
 
 CMakeFiles/HWW2.dir/MyClient.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/MyClient.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/MyClient.cpp > CMakeFiles/HWW2.dir/MyClient.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp > CMakeFiles/HWW2.dir/MyClient.cpp.i
 
 CMakeFiles/HWW2.dir/MyClient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/MyClient.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/MyClient.cpp -o CMakeFiles/HWW2.dir/MyClient.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp -o CMakeFiles/HWW2.dir/MyClient.cpp.s
 
 CMakeFiles/HWW2.dir/MyClient.cpp.o.requires:
 .PHONY : CMakeFiles/HWW2.dir/MyClient.cpp.o.requires
@@ -145,7 +122,6 @@ CMakeFiles/HWW2.dir/MyClient.cpp.o.provides.build: CMakeFiles/HWW2.dir/MyClient.
 HWW2_OBJECTS = \
 "CMakeFiles/HWW2.dir/main.cpp.o" \
 "CMakeFiles/HWW2.dir/MyEpoll.cpp.o" \
-"CMakeFiles/HWW2.dir/MySocket.cpp.o" \
 "CMakeFiles/HWW2.dir/MyClient.cpp.o"
 
 # External object files for target HWW2
@@ -153,7 +129,6 @@ HWW2_EXTERNAL_OBJECTS =
 
 HWW2: CMakeFiles/HWW2.dir/main.cpp.o
 HWW2: CMakeFiles/HWW2.dir/MyEpoll.cpp.o
-HWW2: CMakeFiles/HWW2.dir/MySocket.cpp.o
 HWW2: CMakeFiles/HWW2.dir/MyClient.cpp.o
 HWW2: CMakeFiles/HWW2.dir/build.make
 HWW2: CMakeFiles/HWW2.dir/link.txt
@@ -166,7 +141,6 @@ CMakeFiles/HWW2.dir/build: HWW2
 
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/main.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/MyEpoll.cpp.o.requires
-CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/MySocket.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/MyClient.cpp.o.requires
 .PHONY : CMakeFiles/HWW2.dir/requires
 
@@ -175,6 +149,6 @@ CMakeFiles/HWW2.dir/clean:
 .PHONY : CMakeFiles/HWW2.dir/clean
 
 CMakeFiles/HWW2.dir/depend:
-	cd /home/vanya/Documents/prog/C/homeWorkCpp && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vanya/Documents/prog/C/homeWorkCpp /home/vanya/Documents/prog/C/homeWorkCpp /home/vanya/Documents/prog/C/homeWorkCpp /home/vanya/Documents/prog/C/homeWorkCpp /home/vanya/Documents/prog/C/homeWorkCpp/CMakeFiles/HWW2.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/HWW2.dir/depend
 

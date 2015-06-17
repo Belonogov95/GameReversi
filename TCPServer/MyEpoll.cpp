@@ -8,6 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "MyEpoll.h"
+#include "debug.h"
 
 
 MyEpoll::MyEpoll() {

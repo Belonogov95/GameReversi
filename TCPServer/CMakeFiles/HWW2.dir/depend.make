@@ -3,15 +3,15 @@
 
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.cpp
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/MyClient.cpp.o: MySocket.h
+CMakeFiles/HWW2.dir/MyClient.cpp.o: MyEpoll.h
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyClient.h
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyEpoll.cpp
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyEpoll.h
-CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MySocket.h
+CMakeFiles/HWW2.dir/MyEpoll.cpp.o: debug.h
 
-CMakeFiles/HWW2.dir/MySocket.cpp.o: MySocket.cpp
-CMakeFiles/HWW2.dir/MySocket.cpp.o: MySocket.h
-
+CMakeFiles/HWW2.dir/main.cpp.o: MyClient.h
+CMakeFiles/HWW2.dir/main.cpp.o: MyEpoll.h
+CMakeFiles/HWW2.dir/main.cpp.o: debug.h
 CMakeFiles/HWW2.dir/main.cpp.o: main.cpp
 

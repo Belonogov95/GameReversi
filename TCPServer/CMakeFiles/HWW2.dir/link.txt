@@ -1,1 +1,1 @@
-/usr/bin/c++    -std=c++11   CMakeFiles/HWW2.dir/main.cpp.o CMakeFiles/HWW2.dir/MyEpoll.cpp.o CMakeFiles/HWW2.dir/MySocket.cpp.o CMakeFiles/HWW2.dir/MyClient.cpp.o  -o HWW2 -rdynamic 
+/usr/bin/c++    -std=c++11 -Wall   CMakeFiles/HWW2.dir/main.cpp.o CMakeFiles/HWW2.dir/MyEpoll.cpp.o CMakeFiles/HWW2.dir/MyClient.cpp.o  -o HWW2 -rdynamic 
