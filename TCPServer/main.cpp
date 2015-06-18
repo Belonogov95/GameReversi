@@ -4,140 +4,42 @@
 #include <fstream>
 #include "MyEpoll.h"
 #include "debug.h"
+#include "HttpWorker.h"
 
 using namespace std;
 
 
-const string LINE_BREAK = "\r\n";
 
-//vector<char> strToVector(string s) {
-//    vector<char> g;
-//    for (auto x: s)
-//        g.push_back(x);
-//    return g;
-//}
+map<int, shared_ptr < HttpWorker > > workers;
 
-map<int, int> cnt;
-
-void onAC(shared_ptr<MyClient> cl) {
-    db("onAC");
-    cnt[cl->getSocketDescriptor()] = 0;
-
-    //vector < char > data = strToVector("abacaba2");
-//    cl->write(data);
-}
-
-
-const int BUF_SZ = 10000;
-
-map < int, vector < string > > mainBuf;
 
 void onAC2(shared_ptr < MyClient > client) {
-    db("onAC2");
-    assert(mainBuf.count(client->getSocketDescriptor()) == 0);
-    mainBuf[client->getSocketDescriptor()] = vector < string > ();
+    assert(workers.count(client->getSocketDescriptor()) == 0);
+    workers[client->getSocketDescriptor()] = shared_ptr < HttpWorker > (new HttpWorker());
 }
 
-vector < string > split(string s, char ch) {
-    vector < string > res;
-    //cerr << "debug\n";
-    //cerr << "s:" << s << ":\n";;
-    //cerr << "ch:" << ch << ":\n";
-    //db2(s, ch);
-    for (int i = 0; i < (int)s.size(); i++) {
-        for (; i < (int)s.size() && s[i] == ch; i++);
-        int j = i;
-        for (; i < (int)s.size() && s[i] != ch; i++);
-        if (i - j > 0) {
-            res.push_back(s.substr(j, i - j));
-        }
-    }
-    return res;
-}
 
-string trim(string s) {
-    int l= 0;
-    for (; l < (int)s.size() && s[l] == ' '; l++);
-    int r = (int)s.size() - 1;
-    for (; r > 0 && s[r] == ' '; r--);
-    if (r < l) return string();
-    return s.substr(l, (r - l) + 1);
-}
-
-void sendFile(string path, shared_ptr < MyClient > client) {
-    path = "../site" + path;
-    db(path);
-    ifstream in(path, ios::binary);
-    in.seekg(0, in.end);
-    int length = in.tellg();
-    in.seekg(0, in.beg); 
-    string message(length, 0);
-    in.read((char *)message.data(), length);
-
-    string header = "HTTP/1.1 200 OK" + LINE_BREAK;
-    header += "Content-Length: " + to_string(message.size()) + LINE_BREAK;
-
-    string res = header + LINE_BREAK + message;
-    client->write(res);
-}
-
-void printBuff(vector < string > data) {
-    cerr << "===========: buffer\n";
-    for (auto x: data)
-        cerr << x << endl;  
-}
-
-pair < bool, string > readMessage(shared_ptr < MyClient > client) {
-   string buffer(BUF_SZ, 0);
-    int len = client->read(buffer);
-    db(len);
-    if (len == 0)  {
-        client->closeClient();
-        mainBuf.erase(client->getSocketDescriptor());
-    }
-    if (len <= 0) return make_pair(false, string());
-    assert(len > 0);
-    buffer.resize(len);
-//    cerr << "buffer:" << buffer << ":\n";
-    vector < string >  & buff = mainBuf[client->getSocketDescriptor()];
-    for (auto x: buffer) {
-        if (x == '\n' || buff.empty())
-            buff.push_back(string());
-        if (x != '\n')
-            buff.back().push_back(x);
-    }
-    /// TODO message doesn't in one packet
-    /// try read
-    printBuff(buff);
-
-    assert(!buff.empty());
-    auto tmp = split(buff[0], ' ');
-    db(tmp[0]);
-    assert(tmp[0] == "GET");
-    string address = tmp[1];
-    buff.clear();
-    return make_pair(1, address);
-}
 
 void onRC2(shared_ptr < MyClient > client) {
-    auto prAddress = readMessage(client);
-    if (!prAddress.first) return;
-    sendFile(prAddress.second, client);
-//    int textLen = -1;
-//    int i = 1;
-//    for (; i < (int)buff.size(); i++) {
-//        if (buff[i].empty()) break;
-//        auto tmp = split(buff[i], ':');
-//        assert((int)tmp.size() >= 2);
-//        if (tmp[0] == "Content-Length")
-//            textLen = stoi(trim(tmp[1]));
-//    }
-    //assert(textLen != -1);
+    assert(workers.count(client->getSocketDescriptor()) != 0);
+    shared_ptr < HttpWorker > worker = workers[client->getSocketDescriptor()];
+    while (true) {
+        auto prAddress = worker->readMessage(client);
+        if (!prAddress.first) break;
+
+        //auto question = worker->split(prAddress.second, '?');
+
+        //if ((int)question.size() > 1)
+            //prAddress.second = "/hello.html";
+
+        worker->sendFile(prAddress.second.URL, client);
+    }
+
 }
 
 void test2() {
     MyEpoll ep;
-    ep.add(7770, onAC2, onRC2);
+    ep.add(7772, onAC2, onRC2);
     ep.start();
 }
 

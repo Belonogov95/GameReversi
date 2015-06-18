@@ -118,11 +118,59 @@ CMakeFiles/HWW2.dir/MyClient.cpp.o.provides: CMakeFiles/HWW2.dir/MyClient.cpp.o.
 
 CMakeFiles/HWW2.dir/MyClient.cpp.o.provides.build: CMakeFiles/HWW2.dir/MyClient.cpp.o
 
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o: CMakeFiles/HWW2.dir/flags.make
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o: HttpWorker.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/HttpWorker.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/HttpWorker.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp
+
+CMakeFiles/HWW2.dir/HttpWorker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/HttpWorker.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp > CMakeFiles/HWW2.dir/HttpWorker.cpp.i
+
+CMakeFiles/HWW2.dir/HttpWorker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/HttpWorker.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp -o CMakeFiles/HWW2.dir/HttpWorker.cpp.s
+
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o.requires:
+.PHONY : CMakeFiles/HWW2.dir/HttpWorker.cpp.o.requires
+
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o.provides: CMakeFiles/HWW2.dir/HttpWorker.cpp.o.requires
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/HttpWorker.cpp.o.provides.build
+.PHONY : CMakeFiles/HWW2.dir/HttpWorker.cpp.o.provides
+
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o.provides.build: CMakeFiles/HWW2.dir/HttpWorker.cpp.o
+
+CMakeFiles/HWW2.dir/Message.cpp.o: CMakeFiles/HWW2.dir/flags.make
+CMakeFiles/HWW2.dir/Message.cpp.o: Message.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/Message.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/Message.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
+
+CMakeFiles/HWW2.dir/Message.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/Message.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp > CMakeFiles/HWW2.dir/Message.cpp.i
+
+CMakeFiles/HWW2.dir/Message.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/Message.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp -o CMakeFiles/HWW2.dir/Message.cpp.s
+
+CMakeFiles/HWW2.dir/Message.cpp.o.requires:
+.PHONY : CMakeFiles/HWW2.dir/Message.cpp.o.requires
+
+CMakeFiles/HWW2.dir/Message.cpp.o.provides: CMakeFiles/HWW2.dir/Message.cpp.o.requires
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.o.provides.build
+.PHONY : CMakeFiles/HWW2.dir/Message.cpp.o.provides
+
+CMakeFiles/HWW2.dir/Message.cpp.o.provides.build: CMakeFiles/HWW2.dir/Message.cpp.o
+
 # Object files for target HWW2
 HWW2_OBJECTS = \
 "CMakeFiles/HWW2.dir/main.cpp.o" \
 "CMakeFiles/HWW2.dir/MyEpoll.cpp.o" \
-"CMakeFiles/HWW2.dir/MyClient.cpp.o"
+"CMakeFiles/HWW2.dir/MyClient.cpp.o" \
+"CMakeFiles/HWW2.dir/HttpWorker.cpp.o" \
+"CMakeFiles/HWW2.dir/Message.cpp.o"
 
 # External object files for target HWW2
 HWW2_EXTERNAL_OBJECTS =
@@ -130,6 +178,8 @@ HWW2_EXTERNAL_OBJECTS =
 HWW2: CMakeFiles/HWW2.dir/main.cpp.o
 HWW2: CMakeFiles/HWW2.dir/MyEpoll.cpp.o
 HWW2: CMakeFiles/HWW2.dir/MyClient.cpp.o
+HWW2: CMakeFiles/HWW2.dir/HttpWorker.cpp.o
+HWW2: CMakeFiles/HWW2.dir/Message.cpp.o
 HWW2: CMakeFiles/HWW2.dir/build.make
 HWW2: CMakeFiles/HWW2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable HWW2"
@@ -142,6 +192,8 @@ CMakeFiles/HWW2.dir/build: HWW2
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/main.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/MyEpoll.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/MyClient.cpp.o.requires
+CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/HttpWorker.cpp.o.requires
+CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Message.cpp.o.requires
 .PHONY : CMakeFiles/HWW2.dir/requires
 
 CMakeFiles/HWW2.dir/clean:

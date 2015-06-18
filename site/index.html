@@ -1,39 +1,96 @@
 <!Doctype html>
 
 <html>
-
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-</head>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    </head>
 
     <body>
-    <p>message!    
-    </p>
-    <img src="cat.jpg" alt="Mountain View" style="width:304px;height:228px;">
+        <p> Username: 
+            <input type="text" id="username" maxlength=20>
+        </p>
+        <button id="mybutton"> 
+            Submit =)
+        </button>
 
-    <button id="bb">
-        click me
-    </button>
-    
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="cat.jpg" alt="Mjountain View" style="width:304px;height:228px;">
     </body>
 
-   
-<script>
+    <script>
+        $(document).ready(function() {
+                $("#mybutton").click(function () {
+//                    var name = document.getElementById("username").value
+                    var name = $("#username").val();
+                    $.post("login", name,
+                            function (data, status) {
+                                alert("data: " + data + "\nstatus: " + status);
+                            })
+                })
+
+                });
+
+    </script>
 
 
-        alert("bbb");
-
-document.getElementById("bb").onclick = function() {
-        alert("aaa");
-        window.location.href = "http://www.google.com";
-};
-</script>
-
- 
 
 </html>
 
+
+
+<!--<html>-->
+
+    <!--<head>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <!--</head>-->
+    
+    <!--<script>-->
+        <!--$(document).ready(function() {-->
+                <!--$("#buttonA").click(function() {-->
+                    <!--$.get("A.txt", -->
+                        <!--function(data, status) {-->
+                            <!--alert("data = " + data + " status: " + status);-->
+                        <!--});-->
+
+                    <!--});-->
+                <!--});-->
+
+    <!--</script>-->
+
+
+    <!--<body>-->
+        <!--<p>message! </p>-->
+        <!--<img src="cat.jpg" alt="Mountain View" style="width:304px;height:228px;">-->
+
+        <!--<button id="buttonA">-->
+            <!--get A.txt-->
+        <!--</button>-->
+
+        <!--<form method="POST">-->
+            <!--<input type="text" name="firstname" value="ttt"/>-->
+            <!--<br> -->
+            <!--<input type="submit" value="ssubmit" /> -->
+        <!--</form>-->
+
+    
+    <!--</body>-->
+
+       
+ 
+
+<!--</html>-->
+
+
+    <!--<script>-->
+            <!--alert("bbb");-->
+    <!--document.getElementById("bb").onclick = function() {-->
+            <!--alert("aaa");-->
+            <!--window.location.href = "http://www.google.com";-->
+    <!--};-->
+    <!--</script>-->
 
 
 

@@ -114,6 +114,54 @@ HWW2/fast:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/build
 .PHONY : HWW2/fast
 
+HttpWorker.o: HttpWorker.cpp.o
+.PHONY : HttpWorker.o
+
+# target to build an object file
+HttpWorker.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/HttpWorker.cpp.o
+.PHONY : HttpWorker.cpp.o
+
+HttpWorker.i: HttpWorker.cpp.i
+.PHONY : HttpWorker.i
+
+# target to preprocess a source file
+HttpWorker.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/HttpWorker.cpp.i
+.PHONY : HttpWorker.cpp.i
+
+HttpWorker.s: HttpWorker.cpp.s
+.PHONY : HttpWorker.s
+
+# target to generate assembly for a file
+HttpWorker.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/HttpWorker.cpp.s
+.PHONY : HttpWorker.cpp.s
+
+Message.o: Message.cpp.o
+.PHONY : Message.o
+
+# target to build an object file
+Message.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.o
+.PHONY : Message.cpp.o
+
+Message.i: Message.cpp.i
+.PHONY : Message.i
+
+# target to preprocess a source file
+Message.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.i
+.PHONY : Message.cpp.i
+
+Message.s: Message.cpp.s
+.PHONY : Message.s
+
+# target to generate assembly for a file
+Message.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.s
+.PHONY : Message.cpp.s
+
 MyClient.o: MyClient.cpp.o
 .PHONY : MyClient.o
 
@@ -195,6 +243,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HWW2"
+	@echo "... HttpWorker.o"
+	@echo "... HttpWorker.i"
+	@echo "... HttpWorker.s"
+	@echo "... Message.o"
+	@echo "... Message.i"
+	@echo "... Message.s"
 	@echo "... MyClient.o"
 	@echo "... MyClient.i"
 	@echo "... MyClient.s"

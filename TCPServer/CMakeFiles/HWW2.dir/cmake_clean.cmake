@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/HWW2.dir/main.cpp.o"
   "CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
   "CMakeFiles/HWW2.dir/MyClient.cpp.o"
+  "CMakeFiles/HWW2.dir/HttpWorker.cpp.o"
+  "CMakeFiles/HWW2.dir/Message.cpp.o"
   "HWW2.pdb"
   "HWW2"
 )

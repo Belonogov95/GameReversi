@@ -6,6 +6,32 @@
 
 #IncludeRegexTransform: 
 
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp
+HttpWorker.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
+MyClient.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+Message.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
+bits/stdc++.h
+-
+MyClient.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
+Message.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
+Message.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+bits/stdc++.h
+-
+
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp
 sys/socket.h
 -
@@ -77,4 +103,6 @@ MyEpoll.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+HttpWorker.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
 

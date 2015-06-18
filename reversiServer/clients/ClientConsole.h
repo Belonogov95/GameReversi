@@ -11,6 +11,8 @@
 class ClientConsole : public ClientInterface{
 public:
     virtual GameState makeTurn(GameState state);
+
+
 };
 
 
