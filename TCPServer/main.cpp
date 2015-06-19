@@ -11,13 +11,18 @@ using namespace std;
 
 
 map <int, shared_ptr<HttpWorker>> workers;
-map <int, string> names;
-set <string> myFiles;
+map <int, string> loginById;
+
+map < string, int > idByLogin;
 map < int, set < int > > edges;
+int curId;
+
+set <string> myFiles;
+
 
 void onAC2(shared_ptr<MyClient> client) {
-    assert(workers.count(client->getSocketDescriptor()) == 0);
-    workers[client->getSocketDescriptor()] = shared_ptr<HttpWorker>(new HttpWorker());
+    //assert(workers.count(client->getSocketDescriptor()) == 0);
+    //workers[client->getSocketDescriptor()] = shared_ptr<HttpWorker>(new HttpWorker());
 }
 
 
@@ -33,24 +38,35 @@ string arrayJSFromStrings(vector < string > data) {
 }
 
 
-string generatePlayersList(shared_ptr < MyClient > client) {
-    int descriptor = client->getSocketDescriptor();
+string generatePlayersList(int id) {
     vector < string > data;
-    for (auto x: names)
-        if (x.first != descriptor)
+    for (auto x: loginById)
+        if (x.first != id)
             data.push_back(x.second);
     string s0 = arrayJSFromStrings(data);
     vector < string > dataF;
-    for (auto x: edges[descriptor])
-        dataF.push_back(names[x]);
+    for (auto x: edges[id])
+        dataF.push_back(loginById[x]);
     string s1 = arrayJSFromStrings(dataF);
-    vector < string > tmp;
-    return "[" + s0 + ", " + s1 + "]";
+    int competitor = -1;
+    for (auto x: edges[id]) {
+        if (edges[x].count(id) == 1) {
+            competitor = x;
+            break;
+        }
+    }
+    if (competitor != -1) {
+        return "[" + s0 + ", " + s1 + ", " + "'" + loginById[competitor] + "'" + "]";
+    }
+    else {
+        return "[" + s0 + ", " + s1 + "]";
+    }
 }
 
 void onRC2(shared_ptr<MyClient> client) {
     int descriptor = client->getSocketDescriptor();
-    assert(workers.count(descriptor) != 0);
+    if (workers.count(descriptor) == 0)
+        workers[descriptor] = shared_ptr<HttpWorker>(new HttpWorker());
     shared_ptr<HttpWorker> worker = workers[descriptor];
     while (true) {
         auto prAddress = worker->readMessage(client);
@@ -64,27 +80,41 @@ void onRC2(shared_ptr<MyClient> client) {
 
         if (message.URL == "/login") {
             assert((int) message.body.size() == 1);
-            string name = message.body[0];
+            string login = message.get("login");
             bool exist = 0;
-            for (auto x: names)
-                if (x.second == name)
+            for (auto x: loginById)
+                if (x.second == login)
                     exist = 1;
             if (exist) {
                 worker->sendString("unsuccess", client);
             }
             else {
-                names[descriptor] = name;
+                loginById[curId] = login;
+                idByLogin[login] = curId;
+                curId++;
                 worker->sendString("success", client);
             }
         }
+
+
         else if (message.URL == "/players") {
-            string tmp = generatePlayersList(client);
+            string login = message.get("login");
+            assert(idByLogin.count(login) == 1);
+            int id = idByLogin[login];
+            string tmp = generatePlayersList(id);
             db(tmp);
             worker->sendString(tmp, client);
-//            worker->sendString(generatePlayersList(client), client);
+        }
+        else if (message.URL == "/invite") {
+            string login = message.get("login");
+            assert(idByLogin.count(login) == 1);
+            int id = idByLogin[login];
+            int invitedId = idByLogin[message.get("target")];
+            edges[invitedId].insert(id);
         }
         else if (myFiles.count(message.URL) == 1) {
-            worker->sendFile(prAddress.second.URL, client);
+            if (message.URL == "/") message.URL = "/index.html";
+            worker->sendFile(message.URL, client);
         }
         else {
             db(message.URL);
@@ -95,6 +125,7 @@ void onRC2(shared_ptr<MyClient> client) {
 }
 
 void test2() {
+    myFiles.insert("/");
     myFiles.insert("/index.html");
     myFiles.insert("/favicon.ico");
     myFiles.insert("/cat.jpg");
@@ -102,7 +133,7 @@ void test2() {
     myFiles.insert("/mystyle.css");
 
     MyEpoll ep;
-    ep.add(7773, onAC2, onRC2);
+    ep.add(7771, onAC2, onRC2);
     ep.start();
 }
 

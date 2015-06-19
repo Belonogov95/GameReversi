@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/Message.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyClient.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/Tools.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

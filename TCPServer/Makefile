@@ -210,6 +210,30 @@ MyEpoll.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyEpoll.cpp.s
 .PHONY : MyEpoll.cpp.s
 
+Tools.o: Tools.cpp.o
+.PHONY : Tools.o
+
+# target to build an object file
+Tools.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Tools.cpp.o
+.PHONY : Tools.cpp.o
+
+Tools.i: Tools.cpp.i
+.PHONY : Tools.i
+
+# target to preprocess a source file
+Tools.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Tools.cpp.i
+.PHONY : Tools.cpp.i
+
+Tools.s: Tools.cpp.s
+.PHONY : Tools.s
+
+# target to generate assembly for a file
+Tools.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Tools.cpp.s
+.PHONY : Tools.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -255,6 +279,9 @@ help:
 	@echo "... MyEpoll.o"
 	@echo "... MyEpoll.i"
 	@echo "... MyEpoll.s"
+	@echo "... Tools.o"
+	@echo "... Tools.i"
+	@echo "... Tools.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

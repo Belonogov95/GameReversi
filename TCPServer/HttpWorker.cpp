@@ -6,29 +6,8 @@
 #include "MyClient.h"
 #include "debug.h"
 #include "Message.h"
+#include "Tools.h"
 
-
-vector < string > HttpWorker::split(string s, char ch) {
-    vector < string > res;
-    for (int i = 0; i < (int)s.size(); i++) {
-        for (; i < (int)s.size() && s[i] == ch; i++);
-        int j = i;
-        for (; i < (int)s.size() && s[i] != ch; i++);
-        if (i - j > 0) {
-            res.push_back(s.substr(j, i - j));
-        }
-    }
-    return res;
-}
-
-string HttpWorker::trim(string s) {
-    int l= 0;
-    for (; l < (int)s.size() && s[l] == ' '; l++);
-    int r = (int)s.size() - 1;
-    for (; r > 0 && s[r] == ' '; r--);
-    if (r < l) return string();
-    return s.substr(l, (r - l) + 1);
-}
 
 void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
     path = "../site" + path;
@@ -89,7 +68,7 @@ pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
     for (;!innerBuffer.empty() && innerBuffer[0].empty(); innerBuffer.pop_front());
 
     assert(!innerBuffer.empty());
-    auto tmp = split(innerBuffer[0], ' ');
+    auto tmp = tools::split(innerBuffer[0], ' ');
 //    db("here");
 
     Message message;
@@ -100,7 +79,7 @@ pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
     int textLen = -1;
     //db("here");
     for (int i = 0; i < (int)innerBuffer.size() - 1; i++) {
-        auto tmp = split(innerBuffer[i], ':');
+        auto tmp = tools::split(innerBuffer[i], ':');
         if (tmp[0] == "Content-Length") {
             assert(tmp.size() == 2u);
             textLen = stoi(tmp[1]);
@@ -142,6 +121,8 @@ void HttpWorker::printBuff() {
     for (auto x: innerBuffer)
         cerr << x;
 }
+
+
 
 
 

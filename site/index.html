@@ -7,28 +7,82 @@
     <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
-<body>
-<div id="loginDiv">
-    <p> Username: <input type="text" id="username" maxlength=20></p>
-    <button id="loginButton"> Submit =)</button>
-</div>
+<bodyp>
+    <div id="loginDiv">
+        <p> Username: <input type="text" id="username" maxlength=20></p>
+        <button id="loginButton"> Submit =)</button>
+    </div>
 
-<div>
-    <ol id="userList">
+    <div id="connectDiv">
+        <div id="allUserDiv">
+            <ul id="allUserList"></ul>
+        </div>
+        <div id="inviteDiv">
+            <ul id="inviteList"></ul>
+        </div>
+    </div>
 
-    </ol>
+    <div id="boardDiv">
+        <p> secret text</p>
 
-</div>
-
-
-<br>
-<img src="cat.jpg" alt="Mjountain View" style="width:304px;height:228px;">
-</body>
-
-<script>
+    </div>
 
 
-</script>
+    <table id="boardTable">
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>80</td>
+        </tr>
+    </table>
+
+    <p> before table </p>
+    <table id="newTable"></table>
+    <p> after tabl</p>
+
+    <table>
+        <tr id="row111"> text </tr>
+
+    </table>
+
+    <p> test table</p>
+
+    <br>
+    <img src="cat.jpg" alt="Mjountain View" style="width:304px;height:228px;">
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <canvas id="myCanvas" width="100" height="200"></canvas>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = 70;
+
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = 'white';
+        context.fill();
+        context.lineWidth = 5;
+        context.strokeStyle = '#003300';
+        context.stroke();
+    </script>
+
+    </body>
 
 
 </html>

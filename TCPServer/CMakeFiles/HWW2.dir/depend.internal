@@ -7,10 +7,15 @@ CMakeFiles/HWW2.dir/HttpWorker.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/Message.cpp.o
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
 CMakeFiles/HWW2.dir/MyClient.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
@@ -20,6 +25,9 @@ CMakeFiles/HWW2.dir/MyEpoll.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+CMakeFiles/HWW2.dir/Tools.cpp.o
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.cpp
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
 CMakeFiles/HWW2.dir/main.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h

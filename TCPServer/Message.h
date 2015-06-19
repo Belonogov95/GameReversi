@@ -6,13 +6,16 @@
 #ifndef HWW2_MESSAGE_H
 #define HWW2_MESSAGE_H
 
-using namespace std;
+using std::string;
+using std::vector;
 
 class Message {
 public:
     string type;
     string URL;
     vector < string > body;
+
+    string get(string property);
 };
 
 

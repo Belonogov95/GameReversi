@@ -19,9 +19,8 @@ private:
 
 public:
 
-    vector<string> split(string s, char ch);
-
-    string trim(string s);
+    //vector<string> split(string s, char ch);
+    //string trim(string s);
 
     void printBuff();
 
@@ -31,6 +30,8 @@ public:
 
     void sendString(string data, shared_ptr<MyClient> client);
 };
+
+
 
 
 #endif //HWW2_HTTPWORKER_H
