@@ -67,6 +67,7 @@ void MyEpoll::start() {
 //                        x->closeClient();
 //                    running = false;
                     cerr << "success\n";
+                    exit(0);
                 }
             }
             else if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {

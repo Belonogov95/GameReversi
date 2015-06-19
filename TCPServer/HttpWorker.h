@@ -27,8 +27,9 @@ public:
 
     void sendFile(string path, shared_ptr<MyClient> client);
 
-    pair<bool, Message > readMessage(shared_ptr<MyClient> client);
+    pair<int, Message > readMessage(shared_ptr<MyClient> client);
 
+    void sendString(string data, shared_ptr<MyClient> client);
 };
 
 

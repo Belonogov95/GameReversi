@@ -43,8 +43,6 @@ public:
 
     void setWrite(int flag);
 
-    void write(vector<char> data);
-
     int readyToWrite();
 
     void closeClient();

@@ -5,41 +5,104 @@
 #include "MyEpoll.h"
 #include "debug.h"
 #include "HttpWorker.h"
+#include "MyClient.h"
 
 using namespace std;
 
 
+map <int, shared_ptr<HttpWorker>> workers;
+map <int, string> names;
+set <string> myFiles;
+map < int, set < int > > edges;
 
-map<int, shared_ptr < HttpWorker > > workers;
-
-
-void onAC2(shared_ptr < MyClient > client) {
+void onAC2(shared_ptr<MyClient> client) {
     assert(workers.count(client->getSocketDescriptor()) == 0);
-    workers[client->getSocketDescriptor()] = shared_ptr < HttpWorker > (new HttpWorker());
+    workers[client->getSocketDescriptor()] = shared_ptr<HttpWorker>(new HttpWorker());
 }
 
 
+string arrayJSFromStrings(vector < string > data) {
+    string res = "[" ;
+    for (int i = 0; i < (int)data.size(); i++) {
+        res += "\"" + data[i] + "\"";
+        if (i + 1 != (int)data.size())
+            res += ", ";
+    }
+    res += "]";
+    return res;
+}
 
-void onRC2(shared_ptr < MyClient > client) {
-    assert(workers.count(client->getSocketDescriptor()) != 0);
-    shared_ptr < HttpWorker > worker = workers[client->getSocketDescriptor()];
+
+string generatePlayersList(shared_ptr < MyClient > client) {
+    int descriptor = client->getSocketDescriptor();
+    vector < string > data;
+    for (auto x: names)
+        if (x.first != descriptor)
+            data.push_back(x.second);
+    string s0 = arrayJSFromStrings(data);
+    vector < string > dataF;
+    for (auto x: edges[descriptor])
+        dataF.push_back(names[x]);
+    string s1 = arrayJSFromStrings(dataF);
+    vector < string > tmp;
+    return "[" + s0 + ", " + s1 + "]";
+}
+
+void onRC2(shared_ptr<MyClient> client) {
+    int descriptor = client->getSocketDescriptor();
+    assert(workers.count(descriptor) != 0);
+    shared_ptr<HttpWorker> worker = workers[descriptor];
     while (true) {
         auto prAddress = worker->readMessage(client);
-        if (!prAddress.first) break;
+        auto message = prAddress.second;
+        if (prAddress.first == 0) {
+            workers.erase(client->getSocketDescriptor());
+            return;
+        }
+        if (prAddress.first == -1)
+            return;
 
-        //auto question = worker->split(prAddress.second, '?');
-
-        //if ((int)question.size() > 1)
-            //prAddress.second = "/hello.html";
-
-        worker->sendFile(prAddress.second.URL, client);
+        if (message.URL == "/login") {
+            assert((int) message.body.size() == 1);
+            string name = message.body[0];
+            bool exist = 0;
+            for (auto x: names)
+                if (x.second == name)
+                    exist = 1;
+            if (exist) {
+                worker->sendString("unsuccess", client);
+            }
+            else {
+                names[descriptor] = name;
+                worker->sendString("success", client);
+            }
+        }
+        else if (message.URL == "/players") {
+            string tmp = generatePlayersList(client);
+            db(tmp);
+            worker->sendString(tmp, client);
+//            worker->sendString(generatePlayersList(client), client);
+        }
+        else if (myFiles.count(message.URL) == 1) {
+            worker->sendFile(prAddress.second.URL, client);
+        }
+        else {
+            db(message.URL);
+            assert(false);
+        }
     }
 
 }
 
 void test2() {
+    myFiles.insert("/index.html");
+    myFiles.insert("/favicon.ico");
+    myFiles.insert("/cat.jpg");
+    myFiles.insert("/script.js");
+    myFiles.insert("/mystyle.css");
+
     MyEpoll ep;
-    ep.add(7772, onAC2, onRC2);
+    ep.add(7773, onAC2, onRC2);
     ep.start();
 }
 
@@ -48,7 +111,7 @@ int main() {
     //ifstream in("../site/index.html");
     //string s;
     //while (getline(in, s))
-        //cerr << s << endl;
+    //cerr << s << endl;
 
 
     test2();
