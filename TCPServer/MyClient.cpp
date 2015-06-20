@@ -38,20 +38,11 @@ MyClient::MyClient(int port, int socketDescriptor,
 }
 
 
-//int MyClient::read(vector<char> &buffer) {
-//    cerr << "b\n";
-//    int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
-//    cerr << "a\n";
-//    assert(readLen != -1 || errno == 11);
-//    return readLen;
-//}
-
 int MyClient::read(string &buffer) {
     int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
     assert(readLen != -1 || errno == 11);
     return readLen;
 }
-
 
 
 void MyClient::write(string data) {
@@ -68,21 +59,7 @@ void MyClient::write(string data) {
     setWrite(1);
     myEpoll->write(this);
 }
-//
-//void MyClient::write(vector<char> data) {
-//    int oldLen = (int) buffer.size();
-//    buffer.resize(buffer.size() + data.size());
-//    for (int i = 0; i < (int) data.size(); i++)
-//        buffer[oldLen + i] = data[i];
-//    if (bufferCursor * 2 > (int) buffer.size()) {
-//        for (int i = bufferCursor; i < (int) buffer.size(); i++)
-//            buffer[i - bufferCursor] = buffer[i];
-//        buffer.resize(buffer.size() - bufferCursor);
-//        bufferCursor = 0;
-//    }
-//    setWrite(1);
-//    myEpoll->write(this);
-//}
+
 
 int MyClient::readyToWrite() {
     assert(bufferCursor <= (int) buffer.size());
