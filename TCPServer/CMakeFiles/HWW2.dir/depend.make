@@ -34,4 +34,9 @@ CMakeFiles/HWW2.dir/main.cpp.o: MyClient.h
 CMakeFiles/HWW2.dir/main.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/main.cpp.o: debug.h
 CMakeFiles/HWW2.dir/main.cpp.o: main.cpp
+CMakeFiles/HWW2.dir/main.cpp.o: reversiServer/GameState.h
+
+CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o: reversiServer/GameState.cpp
+CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o: reversiServer/GameState.h
+CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o: reversiServer/debug.h
 

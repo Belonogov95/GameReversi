@@ -35,3 +35,8 @@ CMakeFiles/HWW2.dir/main.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
+CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/debug.h

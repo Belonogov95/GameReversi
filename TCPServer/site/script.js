@@ -3,17 +3,18 @@ var LOGIN;
 var LINE_BREAK;
 var CONNECT_INTERVAL_ID;
 var GAME_INTERVAL_ID;
+var CELL_SIZE = 60;
 
 $(document).ready(function () {
     //$("#connectDiv").hide();
     //$("#boardDiv").hide();
     //alert("here");
     $("#loginButton").click(onClickLogin);
-   createBoard();
-    drawCircle(1, 1, 0);
-    drawCircle(2, 2, 1);
-    drawCircle(2, 3, 0);
-    drawCircle(2, 3, -1);
+   //createBoard();
+   // drawCircle(1, 1, 0);
+   // drawCircle(2, 2, 1);
+   // drawCircle(2, 3, 0);
+   // drawCircle(2, 3, -1);
 });
 
 function onClickLogin() {
@@ -36,7 +37,7 @@ function loginCallBack(data, status) {
     $("#loginDiv").css("display", "none");
     //alert("here3")
     $("#connectDiv").css("display", "inline");
-    $("#connectDiv").prepend("<h4> Hello, " + name + "</h4>");
+    $("#mainDiv").prepend("<h4> Hello, " + name + "</h4>");
     updatePlayerList();
     CONNECT_INTERVAL_ID = setInterval(updatePlayerList, 500);
 }
@@ -57,14 +58,18 @@ function playerListCallBack(data, status) {
     }
     $("#allUserList").empty();
     $("#inviteList").empty();
-    for (i = 0; i < q[0].length; i++)
-        $("#allUserList").append('<li onclick="invitePerson' + "('" + q[0][i] + "')" + '" >' + q[0][i] + "</li>");
-    for (i = 0; i < q[1].length; i++)
-        $("#inviteList").append('<li onclick="invitePerson' + "('" + q[1][i] + "')" + '" >' + q[1][i] + "</li>");
+    for (j = 0; j < 2; j++)
+        for (i = 0; i < q[j].length; i++) {
+            var tmp ='<li><button onclick="invitePerson' + "('" + q[j][i] + "')" + '" >' + q[j][i] + "</button></li>";
+            if (j == 0)
+                $("#allUserList").append(tmp);
+            else
+                $("#inviteList").append(tmp);
+        }
 }
 
 function invitePerson(player) {
-    alert("you are invited: " + player);
+    //alert("you are invited: " + player);
     $.post("invite", LOGIN + "target=" + player + LINE_BREAK);
 }
 ////////////////////////////////////////////// game
@@ -74,17 +79,24 @@ function initGame(enemy) {
     clearInterval(CONNECT_INTERVAL_ID);
     $("#connectDiv").css("display", "none");
     $("#boardDiv").css("display", "inline");
+
+    $("#titleGame").append(createCanvas("leftCircle", CELL_SIZE) +  name + " vs " + enemy +
+            createCanvas("rightCircle", CELL_SIZE));
+    drawCircleById("leftCircle", 1);
+    drawCircleById("rightCircle", 2);
     createBoard();
     updateBoard();
-    GAME_INTERVAL_ID = setInterval(500, updateBoard);
+    GAME_INTERVAL_ID = setInterval(updateBoard, 3000);
 }
 
 function updateBoard() {
+    //alert("send post");
     $.post("board", LOGIN, updateBoardCallBack);
 }
 
 function updateBoardCallBack(data, status) {
-    var board = eval(data);
+    var q = eval(data);
+    var board = eval(q[0]);
     for (i = 0; i < 8; i++)
         for (j = 0; j < 8; j++)
             drawCircle(i, j, board[i][j]);
@@ -93,13 +105,12 @@ function updateBoardCallBack(data, status) {
 
 function createBoard() {
     for (var i = 0; i < 8; i++) {
-        var str = '<tr id="row' + i + '">' + 'gggg' + "</tr>";
+        var str = '<tr id="row' + i + '">' + "</tr>";
         $("#newTable").append(str);
         for (var j = 0; j < 8; j++) {
             var cl = 'onclick="cellClick(' + i + ", " + j + ')"'
             var id = '"cell' + i + j + '"';
-            var sz = 60;
-            var canvas = "<canvas id=" + id +' width="' + sz + '"' + 'height="' + sz + '"></canvas>';
+            var canvas = createCanvas(id, CELL_SIZE);
             str2 = "<td " + cl + ">" + canvas + "</td>";
             $("#row" + i).append(str2);
         }
@@ -107,17 +118,22 @@ function createBoard() {
 
 }
 
-
+function createCanvas(id, sz) {
+   return "<canvas id=" + id +' width="' + sz + '"' + 'height="' + sz + '"></canvas>';
+}
 
 function cellClick(x, y) {
     alert("x: " + x + "\ny: " + y);
     $.post("move", LOGIN + "x=" + x + LINE_BREAK + "y=" + y + LINE_BREAK);
 }
 
-
 function drawCircle(x, y, color) {
     var id = "cell" + x + y;
-    var canvas = document.getElementById(id);
+    drawCircleById(id, color);
+}
+
+function drawCircleById(id, color) {
+   var canvas = document.getElementById(id);
     var context = canvas.getContext('2d');
     if (color == 0) {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -137,7 +153,6 @@ function drawCircle(x, y, color) {
     context.lineWidth = 5;
     context.strokeStyle = '#003300';
     context.stroke();
-
 }
 
 

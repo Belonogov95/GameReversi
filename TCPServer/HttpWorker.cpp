@@ -10,7 +10,8 @@
 
 
 void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
-    path = "../site" + path;
+    path = "site" + path;
+    db(path);
     ifstream in(path, ios::binary);
     in.seekg(0, in.end);
     int length = in.tellg();

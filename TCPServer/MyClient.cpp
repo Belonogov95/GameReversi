@@ -130,23 +130,6 @@ void MyClient::closeClient() {
 }
 
 
-//void MyClient::makeSocketNonBlocking() {
-//    int flags = fcntl(socketDescriptor, F_GETFL, 0);
-//    assert(flags >= 0);
-//    flags |= O_NONBLOCK;
-//    assert(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
-//}
-//
-//int MyClient::getSocketDescriptor() {
-//    return socketDescriptor;
-//}
-//
-//int MyClient::getPort() {
-//    return port;
-//}
-
-
-
 void MyClient::makeSocketNonBlocking() {
     int flags = fcntl(socketDescriptor, F_GETFL, 0);
     assert(flags >= 0);

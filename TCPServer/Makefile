@@ -258,6 +258,30 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+reversiServer/GameState.o: reversiServer/GameState.cpp.o
+.PHONY : reversiServer/GameState.o
+
+# target to build an object file
+reversiServer/GameState.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o
+.PHONY : reversiServer/GameState.cpp.o
+
+reversiServer/GameState.i: reversiServer/GameState.cpp.i
+.PHONY : reversiServer/GameState.i
+
+# target to preprocess a source file
+reversiServer/GameState.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.i
+.PHONY : reversiServer/GameState.cpp.i
+
+reversiServer/GameState.s: reversiServer/GameState.cpp.s
+.PHONY : reversiServer/GameState.s
+
+# target to generate assembly for a file
+reversiServer/GameState.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.s
+.PHONY : reversiServer/GameState.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,6 +309,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... reversiServer/GameState.o"
+	@echo "... reversiServer/GameState.i"
+	@echo "... reversiServer/GameState.s"
 .PHONY : help
 
 

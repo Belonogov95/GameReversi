@@ -62,10 +62,11 @@ public:
 
     void printBoard();
 
-
     void nextTurn();
 
-    bool go(int x, int y, GameState &res, bool FLAG = 0);
+    bool go(int x, int y, GameState &res);
+
+    string toJSArray();
 };
 
 

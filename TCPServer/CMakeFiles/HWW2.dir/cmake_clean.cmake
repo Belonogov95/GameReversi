@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/HWW2.dir/HttpWorker.cpp.o"
   "CMakeFiles/HWW2.dir/Message.cpp.o"
   "CMakeFiles/HWW2.dir/Tools.cpp.o"
+  "CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o"
   "HWW2.pdb"
   "HWW2"
 )

@@ -46,40 +46,39 @@ void GameState::code(int data[8][8]) {
         }
 }
 
-bool GameState::go(int x, int y, GameState &res, bool FLAG) {
+bool GameState::go(int x, int y, GameState &res) {
     assert(check(x, y));
     int data[8][8];
     decode(data);
-//
-//    if (FLAG) {
-//        db2(x, y);
-//        for (int i = 0; i < 8; i++, cerr << endl)
-//            for (int j = 0; j < 8; j++)
-//                cout << data[i][j] << " ";
-//    }
-    if (data[x][y] != 0) return false;
+    if (data[x][y] != 0) {
+        db("whis cell isn't empty");
+        return false;
+    }
     int cntFlip = 0;
-    data[x][y] = 1;
+    int myColor = res.player;
+    int enemyColor = 3 - res.player;
+    data[x][y] =  myColor;
     for (int dir = 0; dir < 8; dir++) {
         int x1 = x + dx[dir];
         int y1 = y + dy[dir];
-        int cntBlack = 0;
-        for (; check(x1, y1) && data[x1][y1] == 2; x1 += dx[dir], y1 += dy[dir], cntBlack++);
-//        db(cntBlack);
-        if (check(x1, y1) && data[x1][y1] == 1) {
-//            cerr << "here " << cntBlack << endl;
-            cntFlip += cntBlack;
+        int cntEnemy = 0;
+        for (; check(x1, y1) && data[x1][y1] == enemyColor; x1 += dx[dir], y1 += dy[dir], cntEnemy++);
+        if (check(x1, y1) && data[x1][y1] == myColor) {
+            cntFlip += cntEnemy;
             x1 = x + dx[dir];
             y1 = y + dy[dir];
-            for (; check(x1, y1) && data[x1][y1] == 2; x1 += dx[dir], y1 += dy[dir])
-                data[x1][y1] = 1;
+            for (; check(x1, y1) && data[x1][y1] == enemyColor; x1 += dx[dir], y1 += dy[dir])
+                data[x1][y1] = myColor;
         }
     }
-//    db(cntFlip);
-    if (cntFlip == 0) return false;
-
+    if (cntFlip == 0) {
+        db("cntFlip == 0");
+        return false;
+    }
     res.code(data);
-    res.player = player;
+
+    res.reverseColor();
+    res.nextTurn();
     return true;
 }
 
@@ -149,6 +148,25 @@ GameState::GameState() {
 
 void GameState::nextTurn() {
     player = 3 - player;
+}
+
+string GameState::toJSArray() {
+    int data[8][8];
+    decode(data);
+    string res = "[";
+    for (int i = 0; i < 8; i++) {
+        res += "[";
+        for (int j = 0; j < 8; j++) {
+            res += '0' + data[i][j];
+            if (j + 1 != 8)
+                res += ", ";
+        }
+        res += "]";
+        if (i + 1 != 8)
+            res += ", ";
+    }
+    res += "]";
+    return res;
 }
 
 
