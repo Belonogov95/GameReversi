@@ -234,6 +234,30 @@ Tools.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Tools.cpp.s
 .PHONY : Tools.cpp.s
 
+debug.o: debug.cpp.o
+.PHONY : debug.o
+
+# target to build an object file
+debug.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.o
+.PHONY : debug.cpp.o
+
+debug.i: debug.cpp.i
+.PHONY : debug.i
+
+# target to preprocess a source file
+debug.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.i
+.PHONY : debug.cpp.i
+
+debug.s: debug.cpp.s
+.PHONY : debug.s
+
+# target to generate assembly for a file
+debug.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.s
+.PHONY : debug.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -306,6 +330,9 @@ help:
 	@echo "... Tools.o"
 	@echo "... Tools.i"
 	@echo "... Tools.s"
+	@echo "... debug.o"
+	@echo "... debug.i"
+	@echo "... debug.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

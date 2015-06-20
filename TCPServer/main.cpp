@@ -7,6 +7,9 @@
 #include "HttpWorker.h"
 #include "MyClient.h"
 #include "reversiServer/GameState.h"
+#include <signal.h>
+#include <string.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -35,11 +38,6 @@ int curGame;
 
 set<string> myFiles;
 
-
-void onAC2(shared_ptr<MyClient> client) {
-    //assert(workers.count(client->getSocketDescriptor()) == 0);
-    //workers[client->getSocketDescriptor()] = shared_ptr<HttpWorker>(new HttpWorker());
-}
 
 
 string arrayJSFromStrings(vector<string> data) {
@@ -206,20 +204,54 @@ void onRC2(shared_ptr<MyClient> client) {
 }
 
 
+int fdFromEpoll;
+
+void handl(int signum) {
+    char buffer[10];
+    sprintf(buffer, "wake up!");
+    cerr << "write!!!!" << endl;
+    db(fdFromEpoll);
+    write(fdFromEpoll, buffer, sizeof(buffer));
+}
+
+
 void test2() {
+
+    ///int pipefd[2];
+    //pipe(pipefd);
+//    read(pipefd[0], , );
+//
+//    write(pipefd[0]);
+
+    ////////////////////////////
     myFiles.insert("/");
     myFiles.insert("/index.html");
     myFiles.insert("/favicon.ico");
     myFiles.insert("/cat.jpg");
     myFiles.insert("/script.js");
     myFiles.insert("/mystyle.css");
-
+    freopen("config.txt", "r", stdin);
+    int port;
+    string ipAddress;
+    cin >> port;
+    cin >> ipAddress;
     MyEpoll ep;
-    ep.add(7772, onAC2, onRC2);
+    fdFromEpoll = ep.getPipe();
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = handl;
+    sigaction(SIGINT, &sa, NULL);
+
+
+    db2(port, ipAddress);
+    ep.add(port, ipAddress, onRC2);
     ep.start();
 }
 
+
 int main() {
+
+
     //test();
     //ifstream in("../site/index.html");
     //string s;

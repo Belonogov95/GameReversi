@@ -2,14 +2,14 @@
 // Created by vanya on 02.06.15.
 //
 
+#ifndef HWW2_MYEPOLL_H
+#define HWW2_MYEPOLL_H
 
 #include <sys/epoll.h>
 #include <map>
 #include "MyClient.h"
 #include <memory>
 
-#ifndef HWW2_MYEPOLL_H
-#define HWW2_MYEPOLL_H
 
 const int MAX_EVENTS = 2;
 const int WAITING_ACCEPT = 1;
@@ -23,16 +23,14 @@ class MyClient;
 class MyEpoll {
 private:
     int epollDescriptor;
-    bool running;
-    map < int, void (*) (shared_ptr < MyClient > ) > onAcceptMap;
+    int pipeFD;
     map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
     map < int, int > socketDescriptorType;
     map < int, int > portFromDescriptor;
     map < int, shared_ptr < MyClient > > clientFromDescriptor;
+
 public:
     friend class MyClient;
-
-
 
     void start();
 
@@ -40,8 +38,8 @@ public:
     ~MyEpoll();
 
     void write(MyClient * myClient);
-
-    void add(int port, void (*onAccept)(shared_ptr<MyClient>), void (*onReceive)(shared_ptr<MyClient>));
+    void add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>));
+    int getPipe();
 };
 
 

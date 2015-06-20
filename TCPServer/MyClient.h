@@ -18,9 +18,13 @@ const int BACK_LOG = 10;
 
 class MyEpoll;
 
+#define db(x) cerr << #x << " = " << x << endl
+#define db2(x, y) cerr << "(" << #x << ", " << #y << ") = (" << x << ", " << y << ")\n"
+
 class MyClient {
 private:
 
+    MyClient(int port, string ipAddress);
 
     int port;
     int socketDescriptor;
@@ -31,13 +35,10 @@ private:
     bool closed;
     MyEpoll * myEpoll;
 
-
     MyClient(int port, int socketDescriptor, int epollDescriptor, MyEpoll * myEpoll);
 
 public:
     friend class MyEpoll;
-
-    MyClient(int port);
 
     void setRead(int flag);
 

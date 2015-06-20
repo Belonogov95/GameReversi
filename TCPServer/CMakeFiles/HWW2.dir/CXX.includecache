@@ -53,8 +53,12 @@ fcntl.h
 -
 netinet/in.h
 -
+netdb.h
+-
 MyClient.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
 array
@@ -102,6 +106,16 @@ Tools.h
 bits/stdc++.h
 -
 
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp
+stdlib.h
+-
+stdio.h
+-
+bits/stdc++.h
+-
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp
@@ -123,6 +137,12 @@ MyClient.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
 reversiServer/GameState.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
+signal.h
+-
+string.h
+-
+unistd.h
+-
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp
 GameState.h

@@ -19,6 +19,7 @@ CMakeFiles/HWW2.dir/Message.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.cpp
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.h
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyEpoll.h
+CMakeFiles/HWW2.dir/MyClient.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyClient.h
 CMakeFiles/HWW2.dir/MyEpoll.cpp.o: MyEpoll.cpp
@@ -27,6 +28,9 @@ CMakeFiles/HWW2.dir/MyEpoll.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/Tools.cpp.o: Tools.cpp
 CMakeFiles/HWW2.dir/Tools.cpp.o: Tools.h
+
+CMakeFiles/HWW2.dir/debug.cpp.o: debug.cpp
+CMakeFiles/HWW2.dir/debug.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/main.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/main.cpp.o: Message.h

@@ -9,22 +9,38 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <netinet/in.h>
+#include <netdb.h>
 #include "MyClient.h"
+#include "debug.h"
 
 
-MyClient::MyClient(int port) : port(port), epollDescriptor(-1), flagMask(0) {
-    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
-    sockaddr_in address;
-    memset(&address, 0, sizeof(address));
+MyClient::MyClient(int port, string ipAddress) : port(port), epollDescriptor(-1), flagMask(0) {
+    addrinfo hints;
+    addrinfo *result;
 
-    address.sin_family = AF_INET;
-    address.sin_port = htons((uint16_t) port);
-    address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
+    hints.ai_socktype = SOCK_STREAM; /* Datagram socket */
 
-    assert(bind(socketDescriptor, (const sockaddr *) &address, sizeof(address)) == 0);
+    assert(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
+
+    assert(result != NULL);
+
+    socketDescriptor = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+    assert(socketDescriptor != -1);
+
+    int one = 1;
+    assert(setsockopt(socketDescriptor, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
+
+    if (bind(socketDescriptor, result->ai_addr, result->ai_addrlen) != 0) {
+        perror("");
+        exit(0);
+    }
     assert(listen(socketDescriptor, BACK_LOG) == 0);
+    freeaddrinfo(result);           /* No longer needed */
     makeSocketNonBlocking();
 }
+
 
 MyClient::MyClient(int port, int socketDescriptor,
                    int epollDescriptor, MyEpoll * myEpoll) : port(port),
@@ -97,11 +113,11 @@ void MyClient::closeClient() {
     assert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
     assert(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
     myEpoll->onReceiveMap.erase(socketDescriptor);
-    assert(myEpoll->onAcceptMap.count(socketDescriptor) == 1);
-    myEpoll->onAcceptMap.erase(socketDescriptor);
+
     assert(myEpoll->clientFromDescriptor.count(socketDescriptor) == 1);
     myEpoll->clientFromDescriptor.erase(socketDescriptor);
-
+    myEpoll->portFromDescriptor.erase(socketDescriptor);
+    myEpoll->socketDescriptorType.erase(socketDescriptor);
     closed = true;
     assert(close(socketDescriptor) == 0);
 }
