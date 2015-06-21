@@ -83,19 +83,21 @@ string.h
 -
 unistd.h
 -
+netdb.h
+-
 MyEpoll.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
-sys/epoll.h
--
-map
--
 MyClient.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
 memory
+-
+sys/epoll.h
+-
+map
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.cpp

@@ -40,10 +40,10 @@ void GameServer::play(shared_ptr < ClientInterface >  a, shared_ptr < ClientInte
             cout << calcResult(state) << endl;
             return;
         }
+        db(state.player);
         state = a->makeTurn(state);
-        state.nextTurn();
+        db(state.player);
         state = b->makeTurn(state);
-        state.nextTurn();
     }
 
 }

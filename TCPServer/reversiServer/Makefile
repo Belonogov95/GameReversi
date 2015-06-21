@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer
+CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer
+CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -161,6 +161,30 @@ GameState.s: GameState.cpp.s
 GameState.cpp.s:
 	$(MAKE) -f CMakeFiles/reversiServer.dir/build.make CMakeFiles/reversiServer.dir/GameState.cpp.s
 .PHONY : GameState.cpp.s
+
+clients/ClientBot.o: clients/ClientBot.cpp.o
+.PHONY : clients/ClientBot.o
+
+# target to build an object file
+clients/ClientBot.cpp.o:
+	$(MAKE) -f CMakeFiles/reversiServer.dir/build.make CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o
+.PHONY : clients/ClientBot.cpp.o
+
+clients/ClientBot.i: clients/ClientBot.cpp.i
+.PHONY : clients/ClientBot.i
+
+# target to preprocess a source file
+clients/ClientBot.cpp.i:
+	$(MAKE) -f CMakeFiles/reversiServer.dir/build.make CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.i
+.PHONY : clients/ClientBot.cpp.i
+
+clients/ClientBot.s: clients/ClientBot.cpp.s
+.PHONY : clients/ClientBot.s
+
+# target to generate assembly for a file
+clients/ClientBot.cpp.s:
+	$(MAKE) -f CMakeFiles/reversiServer.dir/build.make CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.s
+.PHONY : clients/ClientBot.cpp.s
 
 clients/ClientConsole.o: clients/ClientConsole.cpp.o
 .PHONY : clients/ClientConsole.o
@@ -249,6 +273,9 @@ help:
 	@echo "... GameState.o"
 	@echo "... GameState.i"
 	@echo "... GameState.s"
+	@echo "... clients/ClientBot.o"
+	@echo "... clients/ClientBot.i"
+	@echo "... clients/ClientBot.s"
 	@echo "... clients/ClientConsole.o"
 	@echo "... clients/ClientConsole.i"
 	@echo "... clients/ClientConsole.s"

@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/reversiServer.dir/GameState.cpp.o"
   "CMakeFiles/reversiServer.dir/GameServer.cpp.o"
   "CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o"
+  "CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o"
   "reversiServer.pdb"
   "reversiServer"
 )

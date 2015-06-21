@@ -11,8 +11,8 @@
 <body>
 <div id="mainDiv" align="center">
     <div id="loginDiv">
-        <p> Username: <input type="text" id="username" maxlength=20></p>
-        <button id="loginButton"> Submit =)</button>
+        <p> Username: <input type="text" id="username" maxlength=20 autofocus></p>
+        <button id="loginButton" > Submit =)</button>
     </div>
 
     <div id="connectDiv">
@@ -25,10 +25,19 @@
     </div>
 
     <div id="boardDiv">
-        <p id="titleGame">
 
+
+        <p id="titleGame">
+            <canvas id="leftCircle" width=60 height=60 ></canvas>
+            <span id="forText"> </span>
+            <canvas id="rightCircle" width=60 height=60 ></canvas>
         </p>
+        <p id="turnGame"></p>
+        <p id="forWinner" size="6"></p>
         <table id="newTable"></table>
+
+        <a href="index.html"> go to main menu </a>
+        <a href="localhost:7778/index.html"> go to main menu 2 </a>
     </div>
 
     <br>

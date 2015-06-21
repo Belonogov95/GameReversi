@@ -45,6 +45,7 @@ public:
     ull used;
     ull white;
     int player;                   /// 1 - white; 2 - black
+    bool finished;
 
     int getCntUsed();
     int getCntWhite() ;
@@ -56,17 +57,19 @@ public:
 
 //    bool go(int x, int y, GameState & res);
 
-    bool isPossibleMove();
-
     bool check(int x, int y);
 
     void printBoard();
 
     void nextTurn();
 
-    bool go(int x, int y, GameState &res);
+    bool go(int x, int y, GameState &res, bool FLAG = 0);
 
     string toJSArray();
+
+    bool isPossibleMove();
+
+    int getCntBlack();
 };
 
 

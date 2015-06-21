@@ -11,11 +11,11 @@ GameState ClientConsole::makeTurn(GameState state) {
         return state;
     }
     state.printBoard();
-    bool flagRev = 0;
-    if (state.player == 2) {
-        flagRev = 1;
-        state.reverseColor();
-    }
+    //bool flagRev = 0;
+    //if (state.player == 2) {
+        //flagRev = 1;
+        //state.reverseColor();
+    //}
     int x, y;
     bool flag = 1;
     //state.printBoard();
@@ -41,8 +41,6 @@ GameState ClientConsole::makeTurn(GameState state) {
     }
     GameState next;
     state.go(x, y, next);
-    if (flagRev)
-        next.reverseColor();
     return next;
 }
 

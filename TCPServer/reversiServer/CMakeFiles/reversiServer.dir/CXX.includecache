@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.cpp
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.cpp
 GameServer.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.h
 debug.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/debug.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.h
 clients/ClientInterface.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.h
 memory
 -
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.cpp
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp
 GameState.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
 debug.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/debug.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
 iostream
 -
 cmath
@@ -56,31 +56,39 @@ unordered_map
 bitset
 -
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.cpp
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.cpp
+ClientBot.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.h
+ClientInterface.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.cpp
 ClientConsole.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.h
 ClientInterface.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.cpp
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.cpp
 ClientInterface.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.h
 ../GameState.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
 memory
 -
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/debug.h
 
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/main.cpp
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/main.cpp
 iostream
 -
 GameServer.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.h
 clients/ClientConsole.h
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.h
 

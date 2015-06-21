@@ -14,33 +14,6 @@
 #include "debug.h"
 
 
-MyClient::MyClient(int port, string ipAddress) : port(port), epollDescriptor(-1), flagMask(0) {
-    addrinfo hints;
-    addrinfo *result;
-
-    memset(&hints, 0, sizeof(hints));
-    hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
-    hints.ai_socktype = SOCK_STREAM; /* Datagram socket */
-
-    assert(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
-
-    assert(result != NULL);
-
-    socketDescriptor = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-    assert(socketDescriptor != -1);
-
-    int one = 1;
-    assert(setsockopt(socketDescriptor, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
-
-    if (bind(socketDescriptor, result->ai_addr, result->ai_addrlen) != 0) {
-        perror("");
-        exit(0);
-    }
-    assert(listen(socketDescriptor, BACK_LOG) == 0);
-    freeaddrinfo(result);           /* No longer needed */
-    makeSocketNonBlocking();
-}
-
 
 MyClient::MyClient(int port, int socketDescriptor,
                    int epollDescriptor, MyEpoll * myEpoll) : port(port),
@@ -50,7 +23,7 @@ MyClient::MyClient(int port, int socketDescriptor,
                                                                        bufferCursor(0),
                                                                        closed(0),
                                                                        myEpoll(myEpoll) {
-    makeSocketNonBlocking();
+    makeSocketNonBlocking(socketDescriptor);
 }
 
 
@@ -110,7 +83,9 @@ void MyClient::setWrite(int flag) {
 void MyClient::closeClient() {
     cerr << "close client\n";
     assert(!closed);
+
     assert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
+
     assert(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
     myEpoll->onReceiveMap.erase(socketDescriptor);
 
@@ -119,11 +94,12 @@ void MyClient::closeClient() {
     myEpoll->portFromDescriptor.erase(socketDescriptor);
     myEpoll->socketDescriptorType.erase(socketDescriptor);
     closed = true;
+
     assert(close(socketDescriptor) == 0);
 }
 
 
-void MyClient::makeSocketNonBlocking() {
+void makeSocketNonBlocking(int socketDescriptor) {
     int flags = fcntl(socketDescriptor, F_GETFL, 0);
     assert(flags >= 0);
     flags |= O_NONBLOCK;

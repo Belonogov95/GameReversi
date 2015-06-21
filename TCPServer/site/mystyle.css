@@ -50,9 +50,13 @@
     border-collapse: collapse;
 }
 
+#forWinner {
+    color: red;
+}
 
-
-
+a {
+    display: none;
+}
 
 
 

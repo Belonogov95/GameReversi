@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer
+CMAKE_SOURCE_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer
+CMAKE_BINARY_DIR = /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer
 
 # Include any dependencies generated for this target.
 include CMakeFiles/reversiServer.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/reversiServer.dir/flags.make
 
 CMakeFiles/reversiServer.dir/main.cpp.o: CMakeFiles/reversiServer.dir/flags.make
 CMakeFiles/reversiServer.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/main.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/main.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/main.cpp
 
 CMakeFiles/reversiServer.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/main.cpp > CMakeFiles/reversiServer.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/main.cpp > CMakeFiles/reversiServer.dir/main.cpp.i
 
 CMakeFiles/reversiServer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/main.cpp -o CMakeFiles/reversiServer.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/main.cpp -o CMakeFiles/reversiServer.dir/main.cpp.s
 
 CMakeFiles/reversiServer.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/reversiServer.dir/main.cpp.o.requires
@@ -74,17 +74,17 @@ CMakeFiles/reversiServer.dir/main.cpp.o.provides.build: CMakeFiles/reversiServer
 
 CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o: CMakeFiles/reversiServer.dir/flags.make
 CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o: clients/ClientInterface.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.cpp
 
 CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.cpp > CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.cpp > CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.i
 
 CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientInterface.cpp -o CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientInterface.cpp -o CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.s
 
 CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o.requires:
 .PHONY : CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o.requires
@@ -97,17 +97,17 @@ CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o.provides.build: CMake
 
 CMakeFiles/reversiServer.dir/GameState.cpp.o: CMakeFiles/reversiServer.dir/flags.make
 CMakeFiles/reversiServer.dir/GameState.cpp.o: GameState.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/GameState.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/GameState.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/GameState.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp
 
 CMakeFiles/reversiServer.dir/GameState.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/GameState.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.cpp > CMakeFiles/reversiServer.dir/GameState.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp > CMakeFiles/reversiServer.dir/GameState.cpp.i
 
 CMakeFiles/reversiServer.dir/GameState.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/GameState.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameState.cpp -o CMakeFiles/reversiServer.dir/GameState.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp -o CMakeFiles/reversiServer.dir/GameState.cpp.s
 
 CMakeFiles/reversiServer.dir/GameState.cpp.o.requires:
 .PHONY : CMakeFiles/reversiServer.dir/GameState.cpp.o.requires
@@ -120,17 +120,17 @@ CMakeFiles/reversiServer.dir/GameState.cpp.o.provides.build: CMakeFiles/reversiS
 
 CMakeFiles/reversiServer.dir/GameServer.cpp.o: CMakeFiles/reversiServer.dir/flags.make
 CMakeFiles/reversiServer.dir/GameServer.cpp.o: GameServer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/GameServer.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/GameServer.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/GameServer.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.cpp
 
 CMakeFiles/reversiServer.dir/GameServer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/GameServer.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.cpp > CMakeFiles/reversiServer.dir/GameServer.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.cpp > CMakeFiles/reversiServer.dir/GameServer.cpp.i
 
 CMakeFiles/reversiServer.dir/GameServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/GameServer.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/GameServer.cpp -o CMakeFiles/reversiServer.dir/GameServer.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameServer.cpp -o CMakeFiles/reversiServer.dir/GameServer.cpp.s
 
 CMakeFiles/reversiServer.dir/GameServer.cpp.o.requires:
 .PHONY : CMakeFiles/reversiServer.dir/GameServer.cpp.o.requires
@@ -143,17 +143,17 @@ CMakeFiles/reversiServer.dir/GameServer.cpp.o.provides.build: CMakeFiles/reversi
 
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o: CMakeFiles/reversiServer.dir/flags.make
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o: clients/ClientConsole.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.cpp
 
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.cpp > CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.cpp > CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.i
 
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/clients/ClientConsole.cpp -o CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientConsole.cpp -o CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.s
 
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o.requires:
 .PHONY : CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o.requires
@@ -164,13 +164,37 @@ CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o.provides: CMakeFiles/re
 
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o.provides.build: CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o
 
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: CMakeFiles/reversiServer.dir/flags.make
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: clients/ClientBot.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.cpp
+
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.cpp > CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.i
+
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/clients/ClientBot.cpp -o CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.s
+
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.requires:
+.PHONY : CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.requires
+
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.provides: CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.requires
+	$(MAKE) -f CMakeFiles/reversiServer.dir/build.make CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.provides.build
+.PHONY : CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.provides
+
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.provides.build: CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o
+
 # Object files for target reversiServer
 reversiServer_OBJECTS = \
 "CMakeFiles/reversiServer.dir/main.cpp.o" \
 "CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o" \
 "CMakeFiles/reversiServer.dir/GameState.cpp.o" \
 "CMakeFiles/reversiServer.dir/GameServer.cpp.o" \
-"CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o"
+"CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o" \
+"CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o"
 
 # External object files for target reversiServer
 reversiServer_EXTERNAL_OBJECTS =
@@ -180,6 +204,7 @@ reversiServer: CMakeFiles/reversiServer.dir/clients/ClientInterface.cpp.o
 reversiServer: CMakeFiles/reversiServer.dir/GameState.cpp.o
 reversiServer: CMakeFiles/reversiServer.dir/GameServer.cpp.o
 reversiServer: CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o
+reversiServer: CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o
 reversiServer: CMakeFiles/reversiServer.dir/build.make
 reversiServer: CMakeFiles/reversiServer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable reversiServer"
@@ -194,6 +219,7 @@ CMakeFiles/reversiServer.dir/requires: CMakeFiles/reversiServer.dir/clients/Clie
 CMakeFiles/reversiServer.dir/requires: CMakeFiles/reversiServer.dir/GameState.cpp.o.requires
 CMakeFiles/reversiServer.dir/requires: CMakeFiles/reversiServer.dir/GameServer.cpp.o.requires
 CMakeFiles/reversiServer.dir/requires: CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o.requires
+CMakeFiles/reversiServer.dir/requires: CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o.requires
 .PHONY : CMakeFiles/reversiServer.dir/requires
 
 CMakeFiles/reversiServer.dir/clean:
@@ -201,6 +227,6 @@ CMakeFiles/reversiServer.dir/clean:
 .PHONY : CMakeFiles/reversiServer.dir/clean
 
 CMakeFiles/reversiServer.dir/depend:
-	cd /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles/reversiServer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles/reversiServer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/reversiServer.dir/depend
 

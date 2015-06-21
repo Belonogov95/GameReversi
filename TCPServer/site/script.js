@@ -4,6 +4,7 @@ var LINE_BREAK;
 var CONNECT_INTERVAL_ID;
 var GAME_INTERVAL_ID;
 var CELL_SIZE = 60;
+var title;
 
 $(document).ready(function () {
     //$("#connectDiv").hide();
@@ -48,12 +49,14 @@ function updatePlayerList() {
 }
 
 function playerListCallBack(data, status) {
-    var q = eval(data);
+    var r = eval(data);
+    q = [eval(r[0]), eval(r[1])];
+
     //alert("data: " + data + "\nstatus: " + status + "\nlength: " + q.length);
     //$("#userList").append("aba");
-    if (q.length == 3) {
+    if (r.length == 4) {
         //alert("here");
-        initGame(q[2]);
+        initGame(r[2], r[3]);
         return;
     }
     $("#allUserList").empty();
@@ -74,19 +77,24 @@ function invitePerson(player) {
 }
 ////////////////////////////////////////////// game
 
-function initGame(enemy) {
+function initGame(enemy, color) {
     alert("game: " + name + " vs " + enemy);
     clearInterval(CONNECT_INTERVAL_ID);
     $("#connectDiv").css("display", "none");
     $("#boardDiv").css("display", "inline");
 
-    $("#titleGame").append(createCanvas("leftCircle", CELL_SIZE) +  name + " vs " + enemy +
-            createCanvas("rightCircle", CELL_SIZE));
+    if (color == "1")
+        title = name + " vs " + enemy;
+    else
+        title = enemy + " vs " + name;
+
+    //$("#titleGame").append(createCanvas("leftCircle", CELL_SIZE) +  title +
+            //createCanvas("rightCircle", CELL_SIZE));
     drawCircleById("leftCircle", 1);
     drawCircleById("rightCircle", 2);
     createBoard();
     updateBoard();
-    GAME_INTERVAL_ID = setInterval(updateBoard, 3000);
+    GAME_INTERVAL_ID = setInterval(updateBoard, 500);
 }
 
 function updateBoard() {
@@ -97,6 +105,13 @@ function updateBoard() {
 function updateBoardCallBack(data, status) {
     var q = eval(data);
     var board = eval(q[0]);
+    $("#turnGame").text("turn: " + ((q[3] == "1")? "white" : "black"));
+    $("#forText").html("<b>" + q[1] +  "</b>" + "     " + title + "     " + "<b>" + q[2] + "</b>");
+    if (q[4] == "1") {
+        $("#forWinner").html(q[5]);
+        clearInterval(GAME_INTERVAL_ID);
+    }
+
     for (i = 0; i < 8; i++)
         for (j = 0; j < 8; j++)
             drawCircle(i, j, board[i][j]);
@@ -108,7 +123,7 @@ function createBoard() {
         var str = '<tr id="row' + i + '">' + "</tr>";
         $("#newTable").append(str);
         for (var j = 0; j < 8; j++) {
-            var cl = 'onclick="cellClick(' + i + ", " + j + ')"'
+            var cl = 'onclick="cellClick(' + i + ", " + j + ')"';
             var id = '"cell' + i + j + '"';
             var canvas = createCanvas(id, CELL_SIZE);
             str2 = "<td " + cl + ">" + canvas + "</td>";
@@ -123,7 +138,7 @@ function createCanvas(id, sz) {
 }
 
 function cellClick(x, y) {
-    alert("x: " + x + "\ny: " + y);
+    //alert("x: " + x + "\ny: " + y);
     $.post("move", LOGIN + "x=" + x + LINE_BREAK + "y=" + y + LINE_BREAK);
 }
 

@@ -2,13 +2,16 @@
 // Created by vanya on 02.06.15.
 //
 
+
+
 #ifndef HWW2_MYEPOLL_H
 #define HWW2_MYEPOLL_H
 
-#include <sys/epoll.h>
-#include <map>
 #include "MyClient.h"
 #include <memory>
+#include <sys/epoll.h>
+#include <map>
+
 
 
 const int MAX_EVENTS = 2;
@@ -24,6 +27,7 @@ class MyEpoll {
 private:
     int epollDescriptor;
     int pipeFD;
+    int pipeOut;
     map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
     map < int, int > socketDescriptorType;
     map < int, int > portFromDescriptor;

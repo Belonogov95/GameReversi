@@ -11,7 +11,7 @@
 
 void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
     path = "site" + path;
-    db(path);
+//    db(path);
     ifstream in(path, ios::binary);
     in.seekg(0, in.end);
     int length = in.tellg();
@@ -19,7 +19,7 @@ void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
     string message(length, 0);
     in.read((char *)message.data(), length);
 
-    db(message);
+//    db(message);
     string header = "HTTP/1.1 200 OK" + LINE_BREAK;
     header += "Content-Length: " + to_string(message.size()) + LINE_BREAK;
     string res = header + LINE_BREAK + message;
@@ -27,7 +27,7 @@ void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
 }
 
 void HttpWorker::sendString(string message, shared_ptr < MyClient > client) {
-    db(message);
+//    db(message);
     string header = "HTTP/1.1 200 OK" + LINE_BREAK;
     header += "Content-Length: " + to_string(message.size()) + LINE_BREAK;
     string res = header + LINE_BREAK + message;
@@ -64,7 +64,7 @@ pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
             innerBuffer.push_back(string());
     }
 
-    printBuff();
+//    printBuff();
 
     for (;!innerBuffer.empty() && innerBuffer[0].empty(); innerBuffer.pop_front());
 
@@ -92,8 +92,9 @@ pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
     }
 //    db(emptyLine);
 //    db(innerBuffer.size());
-    for (int i = 0; i < (int)innerBuffer.size(); i++)
+//    for (int i = 0; i < (int)innerBuffer.size(); i++)
 //        db2(i, innerBuffer[i].size());
+
     if (emptyLine == -1)  {
         return make_pair(-1, Message());
     }
@@ -111,7 +112,7 @@ pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
     }
     for (int j = 0; j < cur; j++)
         innerBuffer.pop_front();
-    db("success finish");
+//    db("success finish");
 
     return make_pair(1, message);
 }

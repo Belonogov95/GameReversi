@@ -11,6 +11,11 @@ CMakeFiles/reversiServer.dir/GameState.cpp.o: GameState.cpp
 CMakeFiles/reversiServer.dir/GameState.cpp.o: GameState.h
 CMakeFiles/reversiServer.dir/GameState.cpp.o: debug.h
 
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: GameState.h
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: clients/ClientBot.cpp
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: clients/ClientBot.h
+CMakeFiles/reversiServer.dir/clients/ClientBot.cpp.o: clients/ClientInterface.h
+
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o: GameState.h
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o: clients/ClientConsole.cpp
 CMakeFiles/reversiServer.dir/clients/ClientConsole.cpp.o: clients/ClientConsole.h

@@ -13,6 +13,10 @@ int GameState::getCntWhite() {
     return __builtin_popcountll(white);
 }
 
+int GameState::getCntBlack() {
+    return getCntUsed() - getCntWhite();
+}
+
 void GameState::reverseColor() {
     ull newMask = 0;
     for (int i = 0; i < 64; i++) {
@@ -46,17 +50,25 @@ void GameState::code(int data[8][8]) {
         }
 }
 
-bool GameState::go(int x, int y, GameState &res) {
-    assert(check(x, y));
-    int data[8][8];
+bool GameState::go(int x, int y, GameState &res, bool FLAG) {
+    assert(check(x, y)); int data[8][8];
     decode(data);
+    if (FLAG) {
+        for (int i = 0; i < 8; i++, cerr << endl)
+            for (int j = 0; j < 8; j++)
+                cerr << data[i][j] << " ";
+        cerr << "===\n";
+    }
     if (data[x][y] != 0) {
-        db("whis cell isn't empty");
+        if (FLAG)
+            db("whis cell isn't empty");
         return false;
     }
     int cntFlip = 0;
-    int myColor = res.player;
-    int enemyColor = 3 - res.player;
+    int myColor = player;
+    int enemyColor = 3 - player;
+    if (FLAG)
+        db(myColor);
     data[x][y] =  myColor;
     for (int dir = 0; dir < 8; dir++) {
         int x1 = x + dx[dir];
@@ -72,13 +84,12 @@ bool GameState::go(int x, int y, GameState &res) {
         }
     }
     if (cntFlip == 0) {
-        db("cntFlip == 0");
+        //db("cntFlip == 0");
         return false;
     }
     res.code(data);
-
-    res.reverseColor();
-    res.nextTurn();
+//    res.reverseColor();
+    res.player = 3 - player;
     return true;
 }
 
@@ -144,6 +155,7 @@ GameState::GameState() {
 
     code(data);
     player = 1;
+    finished = 0;
 }
 
 void GameState::nextTurn() {

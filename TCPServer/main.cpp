@@ -39,11 +39,14 @@ int curGame;
 set<string> myFiles;
 
 
+string zip(string s, char quote) {
+    return quote + s + quote;
+}
 
-string arrayJSFromStrings(vector<string> data) {
+string arrayJSFromStrings(vector<string> data, char quote = '\'') {
     string res = "[";
     for (int i = 0; i < (int) data.size(); i++) {
-        res += "\"" + data[i] + "\"";
+        res += zip(data[i], quote);
         if (i + 1 != (int) data.size())
             res += ", ";
     }
@@ -51,49 +54,63 @@ string arrayJSFromStrings(vector<string> data) {
     return res;
 }
 
-
-string generatePlayersList(int id, pair<int, int> &match) {
+vector < string > generatePlayersList(int id, pair<int, int> &match) {
     vector<string> data;
     for (auto x: loginById)
         if (x.first != id)
             data.push_back(x.second);
-    string s0 = arrayJSFromStrings(data);
+    string s0 = arrayJSFromStrings(data, '\"');
     vector<string> dataF;
     for (auto x: edges[id])
         dataF.push_back(loginById[x]);
-    string s1 = arrayJSFromStrings(dataF);
-    int competitor = -1;
+    string s1 = arrayJSFromStrings(dataF, '\"');
     for (auto x: edges[id]) {
         if (edges[x].count(id) == 1) {
-            competitor = x;
+            match = make_pair(id, x);
             break;
         }
     }
-    if (competitor != -1) {
-        match = make_pair(competitor, id);
-        return "[" + s0 + ", " + s1 + ", " + "'" + loginById[competitor] + "'" + "]";
-    }
-    else {
-        return "[" + s0 + ", " + s1 + "]";
-    }
+    vector < string > tmp;
+    tmp.push_back(s0);
+    tmp.push_back(s1);
+    return tmp;
 }
 
 
+void dump() {
+    db2(curPlayerId, curGame);
+    db("login - id") ;
+    for (auto x: loginById)
+        cerr << x.second << " " << x.first << endl;
+    db("currentGame") ;
+    for (auto x: currentGame)
+        cerr << "id  enemyId color, gameId: " << x.first << "    " << x.second.enemyId << " " <<
+                x.second.color << " " << x.second.gameId << endl;
+    db("===========");
+}
+
 void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < HttpWorker > worker) {
-    int id = idByLogin[message.URL];
+    int id = idByLogin[message.get("login")];
     int gameId = currentGame[id].gameId;
+    db(gameId);
+    dump();
     GameState state = gameById[gameId];
     string board = state.toJSArray();
-    vector < string > tmp(3);
+    vector < string > tmp(6);
     tmp[0] = board;
-    tmp[1] = loginById[id];
-    tmp[2] = loginById[currentGame[id].enemyId];
-    if (currentGame[id].color != 1)
-        swap(tmp[1], tmp[2]);
+    tmp[1] = to_string(state.getCntWhite());
+    tmp[2] = to_string(state.getCntBlack());
+    tmp[3] = to_string(state.player);
+    tmp[4] = to_string(state.finished);
+    if (state.getCntBlack() == state.getCntWhite())
+        tmp[5] = "Draw";
+    else
+        tmp[5] = ((state.getCntWhite() > state.getCntBlack()) == (currentGame[id].color == 1))? loginById[id]:
+                 loginById[currentGame[id].enemyId];
     worker->sendString(arrayJSFromStrings(tmp), client);
 }
 
-void onRC2(shared_ptr<MyClient> client) {
+void server(shared_ptr<MyClient> client) {
     int descriptor = client->getSocketDescriptor();
     if (workers.count(descriptor) == 0)
         workers[descriptor] = shared_ptr<HttpWorker>(new HttpWorker());
@@ -108,6 +125,7 @@ void onRC2(shared_ptr<MyClient> client) {
         if (prAddress.first == -1)
             return;
 
+        db(message.URL);
         if (message.URL == "/login") {
             assert((int) message.body.size() == 1);
             string login = message.get("login");
@@ -115,6 +133,7 @@ void onRC2(shared_ptr<MyClient> client) {
             for (auto x: loginById)
                 if (x.second == login)
                     exist = 1;
+            exist |= login.size() == 0;
             if (exist) {
                 worker->sendString("unsuccess", client);
             }
@@ -126,11 +145,13 @@ void onRC2(shared_ptr<MyClient> client) {
             }
         }
         else if (message.URL == "/players") {
+            dump();
+
             string login = message.get("login");
             assert(idByLogin.count(login) == 1);
             int id = idByLogin[login];
             pair<int, int> match = make_pair(-1, -1);
-            string tmp = generatePlayersList(id, match);
+            vector < string > tmp = generatePlayersList(id, match);
             if (match.first != -1) {
                 if (rand() % 2 == 1)
                     swap(match.first, match.second);
@@ -141,22 +162,27 @@ void onRC2(shared_ptr<MyClient> client) {
                     edges[i].erase(x);
                     edges[i].erase(y);
                 }
-                GameState state;
                 db2(x, y);
                 assert(currentGame.count(x) == 0);
                 assert(currentGame.count(y) == 0);
 
                 currentGame[x] = GamePointer(curGame, y, 1);
                 currentGame[y] = GamePointer(curGame, x, 2);
-                gameById[curGame] = state;
+                gameById[curGame] = GameState();
+                assert(gameById[curGame].getCntUsed() == 4);
                 curGame++;
             }
             if (currentGame.count(id) != 0) {
-                db2("game already exist", id + " " + loginById[id]);
-                tmp = "[ \"\", \"\", \"" + loginById[currentGame[id].enemyId] + "\"]";
+                tmp.push_back(loginById[currentGame[id].enemyId]);
+                tmp.push_back(to_string(currentGame[id].color));
             }
-            db(tmp);
-            worker->sendString(tmp, client);
+            string qq = arrayJSFromStrings(tmp);
+            worker->sendString(qq, client);
+//            if (currentGame.count(id) != 0) {
+//                db2("game already exist", id + " " + loginById[id]);
+//                tmp = "[ \"\", \"\", \"" + loginById[currentGame[id].enemyId] + "\"]";
+//            }
+//            db(tmp);
         }
         else if (message.URL == "/move") {
             int id = idByLogin[message.get("login")];
@@ -170,19 +196,32 @@ void onRC2(shared_ptr<MyClient> client) {
                 GameState result;
                 if (state.go(x, y, result)) {
                     gameById[gameId] = result;
+                    db("--------succes turn");
+
+                    if (!result.isPossibleMove()) {
+                        result.nextTurn();
+                    }
+                    if (!result.isPossibleMove()) {
+                        result.finished = true;
+                       /// TODO
+                    }
                 }
                 else {
-                    db("===========incorrect move");
+                    db("========incorrect move");
                 }
             }
             else {
                 db("incorrect color");
             }
+
+
+            //check possible moves
+
+
+            worker->sendString("OK!MOVE", client);
         }
         else if (message.URL == "/board") {
-            //TODO
             boardQuery(message, client, worker);
-
         }
         else if (message.URL == "/invite") {
             string login = message.get("login");
@@ -190,6 +229,7 @@ void onRC2(shared_ptr<MyClient> client) {
             int id = idByLogin[login];
             int invitedId = idByLogin[message.get("target")];
             edges[invitedId].insert(id);
+            worker->sendString("OK!", client);
         }
         else if (myFiles.count(message.URL) == 1) {
             if (message.URL == "/") message.URL = "/index.html";
@@ -211,25 +251,18 @@ void handl(int signum) {
     sprintf(buffer, "wake up!");
     cerr << "write!!!!" << endl;
     db(fdFromEpoll);
-    write(fdFromEpoll, buffer, sizeof(buffer));
+    write(fdFromEpoll, buffer, strlen(buffer));
 }
 
 
-void test2() {
-
-    ///int pipefd[2];
-    //pipe(pipefd);
-//    read(pipefd[0], , );
-//
-//    write(pipefd[0]);
-
-    ////////////////////////////
+int main() {
     myFiles.insert("/");
     myFiles.insert("/index.html");
     myFiles.insert("/favicon.ico");
     myFiles.insert("/cat.jpg");
     myFiles.insert("/script.js");
     myFiles.insert("/mystyle.css");
+
     freopen("config.txt", "r", stdin);
     int port;
     string ipAddress;
@@ -242,79 +275,12 @@ void test2() {
     sa.sa_handler = handl;
     sigaction(SIGINT, &sa, NULL);
 
-
     db2(port, ipAddress);
-    ep.add(port, ipAddress, onRC2);
+    ep.add(port, ipAddress, server);
     ep.start();
-}
-
-
-int main() {
-
-
-    //test();
-    //ifstream in("../site/index.html");
-    //string s;
-    //while (getline(in, s))
-    //cerr << s << endl;
-
-
-    test2();
-    //cerr << char(69) << endl;
-//    int sd = socket(AF_INET, SOCK_STREAM, 0);
-//    db(sd);
-//    sockaddr_in address;
-//    memset(&address, 0, sizeof(address));
-//    address.sin_family = AF_INET;
-//    address.sin_port = htons(39005);
-//    address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-//
-//    assert(bind(sd, (const sockaddr *) &address, sizeof(address)) == 0);
-//    int res = listen(sd, 5);
-//    db(res);
-//    assert(res == 0);
-//    sockaddr_storage outAddr;
-//    socklen_t len = sizeof outAddr;
-//
-//    int new_sd = accept(sd, (sockaddr*)&outAddr, &len);
-//    //char *s = (char *) string("8888").c_str();
-//    //int bytes_sent = (int) send(new_sd, s, strlen(s), 0);
-//
-//    int L = 10;
-//    char buff[L];
-//    for (int i = 0; i < L; i++)
-//        buff[i] = '_';
-//    db("before recv");
-//
-//    int mask = fcntl(new_sd, F_GETFL, 0);
-//    //fcntl(new_sd, F_SETFL, mask | O_NONBLOCK);
-//    int sz = (int) recv(new_sd, buff, (size_t) L, 0);
-//    db(sz);
-//    cerr << "|";
-//    for (int i = 0; i < sz; i++)
-//        cerr << buff[i];
-//    cerr << "|";
-//    cerr << endl;
-//    cerr << ":" << buff << ":" << endl;
-//    close(new_sd);
-//    close(sd);
-
-
-    //db(errno);
-    //perror("sdf");
-    //strerror(errno);
-    //while (true);
-
+    db("after ep.start");
 
     return 0;
 }
 
-//inet_ntop(PF_INET, (struct in_addr*)&(address->sin_addr.s_addr), ip, sizeof(ip)-1);
-
-//struct sockaddr_in {
-//   short   sin_family;
-//   u_short sin_port;
-//   struct  in_addr sin_addr;
-//   char    sin_zero[8];
-//};
 

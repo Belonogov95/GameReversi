@@ -1,1 +1,1 @@
-/home/vanya/Documents/prog/C/homeWorkCpp/reversiServer/CMakeFiles/reversiServer.dir
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/CMakeFiles/reversiServer.dir
