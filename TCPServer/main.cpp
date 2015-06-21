@@ -102,11 +102,13 @@ void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < Ht
     tmp[2] = to_string(state.getCntBlack());
     tmp[3] = to_string(state.player);
     tmp[4] = to_string(state.finished);
-    if (state.getCntBlack() == state.getCntWhite())
-        tmp[5] = "Draw";
-    else
-        tmp[5] = ((state.getCntWhite() > state.getCntBlack()) == (currentGame[id].color == 1))? loginById[id]:
-                 loginById[currentGame[id].enemyId];
+    if (state.finished) {
+        if (state.getCntBlack() == state.getCntWhite())
+            tmp[5] = "Draw";
+        else
+            tmp[5] = (((state.getCntWhite() > state.getCntBlack()) == (currentGame[id].color == 1)) ? loginById[id] :
+                     loginById[currentGame[id].enemyId]) + " Win!";
+    }
     worker->sendString(arrayJSFromStrings(tmp), client);
 }
 
@@ -145,7 +147,7 @@ void server(shared_ptr<MyClient> client) {
             }
         }
         else if (message.URL == "/players") {
-            dump();
+            //dump();
 
             string login = message.get("login");
             assert(idByLogin.count(login) == 1);
@@ -169,7 +171,7 @@ void server(shared_ptr<MyClient> client) {
                 currentGame[x] = GamePointer(curGame, y, 1);
                 currentGame[y] = GamePointer(curGame, x, 2);
                 gameById[curGame] = GameState();
-                assert(gameById[curGame].getCntUsed() == 4);
+//                assert(gameById[curGame].getCntUsed() == 4);
                 curGame++;
             }
             if (currentGame.count(id) != 0) {
@@ -202,7 +204,9 @@ void server(shared_ptr<MyClient> client) {
                         result.nextTurn();
                     }
                     if (!result.isPossibleMove()) {
-                        result.finished = true;
+                        gameById[gameId].finished = true;
+                        //result.finished = true;
+                        db("game finished");
                        /// TODO
                     }
                 }

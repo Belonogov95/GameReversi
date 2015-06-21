@@ -52,11 +52,13 @@
 
 #forWinner {
     color: red;
+    font-size: x-large;
 }
 
 a {
     display: none;
 }
+
 
 
 

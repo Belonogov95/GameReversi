@@ -107,9 +107,11 @@ function updateBoardCallBack(data, status) {
     var board = eval(q[0]);
     $("#turnGame").text("turn: " + ((q[3] == "1")? "white" : "black"));
     $("#forText").html("<b>" + q[1] +  "</b>" + "     " + title + "     " + "<b>" + q[2] + "</b>");
+    //alert(data);
     if (q[4] == "1") {
         $("#forWinner").html(q[5]);
         clearInterval(GAME_INTERVAL_ID);
+        $("a").css("display", "inline");
     }
 
     for (i = 0; i < 8; i++)
