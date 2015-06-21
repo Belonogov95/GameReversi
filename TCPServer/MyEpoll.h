@@ -41,7 +41,6 @@ public:
     MyEpoll();
     ~MyEpoll();
 
-    void write(MyClient * myClient);
     void add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>));
     int getPipe();
 };

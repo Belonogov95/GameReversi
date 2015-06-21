@@ -15,6 +15,7 @@ CMakeFiles/HWW2.dir/Message.cpp.o: Message.h
 CMakeFiles/HWW2.dir/Message.cpp.o: MyClient.h
 CMakeFiles/HWW2.dir/Message.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Tools.h
+CMakeFiles/HWW2.dir/Message.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.cpp
 CMakeFiles/HWW2.dir/MyClient.cpp.o: MyClient.h

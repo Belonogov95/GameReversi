@@ -10,27 +10,32 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <bits/stdc++.h>
 #include "MyEpoll.h"
 
 using namespace std;
 
 const int BACK_LOG = 100;
+const int TEMP_SIZE = 1000;
 
 class MyEpoll;
 
 class MyClient {
 private:
 
+    MyClient(int port, int socketDescriptor, int epollDescriptor, MyEpoll *);
+
     int port;
     int socketDescriptor;
     int epollDescriptor;
     u_int32_t flagMask;
-    vector<char> buffer;
-    int bufferCursor;
+
+//    vector<char> buffer;
+//    int bufferCursor;
+    deque < char > buffer;
     bool closed;
     MyEpoll * myEpoll;
 
-    MyClient(int port, int socketDescriptor, int epollDescriptor, MyEpoll * myEpoll);
 
 public:
     friend class MyEpoll;
@@ -45,11 +50,12 @@ public:
 
     int getSocketDescriptor();
 
-    int getPort();
 
     void write(string s);
 
     int read(string &buffer);
+
+    void writeFromEpoll();
 };
 
 void makeSocketNonBlocking(int socketDescriptor);

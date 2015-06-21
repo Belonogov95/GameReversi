@@ -23,11 +23,11 @@ MyEpoll::MyEpoll() {
     epollEvent.events = EPOLLIN | EPOLLOUT;
     epollEvent.data.fd = pipeFD;
 
-    assert(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, pipeFD, &epollEvent) == 0);
+    assertMy(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, pipeFD, &epollEvent) == 0);
 }
 
 MyEpoll::~MyEpoll() {
-//    assert(close(epollDescriptor) == 0);
+//    assertMy(close(epollDescriptor) == 0);
 }
 
 void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>)) {
@@ -39,21 +39,21 @@ void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyCli
     hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
     hints.ai_socktype = SOCK_STREAM; /* Datagram socket */
 
-    assert(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
+    assertMy(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
 
-    assert(result != NULL);
+    assertMy(result != NULL);
 
     socketDescriptor = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-    assert(socketDescriptor != -1);
+    assertMy(socketDescriptor != -1);
 
     int one = 1;
-    assert(setsockopt(socketDescriptor, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
+    assertMy(setsockopt(socketDescriptor, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
 
     if (bind(socketDescriptor, result->ai_addr, result->ai_addrlen) != 0) {
         perror("");
         exit(0);
     }
-    assert(listen(socketDescriptor, BACK_LOG) == 0);
+    assertMy(listen(socketDescriptor, BACK_LOG) == 0);
     freeaddrinfo(result);           /* No longer needed */
     makeSocketNonBlocking(socketDescriptor);
 
@@ -84,15 +84,14 @@ void MyEpoll::start() {
                 for (auto x: clientFromDescriptor)
                     x.second->closeClient();
                 running = false;
-                assert(close(epollDescriptor) == 0);
+                assertMy(close(epollDescriptor) == 0);
                 //TODO
             }
             else if (socketDescriptorType[socketDescriptor] == WAITING_ACCEPT) {
-                assert(events[i].events & EPOLLIN);
+                assertMy(events[i].events & EPOLLIN);
                 sockaddr_storage sockAddrStorage;
                 socklen_t sockLen = sizeof(sockAddrStorage);
                 int newSocketDescriptor = accept(socketDescriptor, (sockaddr *) &sockAddrStorage, &sockLen);
-                db(newSocketDescriptor);
 
                 int port = portFromDescriptor[socketDescriptor];
 
@@ -107,17 +106,17 @@ void MyEpoll::start() {
                 epollEvent.events = 0;
                 epollEvent.data.fd = newSocketDescriptor;
 
-                assert(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, newSocketDescriptor, &epollEvent) == 0);
+                assertMy(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, newSocketDescriptor, &epollEvent) == 0);
                 newClient->setRead(1);
 
             }
             else if (socketDescriptorType[socketDescriptor] == WAITING_READ_OR_WRITE) {
                 shared_ptr<MyClient> myClient = clientFromDescriptor[socketDescriptor];
-                write(myClient.get());
+                myClient->writeFromEpoll();
                 onReceiveMap[socketDescriptor](myClient);
             }
             else
-                assert(false);
+                assertMy(false);
 
         }
     }
@@ -127,17 +126,6 @@ int MyEpoll::getPipe() {
     return pipeOut;
 }
 
-void MyEpoll::write(MyClient * myClient) {
-    assert(!myClient->closed);
-    if (myClient->readyToWrite() == 0)
-        myClient->setWrite(0);
-    else {
-        int len = (int) send(myClient->getSocketDescriptor(), (void *) &(myClient->buffer[myClient->bufferCursor]),
-                             (size_t) myClient->readyToWrite(), 0);
-        assert(len >= 0);
-        myClient->bufferCursor += len;
-    }
-}
 
 
 

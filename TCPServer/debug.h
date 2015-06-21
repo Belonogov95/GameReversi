@@ -8,6 +8,16 @@
 #define db(x) cerr << #x << " = " << x << endl
 #define db2(x, y) cerr << "(" << #x << ", " << #y << ") = (" << x << ", " << y << ")\n"
 
+#define MY_ASSERT
+
+#ifdef MY_ASSERT
+#define assertMy(x) if (!(x)) { cerr << "assertion error file: " << __FILE__ << "    line: " \
+    << __LINE__ << "       " << #x << endl; exit(1); }
+#else
+#define assertMy(x) x
+#endif
+
+
 
 //void assert(bool result);
 

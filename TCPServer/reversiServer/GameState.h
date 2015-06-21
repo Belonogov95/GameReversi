@@ -4,6 +4,7 @@
 
 #ifndef REVERSISERVER_GAMESTATE_H
 #define REVERSISERVER_GAMESTATE_H
+
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -22,17 +23,7 @@
 
 using namespace std;
 
-#define fr first
-#define sc second
-#define mp make_pair
-#define pb push_back
-#define epr(...) fprintf(stderr, __VA_ARGS__)
-
-//#define equal equalll
-//#define less lesss
 typedef unsigned long long ull;
-const int N = -1;
-const int T = 64;
 const int dx[8] = {1, 1, 1, 0, 0, -1, -1, -1};
 const int dy[8] = {1, -1, 0, 1, -1, 0, 1, -1};
 
@@ -48,14 +39,12 @@ public:
     bool finished;
 
     int getCntUsed();
-    int getCntWhite() ;
 
-    void reverseColor();
+    int getCntWhite();
 
     void decode(int data[8][8]);   /// 1 - white ;; 2 - black
-    void code(int data[8][8]);
 
-//    bool go(int x, int y, GameState & res);
+    void code(int data[8][8]);
 
     bool check(int x, int y);
 
@@ -63,13 +52,13 @@ public:
 
     void nextTurn();
 
-    bool go(int x, int y, GameState &res, bool FLAG = 0);
-
     string toJSArray();
 
     bool isPossibleMove();
 
     int getCntBlack();
+
+    bool makeMove(int x, int y, GameState &result);
 };
 
 

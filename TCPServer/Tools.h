@@ -12,9 +12,7 @@ namespace tools {
 
     std::vector < std::string > split(std::string s, char ch);
 
-
     std::string trim(std::string s);
-
 
 };
 

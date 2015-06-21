@@ -21,7 +21,7 @@ struct GamePointer {
     GamePointer() { }
 
     GamePointer(int gameId, int enemyId, int color) : gameId(gameId), enemyId(enemyId), color(color) {
-        assert(color == 1 || color == 2);
+        assertMy(color == 1 || color == 2);
     }
 };
 
@@ -129,7 +129,7 @@ void server(shared_ptr<MyClient> client) {
 
         db(message.URL);
         if (message.URL == "/login") {
-            assert((int) message.body.size() == 1);
+            assertMy((int) message.body.size() == 1);
             string login = message.get("login");
             bool exist = 0;
             for (auto x: loginById)
@@ -150,7 +150,7 @@ void server(shared_ptr<MyClient> client) {
             //dump();
 
             string login = message.get("login");
-            assert(idByLogin.count(login) == 1);
+            assertMy(idByLogin.count(login) == 1);
             int id = idByLogin[login];
             pair<int, int> match = make_pair(-1, -1);
             vector < string > tmp = generatePlayersList(id, match);
@@ -165,13 +165,13 @@ void server(shared_ptr<MyClient> client) {
                     edges[i].erase(y);
                 }
                 db2(x, y);
-                assert(currentGame.count(x) == 0);
-                assert(currentGame.count(y) == 0);
+                assertMy(currentGame.count(x) == 0);
+                assertMy(currentGame.count(y) == 0);
 
                 currentGame[x] = GamePointer(curGame, y, 1);
                 currentGame[y] = GamePointer(curGame, x, 2);
                 gameById[curGame] = GameState();
-//                assert(gameById[curGame].getCntUsed() == 4);
+//                assertMy(gameById[curGame].getCntUsed() == 4);
                 curGame++;
             }
             if (currentGame.count(id) != 0) {
@@ -196,7 +196,7 @@ void server(shared_ptr<MyClient> client) {
             GameState state = gameById[gameId];
             if (state.player == color) {
                 GameState result;
-                if (state.go(x, y, result)) {
+                if (state.makeMove(x, y, result)) {
                     gameById[gameId] = result;
                     db("--------succes turn");
 
@@ -229,7 +229,7 @@ void server(shared_ptr<MyClient> client) {
         }
         else if (message.URL == "/invite") {
             string login = message.get("login");
-            assert(idByLogin.count(login) == 1);
+            assertMy(idByLogin.count(login) == 1);
             int id = idByLogin[login];
             int invitedId = idByLogin[message.get("target")];
             edges[invitedId].insert(id);
@@ -241,7 +241,8 @@ void server(shared_ptr<MyClient> client) {
         }
         else {
             db(message.URL);
-            assert(false);
+
+            assertMy(false);
         }
     }
 

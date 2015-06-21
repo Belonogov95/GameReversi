@@ -33,6 +33,8 @@ HttpWorker.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
 Tools.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
 bits/stdc++.h
@@ -68,6 +70,8 @@ vector
 iostream
 -
 memory
+-
+bits/stdc++.h
 -
 MyEpoll.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
