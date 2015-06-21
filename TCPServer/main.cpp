@@ -26,11 +26,14 @@ struct GamePointer {
 };
 
 
-map<int, shared_ptr<HttpWorker>> workers;
-map<int, string> loginById;
+map<int, shared_ptr<HttpWorker>> workers; // by socket descriptor
+
 map<string, int> idByLogin;
+
+map<int, string> loginById;
 map<int, set<int> > edges;
 map<int, GamePointer> currentGame;
+
 map<int, GameState> gameById;
 int curPlayerId;
 int curGame;
@@ -110,20 +113,16 @@ void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < Ht
     }
     worker->sendString(arrayJSFromStrings(tmp), client);
 }
-//
-//void checkTimeOut(shared_ptr < MyClient > client) {
-//
-//}
+
+
 
 void server(shared_ptr<MyClient> client) {
     int descriptor = client->getSocketDescriptor();
     if (workers.count(descriptor) == 0)
         workers[descriptor] = shared_ptr<HttpWorker>(new HttpWorker());
     shared_ptr<HttpWorker> worker = workers[descriptor];
+    db(worker.use_count());
     while (true) {
-//        checkTimeOut(client);
-
-
         auto prAddress = worker->readMessage(client);
         auto message = prAddress.second;
         if (prAddress.first == 0) {
@@ -152,8 +151,6 @@ void server(shared_ptr<MyClient> client) {
             }
         }
         else if (message.URL == "/players") {
-            //dump();
-
             string login = message.get("login");
             assertMy(idByLogin.count(login) == 1);
             int id = idByLogin[login];
@@ -176,7 +173,6 @@ void server(shared_ptr<MyClient> client) {
                 currentGame[x] = GamePointer(curGame, y, 1);
                 currentGame[y] = GamePointer(curGame, x, 2);
                 gameById[curGame] = GameState();
-//                assertMy(gameById[curGame].getCntUsed() == 4);
                 curGame++;
             }
             if (currentGame.count(id) != 0) {
@@ -198,26 +194,14 @@ void server(shared_ptr<MyClient> client) {
                 GameState result;
                 if (state.makeMove(x, y, result)) {
                     gameById[gameId] = result;
-                    db("--------succes turn");
-
-                    if (!result.isPossibleMove()) {
-                        result.nextTurn();
+                    if (!gameById[gameId].isPossibleMove()) {
+                        gameById[gameId].nextTurn();
                     }
-                    if (!result.isPossibleMove()) {
+                    if (!gameById[gameId].isPossibleMove()) {
                         gameById[gameId].finished = true;
-                        //result.finished = true;
-                        db("game finished");
-                       /// TODO
                     }
                 }
-                else {
-                    db("========incorrect move");
-                }
             }
-            else {
-                db("incorrect color");
-            }
-
             worker->sendString("OK!MOVE", client);
         }
         else if (message.URL == "/board") {
@@ -236,14 +220,11 @@ void server(shared_ptr<MyClient> client) {
             worker->sendFile(message.URL, client);
         }
         else {
-            db(message.URL);
-
             assertMy(false);
         }
     }
 
 }
-
 
 int fdFromEpoll;
 
@@ -252,7 +233,6 @@ void handl(int signum) {
     sprintf(buffer, "wake up!");
     write(fdFromEpoll, buffer, strlen(buffer));
 }
-
 
 int main() {
     myFiles.insert("/");
@@ -274,11 +254,16 @@ int main() {
     sa.sa_handler = handl;
     sigaction(SIGINT, &sa, NULL);
 
+
     db2(port, ipAddress);
     ep.add(port, ipAddress, server);
     ep.start();
-    db("after ep.start");
-
+//    db("after ep.start");
+//    db(workers.size());
+//    for (auto x: workers) {
+//        cerr << x.second.use_count() << endl;
+//    }
+//    workers.clear();
     return 0;
 }
 
