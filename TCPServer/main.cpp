@@ -28,7 +28,6 @@ struct GamePointer {
 
 map<int, shared_ptr<HttpWorker>> workers;
 map<int, string> loginById;
-
 map<string, int> idByLogin;
 map<int, set<int> > edges;
 map<int, GamePointer> currentGame;
@@ -92,8 +91,8 @@ void dump() {
 void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < HttpWorker > worker) {
     int id = idByLogin[message.get("login")];
     int gameId = currentGame[id].gameId;
-    db(gameId);
-    dump();
+//    db(gameId);
+//    dump();
     GameState state = gameById[gameId];
     string board = state.toJSArray();
     vector < string > tmp(6);
@@ -111,6 +110,10 @@ void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < Ht
     }
     worker->sendString(arrayJSFromStrings(tmp), client);
 }
+//
+//void checkTimeOut(shared_ptr < MyClient > client) {
+//
+//}
 
 void server(shared_ptr<MyClient> client) {
     int descriptor = client->getSocketDescriptor();
@@ -118,6 +121,9 @@ void server(shared_ptr<MyClient> client) {
         workers[descriptor] = shared_ptr<HttpWorker>(new HttpWorker());
     shared_ptr<HttpWorker> worker = workers[descriptor];
     while (true) {
+//        checkTimeOut(client);
+
+
         auto prAddress = worker->readMessage(client);
         auto message = prAddress.second;
         if (prAddress.first == 0) {
@@ -126,7 +132,6 @@ void server(shared_ptr<MyClient> client) {
         }
         if (prAddress.first == -1)
             return;
-
         db(message.URL);
         if (message.URL == "/login") {
             assertMy((int) message.body.size() == 1);
@@ -180,11 +185,6 @@ void server(shared_ptr<MyClient> client) {
             }
             string qq = arrayJSFromStrings(tmp);
             worker->sendString(qq, client);
-//            if (currentGame.count(id) != 0) {
-//                db2("game already exist", id + " " + loginById[id]);
-//                tmp = "[ \"\", \"\", \"" + loginById[currentGame[id].enemyId] + "\"]";
-//            }
-//            db(tmp);
         }
         else if (message.URL == "/move") {
             int id = idByLogin[message.get("login")];
@@ -218,10 +218,6 @@ void server(shared_ptr<MyClient> client) {
                 db("incorrect color");
             }
 
-
-            //check possible moves
-
-
             worker->sendString("OK!MOVE", client);
         }
         else if (message.URL == "/board") {
@@ -254,8 +250,6 @@ int fdFromEpoll;
 void handl(int signum) {
     char buffer[10];
     sprintf(buffer, "wake up!");
-    cerr << "write!!!!" << endl;
-    db(fdFromEpoll);
     write(fdFromEpoll, buffer, strlen(buffer));
 }
 

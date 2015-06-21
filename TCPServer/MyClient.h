@@ -22,22 +22,17 @@ class MyEpoll;
 
 class MyClient {
 private:
+    MyClient(int socketDescriptor, MyEpoll *);
 
-    MyClient(int port, int socketDescriptor, int epollDescriptor, MyEpoll *);
-
-    int port;
     int socketDescriptor;
-    int epollDescriptor;
     u_int32_t flagMask;
-
-//    vector<char> buffer;
-//    int bufferCursor;
     deque < char > buffer;
     bool closed;
     MyEpoll * myEpoll;
 
 
 public:
+    ~MyClient();
     friend class MyEpoll;
 
     void setRead(int flag);
@@ -56,6 +51,7 @@ public:
     int read(string &buffer);
 
     void writeFromEpoll();
+
 };
 
 void makeSocketNonBlocking(int socketDescriptor);

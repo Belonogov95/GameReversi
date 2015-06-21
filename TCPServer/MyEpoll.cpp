@@ -27,7 +27,8 @@ MyEpoll::MyEpoll() {
 }
 
 MyEpoll::~MyEpoll() {
-//    assertMy(close(epollDescriptor) == 0);
+
+    close(epollDescriptor);
 }
 
 void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>)) {
@@ -63,7 +64,6 @@ void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyCli
     epollEvent.data.fd = socketDescriptor;
     onReceiveMap[socketDescriptor] = onReceive;
     socketDescriptorType[socketDescriptor] = WAITING_ACCEPT;
-    portFromDescriptor[socketDescriptor] = port;
 
     epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, socketDescriptor, &epollEvent);
 }
@@ -73,16 +73,17 @@ void MyEpoll::start() {
     bool running = true;
     for (; running;) {
         epoll_event events[MAX_EVENTS];
-//        db("before wait");
         int eventsSize = epoll_wait(epollDescriptor, events, MAX_EVENTS, -1);
-//        db("after wait");
         for (int i = 0; i < eventsSize; i++) {
             int socketDescriptor = events[i].data.fd;
-//            db(socketDescriptor);
             if (socketDescriptor == pipeFD)  {
-//                cerr << "here\n";
+                vector < shared_ptr < MyClient > > temporaryList;
                 for (auto x: clientFromDescriptor)
-                    x.second->closeClient();
+                    temporaryList.push_back(x.second);
+
+                for (auto x: temporaryList)
+                    x->closeClient();
+                temporaryList.clear();
                 running = false;
                 assertMy(close(epollDescriptor) == 0);
                 //TODO
@@ -93,13 +94,11 @@ void MyEpoll::start() {
                 socklen_t sockLen = sizeof(sockAddrStorage);
                 int newSocketDescriptor = accept(socketDescriptor, (sockaddr *) &sockAddrStorage, &sockLen);
 
-                int port = portFromDescriptor[socketDescriptor];
 
-                shared_ptr<MyClient> newClient( new MyClient(port, newSocketDescriptor, epollDescriptor, this));
+                shared_ptr<MyClient> newClient( new MyClient(newSocketDescriptor, this));
 
                 onReceiveMap[newSocketDescriptor] = onReceiveMap[socketDescriptor];
                 socketDescriptorType[newSocketDescriptor] = WAITING_READ_OR_WRITE;
-                portFromDescriptor[newSocketDescriptor] = port;
                 clientFromDescriptor[newSocketDescriptor] = newClient;
 
                 epoll_event epollEvent;

@@ -14,15 +14,22 @@
 #include "debug.h"
 
 
-MyClient::MyClient(int port, int socketDescriptor, int epollDescriptor, MyEpoll *myEpoll) : port(port),
-                                                                                            socketDescriptor(
-                                                                                                    socketDescriptor),
-                                                                                            epollDescriptor(
-                                                                                                    epollDescriptor),
-                                                                                            flagMask(0),
-                                                                                            closed(0),
-                                                                                            myEpoll(myEpoll) {
+MyClient::MyClient(int socketDescriptor, MyEpoll *myEpoll) :
+        socketDescriptor( socketDescriptor),
+        flagMask(0),
+        closed(0),
+        myEpoll(myEpoll) {
     makeSocketNonBlocking(socketDescriptor);
+}
+
+
+
+MyClient::~MyClient() {
+    epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0);
+    myEpoll->onReceiveMap.count(socketDescriptor);
+    myEpoll->onReceiveMap.erase(socketDescriptor);
+    myEpoll->socketDescriptorType.erase(socketDescriptor);
+    close(socketDescriptor);
 }
 
 
@@ -55,34 +62,32 @@ void MyClient::setRead(int flag) {
     epoll_event event;
     event.data.fd = socketDescriptor;
     event.events = flagMask;
-    assertMy(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
+    assertMy(epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
 void MyClient::setWrite(int flag) {
     assertMy(flag == 0 || flag == 1);
-    //db(flagMask);
     flagMask |= EPOLLOUT;
     if (flag == 0)
         flagMask ^= EPOLLOUT;
     epoll_event event;
     event.data.fd = socketDescriptor;
     event.events = flagMask;
-    assertMy(epoll_ctl(epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
+    assertMy(epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
 
 void MyClient::closeClient() {
-    cerr << "close client\n";
+    db2("close client", socketDescriptor);
     assertMy(!closed);
 
-    assertMy(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
-
-    assertMy(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
-    myEpoll->onReceiveMap.erase(socketDescriptor);
+    assertMy(epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
 
     assertMy(myEpoll->clientFromDescriptor.count(socketDescriptor) == 1);
+    assertMy(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
     myEpoll->clientFromDescriptor.erase(socketDescriptor);
-    myEpoll->portFromDescriptor.erase(socketDescriptor);
+    myEpoll->onReceiveMap.erase(socketDescriptor);
+
     myEpoll->socketDescriptorType.erase(socketDescriptor);
     closed = true;
 

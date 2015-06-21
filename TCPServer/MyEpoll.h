@@ -30,7 +30,6 @@ private:
     int pipeOut;
     map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
     map < int, int > socketDescriptorType;
-    map < int, int > portFromDescriptor;
     map < int, shared_ptr < MyClient > > clientFromDescriptor;
 
 public:
