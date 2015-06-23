@@ -2,7 +2,6 @@
 // Created by vanya on 02.06.15.
 //
 
-#include <assert.h>
 #include <sys/socket.h>
 #include <iostream>
 #include <string.h>
@@ -10,7 +9,6 @@
 #include <netdb.h>
 #include "MyEpoll.h"
 #include "debug.h"
-
 
 MyEpoll::MyEpoll() {
     epollDescriptor = epoll_create(1);
@@ -27,11 +25,14 @@ MyEpoll::MyEpoll() {
 }
 
 MyEpoll::~MyEpoll() {
-
+    close(pipeOut);
+    close(pipeFD);
     close(epollDescriptor);
 }
 
-void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>)) {
+void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>),
+                  void (*onAccept)(shared_ptr < MyClient >, int key)) {
+
     addrinfo hints;
     addrinfo *result;
     int socketDescriptor;
@@ -63,6 +64,8 @@ void MyEpoll::add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyCli
     epollEvent.events = EPOLLIN;
     epollEvent.data.fd = socketDescriptor;
     onReceiveMap[socketDescriptor] = onReceive;
+    onAcceptMap[socketDescriptor] = onAccept;
+
     socketDescriptorType[socketDescriptor] = WAITING_ACCEPT;
 
     epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, socketDescriptor, &epollEvent);
@@ -94,12 +97,12 @@ void MyEpoll::start() {
                 socklen_t sockLen = sizeof(sockAddrStorage);
                 int newSocketDescriptor = accept(socketDescriptor, (sockaddr *) &sockAddrStorage, &sockLen);
 
-
                 shared_ptr<MyClient> newClient( new MyClient(newSocketDescriptor, this));
 
                 onReceiveMap[newSocketDescriptor] = onReceiveMap[socketDescriptor];
                 socketDescriptorType[newSocketDescriptor] = WAITING_READ_OR_WRITE;
-                clientFromDescriptor[newSocketDescriptor] = newClient;
+                clientFromDescriptor[newSocketDescriptor] = newClient.get();
+                onAcceptMap[newSocketDescriptor](newClient, newSocketDescriptor) ;
 
                 epoll_event epollEvent;
                 epollEvent.events = 0;
@@ -112,7 +115,7 @@ void MyEpoll::start() {
             else if (socketDescriptorType[socketDescriptor] == WAITING_READ_OR_WRITE) {
                 shared_ptr<MyClient> myClient = clientFromDescriptor[socketDescriptor];
                 myClient->writeFromEpoll();
-                onReceiveMap[socketDescriptor](myClient);
+                onReceiveMap[socketDescriptor](myClient, socketDescriptor);
             }
             else
                 assertMy(false);

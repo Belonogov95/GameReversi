@@ -114,6 +114,54 @@ HWW2/fast:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/build
 .PHONY : HWW2/fast
 
+Executor.o: Executor.cpp.o
+.PHONY : Executor.o
+
+# target to build an object file
+Executor.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Executor.cpp.o
+.PHONY : Executor.cpp.o
+
+Executor.i: Executor.cpp.i
+.PHONY : Executor.i
+
+# target to preprocess a source file
+Executor.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Executor.cpp.i
+.PHONY : Executor.cpp.i
+
+Executor.s: Executor.cpp.s
+.PHONY : Executor.s
+
+# target to generate assembly for a file
+Executor.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Executor.cpp.s
+.PHONY : Executor.cpp.s
+
+FileDescriptor.o: FileDescriptor.cpp.o
+.PHONY : FileDescriptor.o
+
+# target to build an object file
+FileDescriptor.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
+.PHONY : FileDescriptor.cpp.o
+
+FileDescriptor.i: FileDescriptor.cpp.i
+.PHONY : FileDescriptor.i
+
+# target to preprocess a source file
+FileDescriptor.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/FileDescriptor.cpp.i
+.PHONY : FileDescriptor.cpp.i
+
+FileDescriptor.s: FileDescriptor.cpp.s
+.PHONY : FileDescriptor.s
+
+# target to generate assembly for a file
+FileDescriptor.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/FileDescriptor.cpp.s
+.PHONY : FileDescriptor.cpp.s
+
 HttpWorker.o: HttpWorker.cpp.o
 .PHONY : HttpWorker.o
 
@@ -162,53 +210,77 @@ Message.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.s
 .PHONY : Message.cpp.s
 
-MyClient.o: MyClient.cpp.o
-.PHONY : MyClient.o
+SmartSocket.o: SmartSocket.cpp.o
+.PHONY : SmartSocket.o
 
 # target to build an object file
-MyClient.cpp.o:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyClient.cpp.o
-.PHONY : MyClient.cpp.o
+SmartSocket.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SmartSocket.cpp.o
+.PHONY : SmartSocket.cpp.o
 
-MyClient.i: MyClient.cpp.i
-.PHONY : MyClient.i
+SmartSocket.i: SmartSocket.cpp.i
+.PHONY : SmartSocket.i
 
 # target to preprocess a source file
-MyClient.cpp.i:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyClient.cpp.i
-.PHONY : MyClient.cpp.i
+SmartSocket.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SmartSocket.cpp.i
+.PHONY : SmartSocket.cpp.i
 
-MyClient.s: MyClient.cpp.s
-.PHONY : MyClient.s
+SmartSocket.s: SmartSocket.cpp.s
+.PHONY : SmartSocket.s
 
 # target to generate assembly for a file
-MyClient.cpp.s:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyClient.cpp.s
-.PHONY : MyClient.cpp.s
+SmartSocket.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SmartSocket.cpp.s
+.PHONY : SmartSocket.cpp.s
 
-MyEpoll.o: MyEpoll.cpp.o
-.PHONY : MyEpoll.o
+TcpSocketClient.o: TcpSocketClient.cpp.o
+.PHONY : TcpSocketClient.o
 
 # target to build an object file
-MyEpoll.cpp.o:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyEpoll.cpp.o
-.PHONY : MyEpoll.cpp.o
+TcpSocketClient.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o
+.PHONY : TcpSocketClient.cpp.o
 
-MyEpoll.i: MyEpoll.cpp.i
-.PHONY : MyEpoll.i
+TcpSocketClient.i: TcpSocketClient.cpp.i
+.PHONY : TcpSocketClient.i
 
 # target to preprocess a source file
-MyEpoll.cpp.i:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyEpoll.cpp.i
-.PHONY : MyEpoll.cpp.i
+TcpSocketClient.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketClient.cpp.i
+.PHONY : TcpSocketClient.cpp.i
 
-MyEpoll.s: MyEpoll.cpp.s
-.PHONY : MyEpoll.s
+TcpSocketClient.s: TcpSocketClient.cpp.s
+.PHONY : TcpSocketClient.s
 
 # target to generate assembly for a file
-MyEpoll.cpp.s:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/MyEpoll.cpp.s
-.PHONY : MyEpoll.cpp.s
+TcpSocketClient.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketClient.cpp.s
+.PHONY : TcpSocketClient.cpp.s
+
+TcpSocketServer.o: TcpSocketServer.cpp.o
+.PHONY : TcpSocketServer.o
+
+# target to build an object file
+TcpSocketServer.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o
+.PHONY : TcpSocketServer.cpp.o
+
+TcpSocketServer.i: TcpSocketServer.cpp.i
+.PHONY : TcpSocketServer.i
+
+# target to preprocess a source file
+TcpSocketServer.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketServer.cpp.i
+.PHONY : TcpSocketServer.cpp.i
+
+TcpSocketServer.s: TcpSocketServer.cpp.s
+.PHONY : TcpSocketServer.s
+
+# target to generate assembly for a file
+TcpSocketServer.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/TcpSocketServer.cpp.s
+.PHONY : TcpSocketServer.cpp.s
 
 Tools.o: Tools.cpp.o
 .PHONY : Tools.o
@@ -315,18 +387,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HWW2"
+	@echo "... Executor.o"
+	@echo "... Executor.i"
+	@echo "... Executor.s"
+	@echo "... FileDescriptor.o"
+	@echo "... FileDescriptor.i"
+	@echo "... FileDescriptor.s"
 	@echo "... HttpWorker.o"
 	@echo "... HttpWorker.i"
 	@echo "... HttpWorker.s"
 	@echo "... Message.o"
 	@echo "... Message.i"
 	@echo "... Message.s"
-	@echo "... MyClient.o"
-	@echo "... MyClient.i"
-	@echo "... MyClient.s"
-	@echo "... MyEpoll.o"
-	@echo "... MyEpoll.i"
-	@echo "... MyEpoll.s"
+	@echo "... SmartSocket.o"
+	@echo "... SmartSocket.i"
+	@echo "... SmartSocket.s"
+	@echo "... TcpSocketClient.o"
+	@echo "... TcpSocketClient.i"
+	@echo "... TcpSocketClient.s"
+	@echo "... TcpSocketServer.o"
+	@echo "... TcpSocketServer.i"
+	@echo "... TcpSocketServer.s"
 	@echo "... Tools.o"
 	@echo "... Tools.i"
 	@echo "... Tools.s"

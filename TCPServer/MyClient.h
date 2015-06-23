@@ -43,9 +43,6 @@ public:
 
     void closeClient();
 
-    int getSocketDescriptor();
-
-
     void write(string s);
 
     int read(string &buffer);

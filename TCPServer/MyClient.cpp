@@ -76,19 +76,19 @@ void MyClient::setWrite(int flag) {
     assertMy(epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_MOD, socketDescriptor, &event) == 0);
 }
 
-
 void MyClient::closeClient() {
     db2("close client", socketDescriptor);
+
     assertMy(!closed);
 
     assertMy(epoll_ctl(myEpoll->epollDescriptor, EPOLL_CTL_DEL, socketDescriptor, 0) == 0);
-
     assertMy(myEpoll->clientFromDescriptor.count(socketDescriptor) == 1);
     assertMy(myEpoll->onReceiveMap.count(socketDescriptor) == 1);
+
     myEpoll->clientFromDescriptor.erase(socketDescriptor);
     myEpoll->onReceiveMap.erase(socketDescriptor);
-
     myEpoll->socketDescriptorType.erase(socketDescriptor);
+
     closed = true;
 
     assertMy(close(socketDescriptor) == 0);
@@ -102,9 +102,6 @@ void makeSocketNonBlocking(int socketDescriptor) {
     assertMy(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
 }
 
-int MyClient::getSocketDescriptor() {
-    return socketDescriptor;
-}
 
 
 void MyClient::writeFromEpoll() {

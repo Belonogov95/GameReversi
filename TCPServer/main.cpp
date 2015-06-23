@@ -5,11 +5,15 @@
 #include "MyEpoll.h"
 #include "debug.h"
 #include "HttpWorker.h"
-#include "MyClient.h"
 #include "reversiServer/GameState.h"
+#include "Executor.h"
+#include "TcpSocketClient.h"
+#include "TcpSocketServer.h"
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/timerfd.h>
+
 
 using namespace std;
 
@@ -26,8 +30,6 @@ struct GamePointer {
 };
 
 
-map<int, shared_ptr<HttpWorker>> workers; // by socket descriptor
-
 map<string, int> idByLogin;
 
 map<int, string> loginById;
@@ -37,6 +39,8 @@ map<int, GamePointer> currentGame;
 map<int, GameState> gameById;
 int curPlayerId;
 int curGame;
+
+
 
 set<string> myFiles;
 
@@ -56,7 +60,7 @@ string arrayJSFromStrings(vector<string> data, char quote = '\'') {
     return res;
 }
 
-vector < string > generatePlayersList(int id, pair<int, int> &match) {
+vector<string> generatePlayersList(int id, pair<int, int> &match) {
     vector<string> data;
     for (auto x: loginById)
         if (x.first != id)
@@ -72,7 +76,7 @@ vector < string > generatePlayersList(int id, pair<int, int> &match) {
             break;
         }
     }
-    vector < string > tmp;
+    vector<string> tmp;
     tmp.push_back(s0);
     tmp.push_back(s1);
     return tmp;
@@ -81,24 +85,23 @@ vector < string > generatePlayersList(int id, pair<int, int> &match) {
 
 void dump() {
     db2(curPlayerId, curGame);
-    db("login - id") ;
+    db("login - id");
     for (auto x: loginById)
         cerr << x.second << " " << x.first << endl;
-    db("currentGame") ;
+    db("currentGame");
     for (auto x: currentGame)
         cerr << "id  enemyId color, gameId: " << x.first << "    " << x.second.enemyId << " " <<
-                x.second.color << " " << x.second.gameId << endl;
+        x.second.color << " " << x.second.gameId << endl;
     db("===========");
 }
 
-void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < HttpWorker > worker) {
+
+void boardQuery(Message message, shared_ptr<TcpSocketClient> client, shared_ptr<HttpWorker> worker) {
     int id = idByLogin[message.get("login")];
     int gameId = currentGame[id].gameId;
-//    db(gameId);
-//    dump();
     GameState state = gameById[gameId];
     string board = state.toJSArray();
-    vector < string > tmp(6);
+    vector<string> tmp(6);
     tmp[0] = board;
     tmp[1] = to_string(state.getCntWhite());
     tmp[2] = to_string(state.getCntBlack());
@@ -109,29 +112,41 @@ void boardQuery(Message message, shared_ptr < MyClient > client, shared_ptr < Ht
             tmp[5] = "Draw";
         else
             tmp[5] = (((state.getCntWhite() > state.getCntBlack()) == (currentGame[id].color == 1)) ? loginById[id] :
-                     loginById[currentGame[id].enemyId]) + " Win!";
+                      loginById[currentGame[id].enemyId]) + " Win!";
     }
     worker->sendString(arrayJSFromStrings(tmp), client);
 }
 
 
+void onAccept(shared_ptr<TcpSocketClient> client, map<int, shared_ptr < TcpSocketClient > > & dataByDescriptor) {
+    db2("main on Accept", client->socketDescriptor);
+    dataByDescriptor[client->socketDescriptor] = client;
+}
 
-void server(shared_ptr<MyClient> client) {
-    int descriptor = client->getSocketDescriptor();
+//map<int, shared_ptr < TcpSocketClient > > dataByDescriptor;
+//map<int, shared_ptr<HttpWorker>> workers; // by socket descriptor
+
+
+void onReceive(int descriptor, u_int32_t flagMask, map < int, shared_ptr < TcpSocketClient > > & dataByDescriptor,
+               map<int, shared_ptr<HttpWorker>> &workers) {
+
+    assertMy(dataByDescriptor.count(descriptor) == 1);
+    shared_ptr < TcpSocketClient > client = dataByDescriptor[descriptor];
+    client->writeFromEpoll();
     if (workers.count(descriptor) == 0)
         workers[descriptor] = shared_ptr<HttpWorker>(new HttpWorker());
+
     shared_ptr<HttpWorker> worker = workers[descriptor];
-    db(worker.use_count());
     while (true) {
         auto prAddress = worker->readMessage(client);
         auto message = prAddress.second;
         if (prAddress.first == 0) {
-            workers.erase(client->getSocketDescriptor());
+            workers.erase(descriptor);
+            dataByDescriptor.erase(descriptor);
             return;
         }
         if (prAddress.first == -1)
             return;
-        db(message.URL);
         if (message.URL == "/login") {
             assertMy((int) message.body.size() == 1);
             string login = message.get("login");
@@ -226,15 +241,57 @@ void server(shared_ptr<MyClient> client) {
 
 }
 
+
+struct MyPipe {
+    int pipeIn, pipeOut;
+    MyPipe() {
+        int p[2];
+        assertMy(pipe(p) == 0);
+        pipeIn = p[0];
+        pipeOut = p[1];
+    }
+    ~MyPipe() {
+        close(pipeIn);
+        close(pipeOut);
+    }
+};
+//
+//struct MyTimer {
+//    int fd;
+//
+//    MyTimer() {
+//        fd = timerfd_create(CLOCK_MONOTONIC, TFD_NONBLOCK);
+//        struct itimerspec tmr;
+//        memset(&tmr, 0, sizeof(tmr));
+//        tmr.it_interval.tv_sec = 1;
+//        assertMy(timerfd_settime(fd, TFD_TIMER_ABSTIME, &tmr, NULL) != -1);
+//    }
+//
+//    ~MyTimer() {
+//        close(fd);
+//    }
+
+//
+//       int timerfd_settime(int fd, int flags,
+//                           const struct itimerspec *new_value,
+//                           struct itimerspec *old_value);
+//
+//       int timerfd_gettime(int fd, struct itimerspec *curr_value);
+//        }
+
+//
+//};
+
 int fdFromEpoll;
 
 void handl(int signum) {
     char buffer[10];
     sprintf(buffer, "wake up!");
-    write(fdFromEpoll, buffer, strlen(buffer));
+    assertMy(write(fdFromEpoll, buffer, strlen(buffer)) != -1);
 }
 
 int main() {
+    db2(EPOLLIN, EPOLLOUT);
     myFiles.insert("/");
     myFiles.insert("/index.html");
     myFiles.insert("/favicon.ico");
@@ -247,23 +304,50 @@ int main() {
     string ipAddress;
     cin >> port;
     cin >> ipAddress;
-    MyEpoll ep;
-    fdFromEpoll = ep.getPipe();
+    db2(port, ipAddress);
+
+    MyPipe myPipe;
+    db2(myPipe.pipeOut, myPipe.pipeIn);
+    fdFromEpoll = myPipe.pipeOut;
+
     struct sigaction sa;
     memset(&sa, 0, sizeof(sa));
     sa.sa_handler = handl;
     sigaction(SIGINT, &sa, NULL);
 
+    Executor executor;
+    map<int, shared_ptr < TcpSocketClient > > dataByDescriptor;
+    map<int, shared_ptr<HttpWorker>> workers; // by socket descriptor
 
-    db2(port, ipAddress);
-    ep.add(port, ipAddress, server);
-    ep.start();
-//    db("after ep.start");
-//    db(workers.size());
-//    for (auto x: workers) {
-//        cerr << x.second.use_count() << endl;
-//    }
-//    workers.clear();
+    function < void (u_int32_t ) > fBreak = [&](u_int32_t y) {
+        cerr << "false";
+        executor.running = false;
+    };
+//    function < void (int, u_int32_t) > fTimer = [] (int fd, u_int32_t y) {
+//        cerr << "timer\n";
+//    };
+
+//    MyTimer myTimer;
+
+//    executor.add(myTimer.fd, fTimer, EPOLLIN);
+    executor.add(myPipe.pipeIn, fBreak, EPOLLIN);
+
+    function < void (shared_ptr < TcpSocketClient > ) > alfAC = [&](shared_ptr < TcpSocketClient > x) {
+        onAccept(x, dataByDescriptor);
+    };
+    function < void (int, u_int32_t) > alfRC= [&](int x, u_int32_t y) {
+        onReceive(x, y, dataByDescriptor, workers);
+    } ;
+
+    TcpSocketServer tcpServer(port, ipAddress, alfAC, alfRC, &executor);
+
+    executor.run();
+
+
+
+    dataByDescriptor.clear();
+    workers.clear();
+
     return 0;
 }
 

@@ -9,7 +9,7 @@
 #include "Tools.h"
 
 
-void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
+void HttpWorker::sendFile(string path, shared_ptr < TcpSocketClient> client) {
     path = "site" + path;
 //    db(path);
     ifstream in(path, ios::binary);
@@ -22,7 +22,7 @@ void HttpWorker::sendFile(string path, shared_ptr < MyClient > client) {
     sendString(message, client);
 }
 
-void HttpWorker::sendString(string message, shared_ptr < MyClient > client) {
+void HttpWorker::sendString(string message, shared_ptr < TcpSocketClient > client) {
     string header = "HTTP/1.1 200 OK" + LINE_BREAK;
     header += "Content-Length: " + to_string(message.size()) + LINE_BREAK;
     client->write(header + LINE_BREAK + message);
@@ -37,12 +37,12 @@ bool isEmpty(string s) {
 }
 
 
-pair < int, Message > HttpWorker::readMessage(shared_ptr < MyClient > client) {
+pair < int, Message > HttpWorker::readMessage(shared_ptr < TcpSocketClient > client) {
     string buffer(BUF_SZ, 0);
     int len = client->read(buffer);
 
     if (len == 0)  {
-        client->closeClient();
+//        client->closeClient();
         //TODO something with HttpWorker
         return make_pair(0, Message());
     }

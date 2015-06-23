@@ -40,7 +40,7 @@ function loginCallBack(data, status) {
     $("#connectDiv").css("display", "inline");
     $("#mainDiv").prepend("<h4> Hello, " + name + "</h4>");
     updatePlayerList();
-    CONNECT_INTERVAL_ID = setInterval(updatePlayerList, 500);
+    CONNECT_INTERVAL_ID = setInterval(updatePlayerList, 3000);
 }
 
 function updatePlayerList() {

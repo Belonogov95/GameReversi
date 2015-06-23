@@ -28,9 +28,11 @@ private:
     int epollDescriptor;
     int pipeFD;
     int pipeOut;
-    map < int, void (*) (shared_ptr < MyClient > ) > onReceiveMap;
+    map < int, void (*) (int key) > onReceiveMap;
+    map < int, void (*) (shared_ptr < MyClient > , int key) > onAcceptMap;
+
     map < int, int > socketDescriptorType;
-    map < int, shared_ptr < MyClient > > clientFromDescriptor;
+    map < int, MyClient * > clientFromDescriptor;
 
 public:
     friend class MyClient;
@@ -40,8 +42,10 @@ public:
     MyEpoll();
     ~MyEpoll();
 
-    void add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>));
     int getPipe();
+
+    void add(int port, string ipAddress, void (*onReceive)(shared_ptr<MyClient>),
+             void (*onAccept)(shared_ptr<MyClient>, int));
 };
 
 

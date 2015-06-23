@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include "MyClient.h"
 #include "Message.h"
+#include "TcpSocketClient.h"
 
 #ifndef HWW2_HTTPWORKER_H
 #define HWW2_HTTPWORKER_H
@@ -19,16 +20,13 @@ private:
 
 public:
 
-    //vector<string> split(string s, char ch);
-    //string trim(string s);
-
     void printBuff();
 
-    void sendFile(string path, shared_ptr<MyClient> client);
+    void sendFile(string path, shared_ptr<TcpSocketClient> client);
 
-    pair<int, Message > readMessage(shared_ptr<MyClient> client);
+    pair<int, Message > readMessage(shared_ptr<TcpSocketClient> client);
 
-    void sendString(string data, shared_ptr<MyClient> client);
+    void sendString(string data, shared_ptr<TcpSocketClient> client);
 };
 
 

@@ -4,10 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/Executor.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/FileDescriptor.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/HttpWorker.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/Message.cpp.o"
-  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyClient.cpp.o"
-  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/MyEpoll.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/SmartSocket.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o"
+  "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/Tools.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/debug.cpp.o"
   "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp" "/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles/HWW2.dir/main.cpp.o"
