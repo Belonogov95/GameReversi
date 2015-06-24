@@ -6,9 +6,9 @@
 #include "debug.h"
 #include "Message.h"
 #include "Tools.h"
+#include <sys/epoll.h>
 
 HttpWorker::HttpWorker(const shared_ptr<TcpSocketClient> &client): client(client) { }
-
 
 
 void HttpWorker::sendFile(string path) {

@@ -29,7 +29,7 @@ public:
 
     int read(string &buffer);
 
-    void write(string data);
+    void write(const string & data);
 
     void setWrite(int flag);
 

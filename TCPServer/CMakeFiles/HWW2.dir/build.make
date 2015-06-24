@@ -279,6 +279,29 @@ CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.provides: CMakeFiles/HWW2.dir/FileDescr
 
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.provides.build: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
 
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: CMakeFiles/HWW2.dir/flags.make
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: SignalHandler.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/SignalHandler.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/SignalHandler.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.cpp
+
+CMakeFiles/HWW2.dir/SignalHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/SignalHandler.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.cpp > CMakeFiles/HWW2.dir/SignalHandler.cpp.i
+
+CMakeFiles/HWW2.dir/SignalHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/SignalHandler.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.cpp -o CMakeFiles/HWW2.dir/SignalHandler.cpp.s
+
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o.requires:
+.PHONY : CMakeFiles/HWW2.dir/SignalHandler.cpp.o.requires
+
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o.provides: CMakeFiles/HWW2.dir/SignalHandler.cpp.o.requires
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SignalHandler.cpp.o.provides.build
+.PHONY : CMakeFiles/HWW2.dir/SignalHandler.cpp.o.provides
+
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o.provides.build: CMakeFiles/HWW2.dir/SignalHandler.cpp.o
+
 # Object files for target HWW2
 HWW2_OBJECTS = \
 "CMakeFiles/HWW2.dir/main.cpp.o" \
@@ -290,7 +313,8 @@ HWW2_OBJECTS = \
 "CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o" \
 "CMakeFiles/HWW2.dir/Message.cpp.o" \
 "CMakeFiles/HWW2.dir/SmartSocket.cpp.o" \
-"CMakeFiles/HWW2.dir/FileDescriptor.cpp.o"
+"CMakeFiles/HWW2.dir/FileDescriptor.cpp.o" \
+"CMakeFiles/HWW2.dir/SignalHandler.cpp.o"
 
 # External object files for target HWW2
 HWW2_EXTERNAL_OBJECTS =
@@ -305,6 +329,7 @@ HWW2: CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o
 HWW2: CMakeFiles/HWW2.dir/Message.cpp.o
 HWW2: CMakeFiles/HWW2.dir/SmartSocket.cpp.o
 HWW2: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
+HWW2: CMakeFiles/HWW2.dir/SignalHandler.cpp.o
 HWW2: CMakeFiles/HWW2.dir/build.make
 HWW2: CMakeFiles/HWW2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable HWW2"
@@ -324,6 +349,7 @@ CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Message.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/SmartSocket.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.requires
+CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/SignalHandler.cpp.o.requires
 .PHONY : CMakeFiles/HWW2.dir/requires
 
 CMakeFiles/HWW2.dir/clean:

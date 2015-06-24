@@ -8,13 +8,12 @@
 #include "debug.h"
 #include "Executor.h"
 #include "TcpSocketClient.h"
-
-
+#include <sys/epoll.h>
 
 
 namespace
 {
-    FileDescriptor create_socket(int port, string ipAddress, function<void(shared_ptr < TcpSocketClient >) > onAccept,
+    FileDescriptor create_socket(int port, const string & ipAddress, function<void(shared_ptr < TcpSocketClient >) > onAccept,
                       function<void(int, u_int32_t )> onReceive, Executor *executor)
     {
         addrinfo hints;
@@ -26,9 +25,9 @@ namespace
 
         myAssert(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
 
-        myAssert(result != NULL);
+        myCheck(result != NULL);
         FileDescriptor socketDescriptor(socket(result->ai_family, result->ai_socktype, result->ai_protocol));
-        db2("socket client created", socketDescriptor.get());
+//        db2("socket client created", socketDescriptor.get());
         myAssert(socketDescriptor.get() != -1);
 
         int one = 1;
@@ -42,7 +41,7 @@ namespace
     }
 }
 
-TcpSocketServer::TcpSocketServer(int port, string ipAddress, function<void(shared_ptr < TcpSocketClient >) > onAccept,
+TcpSocketServer::TcpSocketServer(int port, const string & ipAddress, function<void(shared_ptr < TcpSocketClient >) > onAccept,
                                  function<void(int, u_int32_t )> onReceive, Executor *executor)
         : executor(executor)
         , socketDescriptor(create_socket(port, ipAddress, onAccept, onReceive, executor))

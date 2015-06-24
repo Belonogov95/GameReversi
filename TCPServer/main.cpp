@@ -8,11 +8,12 @@
 #include "Executor.h"
 #include "TcpSocketClient.h"
 #include "TcpSocketServer.h"
+#include "SignalHandler.h"
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/timerfd.h>
-
+#include <sys/epoll.h>
 
 using namespace std;
 const int MAX_WAIT = 5; // sec
@@ -296,21 +297,6 @@ void onReceive(int descriptor, u_int32_t flagMask, MapWorkers &workers) {
 
 }
 
-struct MyPipe {
-    int pipeIn, pipeOut;
-
-    MyPipe() {
-        int p[2];
-        myAssert(pipe(p) == 0);
-        pipeIn = p[0];
-        pipeOut = p[1];
-    }
-
-    ~MyPipe() {
-        close(pipeIn);
-        close(pipeOut);
-    }
-};
 
 struct MyTimer {
     int fd;
@@ -323,7 +309,6 @@ struct MyTimer {
         tmr.it_interval.tv_sec = 1;
         tmr.it_value.tv_sec = 2;
         myAssert(timerfd_settime(fd, 0, &tmr, NULL) != -1);
-        /// TODO rai
     }
 
     ~MyTimer() {
@@ -331,20 +316,15 @@ struct MyTimer {
     }
 };
 
-int fdFromEpoll;
 
-void handl(int signum) {
-    char buffer[10];
-    sprintf(buffer, "wake up!");
-    myAssert(write(fdFromEpoll, buffer, strlen(buffer)) != -1);
-}
 
 void read(int &port, string &ipAddress) {
-    freopen("config.txt", "r", stdin);
-    cin >> port;
-    cin >> ipAddress;
+    std::ifstream in("config.txt", std::ios_base::in);
+    if (!in)
+        throw std::runtime_error("unable to read config.txt");
+    in >> port;
+    in >> ipAddress;
     db2(port, ipAddress);
-
 }
 
 void initFiles() {
@@ -356,52 +336,47 @@ void initFiles() {
     myFiles.insert("/mystyle.css");
 }
 
-void initSignal() {
-    struct sigaction sa;
-    memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = handl;
-    sigaction(SIGINT, &sa, NULL);
-}
-
 
 void clearOldUsers() {
     int currentTime = getTime();
-    vector<int> forDelete;
-    for (auto &x: data) {
-        if (x.second.lastActivity + MAX_WAIT < currentTime) {
-            forDelete.push_back(x.first);
+    for (auto i = data.begin(); i != data.end();)
+    {
+        auto& element = *i;
+        if (element.second.lastActivity + MAX_WAIT < currentTime) {
+            idByLogin.erase(element.second.login);
+            i = data.erase(i);
         }
-    }
-    for (auto id: forDelete) {
-        idByLogin.erase(data[id].login);
-        data.erase(id);
+        else
+            ++i;
     }
 }
 
 
 int main() {
-//    assert(false);
-    MyPipe myPipe;
-    fdFromEpoll = myPipe.pipeOut;
+
     int port;
     string ipAddress;
     read(port, ipAddress);
     initFiles();
-    initSignal();
 
     Executor executor;
+    SignalHandler sigHandler(executor, [&] {
+        executor.stop();
+    });
+
     map<int, shared_ptr<HttpWorker> > workers;
 
-    function<void(u_int32_t)> fBreak = [&](u_int32_t y) {
-        executor.running = false;
-    };
-    executor.add(myPipe.pipeIn, fBreak, EPOLLIN);
+    // GameServer gameServer;
+    // myAssert in release
+    // cleanup EPOLLOUT
+
+
 
 
     MyTimer myTimer;
 
     int timerFd = myTimer.fd;
-    function<void(uint)> fTimer = [=](uint flagMask) {
+    function<void(uint32_t)> fTimer = [=](uint32_t flagMask) {
         u_int64_t buffer;
         myAssert(read(timerFd, &buffer, sizeof(u_int64_t)) == 8);
         clearOldUsers();
@@ -412,7 +387,8 @@ int main() {
     function<void(shared_ptr<TcpSocketClient>)> alfAC = [&](shared_ptr<TcpSocketClient> x) {
         onAccept(x, workers);
     };
-    function<void(int, uint)> alfRC = [&](int x, uint y) {
+
+    function<void(int, uint32_t)> alfRC = [&](int x, uint32_t y) {
         onReceive(x, y, workers);
     };
 

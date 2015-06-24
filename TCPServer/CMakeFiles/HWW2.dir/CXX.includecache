@@ -11,17 +11,17 @@ Executor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
-bits/stdc++.h
--
 sys/epoll.h
 -
 unistd.h
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
-bits/stdc++.h
+functional
 -
-sys/epoll.h
+cstdint
+-
+map
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.cpp
@@ -45,6 +45,8 @@ Message.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
 Tools.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
+sys/epoll.h
+-
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
 bits/stdc++.h
@@ -68,6 +70,26 @@ debug.h
 bits/stdc++.h
 -
 
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.cpp
+sys/epoll.h
+-
+signal.h
+-
+SignalHandler.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.h
+
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.h
+functional
+-
+unistd.h
+-
+Executor.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+SmartSocket.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
+
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
 SmartSocket.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
@@ -75,6 +97,8 @@ debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
+functional
+-
 Executor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
 
@@ -117,6 +141,8 @@ Executor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
 TcpSocketClient.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
+sys/epoll.h
+-
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.h
 bits/stdc++.h
@@ -165,6 +191,8 @@ TcpSocketClient.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
 TcpSocketServer.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.h
+SignalHandler.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SignalHandler.h
 signal.h
 -
 string.h
@@ -172,6 +200,8 @@ string.h
 unistd.h
 -
 sys/timerfd.h
+-
+sys/epoll.h
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp

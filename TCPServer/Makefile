@@ -210,6 +210,30 @@ Message.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.s
 .PHONY : Message.cpp.s
 
+SignalHandler.o: SignalHandler.cpp.o
+.PHONY : SignalHandler.o
+
+# target to build an object file
+SignalHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SignalHandler.cpp.o
+.PHONY : SignalHandler.cpp.o
+
+SignalHandler.i: SignalHandler.cpp.i
+.PHONY : SignalHandler.i
+
+# target to preprocess a source file
+SignalHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SignalHandler.cpp.i
+.PHONY : SignalHandler.cpp.i
+
+SignalHandler.s: SignalHandler.cpp.s
+.PHONY : SignalHandler.s
+
+# target to generate assembly for a file
+SignalHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/SignalHandler.cpp.s
+.PHONY : SignalHandler.cpp.s
+
 SmartSocket.o: SmartSocket.cpp.o
 .PHONY : SmartSocket.o
 
@@ -375,6 +399,9 @@ help:
 	@echo "... Message.o"
 	@echo "... Message.i"
 	@echo "... Message.s"
+	@echo "... SignalHandler.o"
+	@echo "... SignalHandler.i"
+	@echo "... SignalHandler.s"
 	@echo "... SmartSocket.o"
 	@echo "... SmartSocket.i"
 	@echo "... SmartSocket.s"

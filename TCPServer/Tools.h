@@ -10,9 +10,9 @@
 
 namespace tools {
 
-    std::vector < std::string > split(std::string s, char ch);
+    std::string trim(const std::string &s);
 
-    std::string trim(std::string s);
+    std::vector<std::string> split(const std::string &s, char ch);
 
 };
 

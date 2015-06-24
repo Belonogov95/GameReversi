@@ -8,7 +8,7 @@ set(SOURCE_FILES main.cpp)
 add_executable(HWW2 ${SOURCE_FILES}
 HttpWorker.cpp
 Tools.cpp  reversiServer/GameState.cpp Executor.cpp TcpSocketServer.cpp  TcpSocketClient.cpp Message.cpp SmartSocket.cpp
-FileDescriptor.cpp)
+FileDescriptor.cpp SignalHandler.cpp SignalHandler.h)
 
 
 #add_executable(HWW2 ${SOURCE_FILES} MyEpoll.cpp MyEpoll.h MyClient.cpp MyClient.h debug.h

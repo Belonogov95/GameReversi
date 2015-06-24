@@ -29,6 +29,12 @@ CMakeFiles/HWW2.dir/Message.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/Message.cpp.o: debug.h
 
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: Executor.h
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: SignalHandler.cpp
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: SignalHandler.h
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: SmartSocket.h
+CMakeFiles/HWW2.dir/SignalHandler.cpp.o: debug.h
+
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.cpp
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.h
@@ -56,6 +62,7 @@ CMakeFiles/HWW2.dir/main.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/main.cpp.o: FileDescriptor.h
 CMakeFiles/HWW2.dir/main.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/main.cpp.o: Message.h
+CMakeFiles/HWW2.dir/main.cpp.o: SignalHandler.h
 CMakeFiles/HWW2.dir/main.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/main.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/main.cpp.o: TcpSocketServer.h

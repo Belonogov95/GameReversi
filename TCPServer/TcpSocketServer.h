@@ -21,7 +21,7 @@ public:
     FileDescriptor socketDescriptor;
     SmartSocket smartSocket;
 
-    TcpSocketServer(int port, string ipAddress, function<void(shared_ptr < TcpSocketClient >)> onAccept,function<void(int, u_int32_t )> onReceive, Executor *executor);
+    TcpSocketServer(int port, const string & ipAddress, function<void(shared_ptr < TcpSocketClient >)> onAccept,function<void(int, u_int32_t )> onReceive, Executor *executor);
 };
 
 
