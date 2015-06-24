@@ -12,19 +12,33 @@
 
 using namespace std;
 
-TcpSocketClient::TcpSocketClient(int socketDescriptor, Executor * executor): socketDescriptor(socketDescriptor),
-                                                                              executor(executor), flagMask(EPOLLIN){
-    makeSocketNonBlocking(socketDescriptor);
+
+namespace {
+    int acceptSocket(int socketDescriptor) {
+        sockaddr_storage sockAddrStorage;
+        socklen_t sockLen = sizeof(sockAddrStorage);
+        int r = accept(socketDescriptor, (sockaddr *) &sockAddrStorage, &sockLen);
+        myCheck(r != -1);
+        return r;
+    }
+
+
+};
+
+
+TcpSocketClient::TcpSocketClient(int serverDescriptor, Executor *executor, OnReceive onReceive)
+        : socketDescriptor(acceptSocket(serverDescriptor))
+        , smartSocket(socketDescriptor.get(), onReceive, EPOLLIN, executor)
+        , executor(executor)
+        , flagMask(EPOLLIN) {
+    makeSocketNonBlocking(socketDescriptor.get());
 }
 
-TcpSocketClient::~TcpSocketClient() {
-    executor->del(socketDescriptor);
-    int r = close(socketDescriptor);
-    myAssert(r == 0);
-}
+//executor->add(newSocketDescriptor, [=](u_int32_t mask) { onReceive(newSocketDescriptor, mask); }, EPOLLIN);
+
 
 int TcpSocketClient::read(string &buffer) {
-    int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
+    int readLen = (int) recv(socketDescriptor.get(), &buffer[0], buffer.size(), 0);
     myAssert(readLen != -1 || errno == 11);
     return readLen;
 }
@@ -44,9 +58,9 @@ void TcpSocketClient::setWrite(int flag) {
 //    db(flag);
     flagMask |= EPOLLOUT;
     if (flag == 0)
-       flagMask ^= EPOLLOUT;
+        flagMask ^= EPOLLOUT;
 //    db(flagMask);
-    executor->changeFlags(socketDescriptor, flagMask);
+    executor->changeFlags(socketDescriptor.get(), flagMask);
 }
 
 void makeSocketNonBlocking(int socketDescriptor) {
@@ -55,7 +69,6 @@ void makeSocketNonBlocking(int socketDescriptor) {
     flags |= O_NONBLOCK;
     myAssert(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
 }
-
 
 
 void TcpSocketClient::writeFromEpoll() {
@@ -69,7 +82,7 @@ void TcpSocketClient::writeFromEpoll() {
             vector<char> temporaryBuffer;
             for (int i = 0; i < min(TEMP_SIZE1, (int) buffer.size()); i++)
                 temporaryBuffer.push_back(buffer[i]);
-            len = (int) send(socketDescriptor, (void *) temporaryBuffer.data(), temporaryBuffer.size(), 0);
+            len = (int) send(socketDescriptor.get(), (void *) temporaryBuffer.data(), temporaryBuffer.size(), 0);
 //            db(len);
             myAssert(len >= 0);
             for (int i = 0; i < len; i++)

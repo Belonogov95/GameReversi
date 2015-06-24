@@ -10,10 +10,12 @@
 string Message::get(string property) const {
     for (auto x: body) {
         auto currentString = tools::split(x, '=');
-        if (currentString[0] == property)
+        if (currentString[0] == property) {
             return tools::trim(currentString[1]);
+        }
     }
-    myAssert(false);
+    //db(property);
+    return "";
 }
 
 

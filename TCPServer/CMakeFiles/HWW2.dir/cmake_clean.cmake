@@ -9,7 +9,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/HWW2.dir/Message.cpp.o"
   "CMakeFiles/HWW2.dir/SmartSocket.cpp.o"
   "CMakeFiles/HWW2.dir/FileDescriptor.cpp.o"
-  "CMakeFiles/HWW2.dir/Server.cpp.o"
   "HWW2.pdb"
   "HWW2"
 )

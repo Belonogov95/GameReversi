@@ -27,6 +27,8 @@ sys/epoll.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.cpp
 FileDescriptor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
+bits/stdc++.h
+-
 unistd.h
 -
 debug.h
@@ -69,6 +71,8 @@ bits/stdc++.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
 SmartSocket.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
+debug.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
 Executor.h
@@ -95,6 +99,10 @@ bits/stdc++.h
 -
 Executor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
+FileDescriptor.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
+SmartSocket.h
+/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.cpp
 netdb.h

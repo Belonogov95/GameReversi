@@ -10,27 +10,33 @@ CMakeFiles/HWW2.dir/FileDescriptor.cpp.o: FileDescriptor.h
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Executor.h
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o: FileDescriptor.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: HttpWorker.cpp
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Message.h
+CMakeFiles/HWW2.dir/HttpWorker.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/Message.cpp.o: Executor.h
+CMakeFiles/HWW2.dir/Message.cpp.o: FileDescriptor.h
 CMakeFiles/HWW2.dir/Message.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Message.cpp
 CMakeFiles/HWW2.dir/Message.cpp.o: Message.h
+CMakeFiles/HWW2.dir/Message.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/Message.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/Message.cpp.o: debug.h
 
-
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.cpp
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.h
+CMakeFiles/HWW2.dir/SmartSocket.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: Executor.h
+CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: FileDescriptor.h
+CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: TcpSocketClient.cpp
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: debug.h

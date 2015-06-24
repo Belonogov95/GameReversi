@@ -127,9 +127,13 @@ vector<string> generatePlayersList(int id, pair<int, int> &match) {
 }
 
 void myBoard(int id, shared_ptr<HttpWorker> worker, const Message &message) {
+    if (data[id].game.gameState == NULL) {
+        worker->sendString("fail", "400 Bad Request");
+        return;
+    }
+
     vector<string> tmp(7);
-    if (!checkOpponent(id)) {
-        db("opponent leave server");
+    if (!checkOpponent(id) && !data[id].game.gameState->finished) {
         tmp[6] = "leave";
         data[id].game = GamePointer();
     }
@@ -139,7 +143,8 @@ void myBoard(int id, shared_ptr<HttpWorker> worker, const Message &message) {
         tmp[0] = board;
         tmp[1] = to_string(state->getCntWhite());
         tmp[2] = to_string(state->getCntBlack());
-        tmp[3] = to_string(state->player);
+        db2(state->player, data[id].game.color);
+        tmp[3] = to_string(state->player == data[id].game.color);
         tmp[4] = to_string(state->finished);
         if (state->finished) {
             if (state->getCntBlack() == state->getCntWhite())
@@ -155,7 +160,7 @@ void myBoard(int id, shared_ptr<HttpWorker> worker, const Message &message) {
 
 
 void myLogin(shared_ptr<HttpWorker> worker, const Message &message) {
-    myAssert((int) message.body.size() == 1);
+    myCheck((int) message.body.size() == 1);
     string login = message.get("login");
     bool exist = 0;
     exist = idByLogin.count(login);
@@ -206,12 +211,14 @@ void myMove(int id, shared_ptr<HttpWorker> worker, const Message &message) {
     int y = stoi(message.get("y"));
 
 
+    myCheck(data[id].game.gameState != NULL);
     shared_ptr < GameState > gameState = data[id].game.gameState;
 
     int color = data[id].game.color;
     if (gameState->player == color) {
         shared_ptr < GameState > result(new GameState());
         if (gameState->makeMove(x, y, result)) {
+            myCheck(data[id].game.gameState->player != result->player);
             *(data[id].game.gameState) = *(result);
             if (!data[id].game.gameState->isPossibleMove()) {
                 data[id].game.gameState->nextTurn();
@@ -225,15 +232,17 @@ void myMove(int id, shared_ptr<HttpWorker> worker, const Message &message) {
 }
 
 void myInvite(int id, shared_ptr<HttpWorker> worker, const Message &message) {
-    int invitedId = idByLogin[message.get("target")];
-    data[invitedId].edges.insert(id);
+    if (data[id].game.gameState == NULL) {
+        int invitedId = idByLogin[message.get("target")];
+        data[invitedId].edges.insert(id);
+    }
     worker->sendString("OK!");
 }
 
 
 void onAccept(shared_ptr<TcpSocketClient> client, MapWorkers &workers) {
-    myCheck(workers.count(client->socketDescriptor) == 0);
-    workers.insert(make_pair(client->socketDescriptor, shared_ptr<HttpWorker>(new HttpWorker(client))));
+    myCheck(workers.count(client->socketDescriptor.get()) == 0);
+    workers.insert(make_pair(client->socketDescriptor.get(), shared_ptr<HttpWorker>(new HttpWorker(client))));
 }
 
 void onReceive(int descriptor, u_int32_t flagMask, MapWorkers &workers) {
@@ -261,7 +270,10 @@ void onReceive(int descriptor, u_int32_t flagMask, MapWorkers &workers) {
         }
         else {
             string login = message.get("login");
-            myCheck(idByLogin.count(login) == 1);
+            if (login == "" || idByLogin.count(login) != 1) {
+                worker->sendString("Error: incorrect login", "404 Page Not Found");
+                return;
+            }
             int id = idByLogin[login];
             data[id].lastActivity = getTime();
             if (message.URL == "/players") {
@@ -368,6 +380,7 @@ void clearOldUsers() {
 
 
 int main() {
+//    assert(false);
     MyPipe myPipe;
     fdFromEpoll = myPipe.pipeOut;
     int port;
@@ -406,6 +419,7 @@ int main() {
     TcpSocketServer tcpServer(port, ipAddress, alfAC, alfRC, &executor);
 
     executor.run();
+    db("after run");
 
     return 0;
 }

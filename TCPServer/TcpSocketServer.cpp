@@ -9,6 +9,9 @@
 #include "Executor.h"
 #include "TcpSocketClient.h"
 
+
+
+
 namespace
 {
     FileDescriptor create_socket(int port, string ipAddress, function<void(shared_ptr < TcpSocketClient >) > onAccept,
@@ -44,13 +47,9 @@ TcpSocketServer::TcpSocketServer(int port, string ipAddress, function<void(share
         : executor(executor)
         , socketDescriptor(create_socket(port, ipAddress, onAccept, onReceive, executor))
         , smartSocket(socketDescriptor.get(), [=](int fd, u_int32_t) {
-            sockaddr_storage sockAddrStorage;
-            socklen_t sockLen = sizeof(sockAddrStorage);
-            int newSocketDescriptor = accept(socketDescriptor.get(), (sockaddr *) &sockAddrStorage, &sockLen);
 
-            shared_ptr<TcpSocketClient> client(new TcpSocketClient(newSocketDescriptor, executor));
+            shared_ptr<TcpSocketClient> client(new TcpSocketClient(socketDescriptor.get(), executor, onReceive));
 
             onAccept(client);
-            executor->add(newSocketDescriptor, [=](u_int32_t mask) { onReceive(newSocketDescriptor, mask); }, EPOLLIN);
         }, EPOLLIN | EPOLLOUT, executor)
 {}

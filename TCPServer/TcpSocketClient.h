@@ -7,18 +7,22 @@
 
 #include <bits/stdc++.h>
 #include "Executor.h"
+#include "FileDescriptor.h"
+#include "SmartSocket.h"
 
 using namespace std;
+typedef function<void(int, u_int32_t )> OnReceive;
 
 const int TEMP_SIZE1 = 1000;
 
 class TcpSocketClient {
 public:
-    TcpSocketClient(int socketDescriptor, Executor *executor);
-    ~TcpSocketClient();
+
+    TcpSocketClient(int serverDescriptor, Executor *executor, OnReceive onReceive);
 
     deque < char > buffer;
-    int socketDescriptor;
+    FileDescriptor socketDescriptor;
+    SmartSocket smartSocket;
     Executor * executor;
     u_int32_t flagMask;
 

@@ -11,27 +11,33 @@ CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/Message.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
-CMakeFiles/HWW2.dir/Server.cpp.o
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
+ /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h

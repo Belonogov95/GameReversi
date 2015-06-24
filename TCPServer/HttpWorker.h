@@ -25,12 +25,11 @@ public:
 
     void sendFile(string path);
 
-    void sendString(string data);
-
     pair<int, Message > readMessage();
 
     void writeBuffer(u_int32_t flagMask);
 
+    void sendString(string message, string status = "200 OK");
 };
 
 

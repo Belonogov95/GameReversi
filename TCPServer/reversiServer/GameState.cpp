@@ -22,16 +22,16 @@ int GameState::getCntBlack() {
 GameState::GameState() {
     int data[8][8];
     memset(data, 0, sizeof(data));
-    data[3][3] = 1;
-    data[4][4] = 1;
-    data[3][4] = 2;
-    data[4][3] = 2;
+//    data[3][3] = 1;
+//    data[4][4] = 1;
+//    data[3][4] = 2;
+//    data[4][3] = 2;
 
-//    data[0][3] = 1;
-//    data[0][4] = 2;
-//    data[7][3] = 2;
-//    data[7][4] = 1;
-//    data[3][3] = 2;
+    data[0][3] = 1;
+    data[0][4] = 2;
+    data[7][3] = 2;
+    data[7][4] = 1;
+    data[3][3] = 2;
 
     code(data);
     player = 1;
@@ -89,7 +89,7 @@ bool GameState::makeMove(int x, int y, shared_ptr < GameState > result) {
         return false;
     }
     result->code(data);
-    result->nextTurn();
+    result->player = 3 - player;
     return true;
 }
 

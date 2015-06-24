@@ -27,7 +27,7 @@ void Executor::add(int fd, function < void (u_int32_t ) > action, u_int32_t flag
     memset(&epollEvent, 0, sizeof(epollEvent));
     epollEvent.events = flagMask;
     epollEvent.data.fd = fd;
-    db2(epollDescriptor, fd);
+//    db2(epollDescriptor, fd);
     myAssert(epoll_ctl(epollDescriptor, EPOLL_CTL_ADD, fd, &epollEvent) == 0);
 }
 
@@ -40,7 +40,13 @@ void Executor::changeFlags(int fd, u_int32_t flagMask) {
 }
 
 void Executor::del (int fd) {
-    myAssert(epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, fd, 0) == 0);
+    db2(epollDescriptor, fd);
+    int r = epoll_ctl(epollDescriptor, EPOLL_CTL_DEL, fd, 0);
+    if (r != 0) {
+        perror("");
+        assert(false);
+    }
+
     actionByFD.erase(fd);
 }
 
@@ -50,7 +56,6 @@ void Executor::run() {
         int eventsSize = epoll_wait(epollDescriptor, events, MAX_EVENTS, -1);
         for (int i = 0; i < eventsSize; i++) {
             int fd = events[i].data.fd;
-//            db2("executor", fd)
             actionByFD[fd](events[i].events);
         }
     }

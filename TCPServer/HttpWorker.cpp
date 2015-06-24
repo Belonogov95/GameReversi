@@ -23,8 +23,8 @@ void HttpWorker::sendFile(string path) {
     sendString(message);
 }
 
-void HttpWorker::sendString(string message) {
-    string header = "HTTP/1.1 200 OK" + LINE_BREAK;
+void HttpWorker::sendString(string message, string status) {
+    string header = "HTTP/1.1 " + status + LINE_BREAK;
     header += "Content-Length: " + to_string(message.size()) + LINE_BREAK;
     client->write(header + LINE_BREAK + message);
 }
@@ -67,7 +67,10 @@ pair < int, Message > HttpWorker::readMessage() {
 
     Message message;
     message.type = tmp[0];
-    myAssert(message.type == "POST" || message.type == "GET");
+    if (message.type != "POST" && message.type != "GET") {
+        db("incorrect query type");
+        return make_pair(0, Message());
+    }
     message.URL = tmp[1];
     int emptyLine = -1;
     int textLen = -1;

@@ -3,6 +3,10 @@
 //
 
 #include "FileDescriptor.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
 
 #include <unistd.h>
 
@@ -29,6 +33,7 @@ FileDescriptor& FileDescriptor::operator=(FileDescriptor rhs) {
 
 FileDescriptor::~FileDescriptor()
 {
+    db2("FileDesc close", fd);
     int r = close(fd);
     myAssert(r == 0);
 }

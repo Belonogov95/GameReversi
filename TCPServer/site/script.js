@@ -57,7 +57,6 @@ function playerListCallBack(data, status) {
     //alert("data: " + data + "\nstatus: " + status + "\nlength: " + q.length);
     //$("#userList").append("aba");
     if (r.length == 4) {
-        //alert("here");
         initGame(r[2], r[3]);
         return;
     }
@@ -80,11 +79,11 @@ function invitePerson(player) {
 ////////////////////////////////////////////// game
 
 function initGame(enemy, color) {
-    //alert("game: " + name + " vs " + enemy);
     clearInterval(CONNECT_INTERVAL_ID);
     $("#connectDiv").css("display", "none");
     $("#boardDiv").css("display", "inline");
-
+    $("#forWinner").html(" ");
+    $("#goToMainMenu").css("display", "none");
     if (color == "1")
         title = name + " vs " + enemy;
     else
@@ -100,7 +99,6 @@ function initGame(enemy, color) {
 }
 
 function updateBoard() {
-    //alert("send post");
     $.post("board", LOGIN, updateBoardCallBack);
 }
 
@@ -114,13 +112,13 @@ function updateBoardCallBack(data, status) {
         return;
     }
 
-    $("#turnGame").text("turn: " + ((q[3] == "1")? "white" : "black"));
+    $("#turnGame").text((q[3] == "1")? "Your turn" : "Opponent turn");
     $("#forText").html("<b>" + q[1] +  "</b>" + "     " + title + "     " + "<b>" + q[2] + "</b>");
     //alert(data);
     if (q[4] == "1") {
         $("#forWinner").html(q[5]);
         clearInterval(GAME_INTERVAL_ID);
-        $("a").css("display", "inline");
+        $("#goToMainMenu").css("display", "inline");
     }
 
     for (i = 0; i < 8; i++)
@@ -180,12 +178,6 @@ function drawCircleById(id, color) {
     context.lineWidth = 5;
     context.strokeStyle = '#003300';
     context.stroke();
-}
-
-
-function finishGame() {
-    //$.post("finish", LOGIN);
-    initConnect("OK_F");
 }
 
 
