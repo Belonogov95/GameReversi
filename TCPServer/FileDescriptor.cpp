@@ -30,7 +30,7 @@ FileDescriptor& FileDescriptor::operator=(FileDescriptor rhs) {
 FileDescriptor::~FileDescriptor()
 {
     int r = close(fd);
-    assertMy(r == 0);
+    myAssert(r == 0);
 }
 
 int FileDescriptor::get() {

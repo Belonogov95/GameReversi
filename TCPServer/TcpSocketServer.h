@@ -12,6 +12,7 @@
 
 using namespace std;
 
+const int BACK_LOG = 10;
 
 
 class TcpSocketServer {

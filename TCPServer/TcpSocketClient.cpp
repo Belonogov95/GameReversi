@@ -20,12 +20,12 @@ TcpSocketClient::TcpSocketClient(int socketDescriptor, Executor * executor): soc
 TcpSocketClient::~TcpSocketClient() {
     executor->del(socketDescriptor);
     int r = close(socketDescriptor);
-    assertMy(r == 0);
+    myAssert(r == 0);
 }
 
 int TcpSocketClient::read(string &buffer) {
     int readLen = (int) recv(socketDescriptor, &buffer[0], buffer.size(), 0);
-    assertMy(readLen != -1 || errno == 11);
+    myAssert(readLen != -1 || errno == 11);
     return readLen;
 }
 
@@ -51,9 +51,9 @@ void TcpSocketClient::setWrite(int flag) {
 
 void makeSocketNonBlocking(int socketDescriptor) {
     int flags = fcntl(socketDescriptor, F_GETFL, 0);
-    assertMy(flags >= 0);
+    myAssert(flags >= 0);
     flags |= O_NONBLOCK;
-    assertMy(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
+    myAssert(fcntl(socketDescriptor, F_SETFL, flags) >= 0);
 }
 
 
@@ -71,7 +71,7 @@ void TcpSocketClient::writeFromEpoll() {
                 temporaryBuffer.push_back(buffer[i]);
             len = (int) send(socketDescriptor, (void *) temporaryBuffer.data(), temporaryBuffer.size(), 0);
 //            db(len);
-            assertMy(len >= 0);
+            myAssert(len >= 0);
             for (int i = 0; i < len; i++)
                 buffer.pop_front();
         }

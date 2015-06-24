@@ -15,7 +15,7 @@ public:
     string URL;
     vector < string > body;
 
-    string get(string property);
+    string get(string property) const;
 };
 
 

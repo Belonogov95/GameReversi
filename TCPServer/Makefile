@@ -210,6 +210,30 @@ Message.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Message.cpp.s
 .PHONY : Message.cpp.s
 
+Server.o: Server.cpp.o
+.PHONY : Server.o
+
+# target to build an object file
+Server.cpp.o:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Server.cpp.o
+.PHONY : Server.cpp.o
+
+Server.i: Server.cpp.i
+.PHONY : Server.i
+
+# target to preprocess a source file
+Server.cpp.i:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Server.cpp.i
+.PHONY : Server.cpp.i
+
+Server.s: Server.cpp.s
+.PHONY : Server.s
+
+# target to generate assembly for a file
+Server.cpp.s:
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Server.cpp.s
+.PHONY : Server.cpp.s
+
 SmartSocket.o: SmartSocket.cpp.o
 .PHONY : SmartSocket.o
 
@@ -306,30 +330,6 @@ Tools.cpp.s:
 	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Tools.cpp.s
 .PHONY : Tools.cpp.s
 
-debug.o: debug.cpp.o
-.PHONY : debug.o
-
-# target to build an object file
-debug.cpp.o:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.o
-.PHONY : debug.cpp.o
-
-debug.i: debug.cpp.i
-.PHONY : debug.i
-
-# target to preprocess a source file
-debug.cpp.i:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.i
-.PHONY : debug.cpp.i
-
-debug.s: debug.cpp.s
-.PHONY : debug.s
-
-# target to generate assembly for a file
-debug.cpp.s:
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.s
-.PHONY : debug.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -399,6 +399,9 @@ help:
 	@echo "... Message.o"
 	@echo "... Message.i"
 	@echo "... Message.s"
+	@echo "... Server.o"
+	@echo "... Server.i"
+	@echo "... Server.s"
 	@echo "... SmartSocket.o"
 	@echo "... SmartSocket.i"
 	@echo "... SmartSocket.s"
@@ -411,9 +414,6 @@ help:
 	@echo "... Tools.o"
 	@echo "... Tools.i"
 	@echo "... Tools.s"
-	@echo "... debug.o"
-	@echo "... debug.i"
-	@echo "... debug.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

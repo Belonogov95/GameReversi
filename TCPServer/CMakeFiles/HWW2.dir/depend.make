@@ -3,8 +3,6 @@
 
 CMakeFiles/HWW2.dir/Executor.cpp.o: Executor.cpp
 CMakeFiles/HWW2.dir/Executor.cpp.o: Executor.h
-CMakeFiles/HWW2.dir/Executor.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/Executor.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/Executor.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o: FileDescriptor.cpp
@@ -15,8 +13,6 @@ CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: HttpWorker.cpp
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Message.h
-CMakeFiles/HWW2.dir/HttpWorker.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/HttpWorker.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/HttpWorker.cpp.o: debug.h
@@ -25,11 +21,10 @@ CMakeFiles/HWW2.dir/Message.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/Message.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Message.cpp
 CMakeFiles/HWW2.dir/Message.cpp.o: Message.h
-CMakeFiles/HWW2.dir/Message.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/Message.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/Message.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/Message.cpp.o: Tools.h
 CMakeFiles/HWW2.dir/Message.cpp.o: debug.h
+
 
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.cpp
@@ -42,8 +37,6 @@ CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: debug.h
 
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: FileDescriptor.h
-CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: TcpSocketServer.cpp
@@ -53,15 +46,10 @@ CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: debug.h
 CMakeFiles/HWW2.dir/Tools.cpp.o: Tools.cpp
 CMakeFiles/HWW2.dir/Tools.cpp.o: Tools.h
 
-CMakeFiles/HWW2.dir/debug.cpp.o: debug.cpp
-CMakeFiles/HWW2.dir/debug.cpp.o: debug.h
-
 CMakeFiles/HWW2.dir/main.cpp.o: Executor.h
 CMakeFiles/HWW2.dir/main.cpp.o: FileDescriptor.h
 CMakeFiles/HWW2.dir/main.cpp.o: HttpWorker.h
 CMakeFiles/HWW2.dir/main.cpp.o: Message.h
-CMakeFiles/HWW2.dir/main.cpp.o: MyClient.h
-CMakeFiles/HWW2.dir/main.cpp.o: MyEpoll.h
 CMakeFiles/HWW2.dir/main.cpp.o: SmartSocket.h
 CMakeFiles/HWW2.dir/main.cpp.o: TcpSocketClient.h
 CMakeFiles/HWW2.dir/main.cpp.o: TcpSocketServer.h

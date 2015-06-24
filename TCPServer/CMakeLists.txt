@@ -7,7 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 set(SOURCE_FILES main.cpp)
 add_executable(HWW2 ${SOURCE_FILES}
 HttpWorker.cpp
-Tools.cpp  reversiServer/GameState.cpp debug.cpp Executor.cpp TcpSocketServer.cpp  TcpSocketClient.cpp Message.cpp SmartSocket.cpp SmartSocket.h FileDescriptor.cpp FileDescriptor.h)
+Tools.cpp  reversiServer/GameState.cpp Executor.cpp TcpSocketServer.cpp  TcpSocketClient.cpp Message.cpp SmartSocket.cpp
+FileDescriptor.cpp Server.cpp)
 
 
 #add_executable(HWW2 ${SOURCE_FILES} MyEpoll.cpp MyEpoll.h MyClient.cpp MyClient.h debug.h

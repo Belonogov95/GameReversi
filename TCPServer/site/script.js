@@ -23,12 +23,12 @@ function onClickLogin() {
     LINE_BREAK = "\r\n";
     LOGIN = "login=" + name + LINE_BREAK;
 
-    $.post("login", LOGIN, loginCallBack);
+    $.post("login", LOGIN, initConnect);
 }
 
 ///////////////////////////////////// connect
 
-function loginCallBack(data, status) {
+function initConnect(data) {
     //alert("data: " + data + "\nstatus: " + status);
     //alert("here3")
     if (data == "unsuccess") {
@@ -36,11 +36,13 @@ function loginCallBack(data, status) {
         return;
     }
     $("#loginDiv").css("display", "none");
-    //alert("here3")
     $("#connectDiv").css("display", "inline");
-    $("#mainDiv").prepend("<h4> Hello, " + name + "</h4>");
+    $("#boardDiv").css("display", "none");
+
+
+    $("#HelloPar").html("<h4> Hello, " + name + "</h4>");
     updatePlayerList();
-    CONNECT_INTERVAL_ID = setInterval(updatePlayerList, 3000);
+    CONNECT_INTERVAL_ID = setInterval(updatePlayerList, 500);
 }
 
 function updatePlayerList() {
@@ -78,7 +80,7 @@ function invitePerson(player) {
 ////////////////////////////////////////////// game
 
 function initGame(enemy, color) {
-    alert("game: " + name + " vs " + enemy);
+    //alert("game: " + name + " vs " + enemy);
     clearInterval(CONNECT_INTERVAL_ID);
     $("#connectDiv").css("display", "none");
     $("#boardDiv").css("display", "inline");
@@ -105,6 +107,13 @@ function updateBoard() {
 function updateBoardCallBack(data, status) {
     var q = eval(data);
     var board = eval(q[0]);
+    if (q[6] == 'leave')  {
+        alert("Your opponent leave the server");
+        clearInterval(GAME_INTERVAL_ID);
+        initConnect("OK");
+        return;
+    }
+
     $("#turnGame").text("turn: " + ((q[3] == "1")? "white" : "black"));
     $("#forText").html("<b>" + q[1] +  "</b>" + "     " + title + "     " + "<b>" + q[2] + "</b>");
     //alert(data);
@@ -121,6 +130,7 @@ function updateBoardCallBack(data, status) {
 
 
 function createBoard() {
+    $("#newTable").html("");
     for (var i = 0; i < 8; i++) {
         var str = '<tr id="row' + i + '">' + "</tr>";
         $("#newTable").append(str);
@@ -173,6 +183,10 @@ function drawCircleById(id, color) {
 }
 
 
+function finishGame() {
+    //$.post("finish", LOGIN);
+    initConnect("OK_F");
+}
 
 
 

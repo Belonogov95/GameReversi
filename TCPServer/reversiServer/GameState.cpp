@@ -2,6 +2,7 @@
 // Created by vanya on 09.06.15.
 //
 
+#include <bits/stdc++.h>
 #include "GameState.h"
 #include "debug.h"
 
@@ -61,7 +62,7 @@ void GameState::code(int data[8][8]) {
         }
 }
 
-bool GameState::makeMove(int x, int y, GameState &result) {
+bool GameState::makeMove(int x, int y, shared_ptr < GameState > result) {
     assert(check(x, y)); int data[8][8];
     decode(data);
     if (data[x][y] != 0) {
@@ -87,8 +88,8 @@ bool GameState::makeMove(int x, int y, GameState &result) {
     if (countFlip == 0) {
         return false;
     }
-    result.code(data);
-    result.player = 3 - player;
+    result->code(data);
+    result->nextTurn();
     return true;
 }
 
@@ -99,7 +100,7 @@ bool GameState::isPossibleMove() {
     int count = 0;
     for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++) {
-            GameState tmp;
+            shared_ptr < GameState > tmp(new GameState());
             count += makeMove(i, j, tmp);
         }
     return count > 0;

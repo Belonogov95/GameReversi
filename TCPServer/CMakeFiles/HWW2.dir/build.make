@@ -141,32 +141,9 @@ CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o.provides: CMakeFiles/HWW2.dir/
 
 CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o.provides.build: CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o
 
-CMakeFiles/HWW2.dir/debug.cpp.o: CMakeFiles/HWW2.dir/flags.make
-CMakeFiles/HWW2.dir/debug.cpp.o: debug.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/debug.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/debug.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp
-
-CMakeFiles/HWW2.dir/debug.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/debug.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp > CMakeFiles/HWW2.dir/debug.cpp.i
-
-CMakeFiles/HWW2.dir/debug.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/debug.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp -o CMakeFiles/HWW2.dir/debug.cpp.s
-
-CMakeFiles/HWW2.dir/debug.cpp.o.requires:
-.PHONY : CMakeFiles/HWW2.dir/debug.cpp.o.requires
-
-CMakeFiles/HWW2.dir/debug.cpp.o.provides: CMakeFiles/HWW2.dir/debug.cpp.o.requires
-	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/debug.cpp.o.provides.build
-.PHONY : CMakeFiles/HWW2.dir/debug.cpp.o.provides
-
-CMakeFiles/HWW2.dir/debug.cpp.o.provides.build: CMakeFiles/HWW2.dir/debug.cpp.o
-
 CMakeFiles/HWW2.dir/Executor.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/Executor.cpp.o: Executor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/Executor.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/Executor.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.cpp
 
@@ -189,7 +166,7 @@ CMakeFiles/HWW2.dir/Executor.cpp.o.provides.build: CMakeFiles/HWW2.dir/Executor.
 
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o: TcpSocketServer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.cpp
 
@@ -212,7 +189,7 @@ CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o.provides.build: CMakeFiles/HWW2.dir/Tc
 
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o: TcpSocketClient.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.cpp
 
@@ -235,7 +212,7 @@ CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o.provides.build: CMakeFiles/HWW2.dir/Tc
 
 CMakeFiles/HWW2.dir/Message.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/Message.cpp.o: Message.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/Message.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/Message.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
 
@@ -258,7 +235,7 @@ CMakeFiles/HWW2.dir/Message.cpp.o.provides.build: CMakeFiles/HWW2.dir/Message.cp
 
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o: SmartSocket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/SmartSocket.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/SmartSocket.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
 
@@ -281,7 +258,7 @@ CMakeFiles/HWW2.dir/SmartSocket.cpp.o.provides.build: CMakeFiles/HWW2.dir/SmartS
 
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o: CMakeFiles/HWW2.dir/flags.make
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o: FileDescriptor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/FileDescriptor.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/FileDescriptor.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.cpp
 
@@ -302,19 +279,42 @@ CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.provides: CMakeFiles/HWW2.dir/FileDescr
 
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.provides.build: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
 
+CMakeFiles/HWW2.dir/Server.cpp.o: CMakeFiles/HWW2.dir/flags.make
+CMakeFiles/HWW2.dir/Server.cpp.o: Server.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HWW2.dir/Server.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HWW2.dir/Server.cpp.o -c /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Server.cpp
+
+CMakeFiles/HWW2.dir/Server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HWW2.dir/Server.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Server.cpp > CMakeFiles/HWW2.dir/Server.cpp.i
+
+CMakeFiles/HWW2.dir/Server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HWW2.dir/Server.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Server.cpp -o CMakeFiles/HWW2.dir/Server.cpp.s
+
+CMakeFiles/HWW2.dir/Server.cpp.o.requires:
+.PHONY : CMakeFiles/HWW2.dir/Server.cpp.o.requires
+
+CMakeFiles/HWW2.dir/Server.cpp.o.provides: CMakeFiles/HWW2.dir/Server.cpp.o.requires
+	$(MAKE) -f CMakeFiles/HWW2.dir/build.make CMakeFiles/HWW2.dir/Server.cpp.o.provides.build
+.PHONY : CMakeFiles/HWW2.dir/Server.cpp.o.provides
+
+CMakeFiles/HWW2.dir/Server.cpp.o.provides.build: CMakeFiles/HWW2.dir/Server.cpp.o
+
 # Object files for target HWW2
 HWW2_OBJECTS = \
 "CMakeFiles/HWW2.dir/main.cpp.o" \
 "CMakeFiles/HWW2.dir/HttpWorker.cpp.o" \
 "CMakeFiles/HWW2.dir/Tools.cpp.o" \
 "CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o" \
-"CMakeFiles/HWW2.dir/debug.cpp.o" \
 "CMakeFiles/HWW2.dir/Executor.cpp.o" \
 "CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o" \
 "CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o" \
 "CMakeFiles/HWW2.dir/Message.cpp.o" \
 "CMakeFiles/HWW2.dir/SmartSocket.cpp.o" \
-"CMakeFiles/HWW2.dir/FileDescriptor.cpp.o"
+"CMakeFiles/HWW2.dir/FileDescriptor.cpp.o" \
+"CMakeFiles/HWW2.dir/Server.cpp.o"
 
 # External object files for target HWW2
 HWW2_EXTERNAL_OBJECTS =
@@ -323,13 +323,13 @@ HWW2: CMakeFiles/HWW2.dir/main.cpp.o
 HWW2: CMakeFiles/HWW2.dir/HttpWorker.cpp.o
 HWW2: CMakeFiles/HWW2.dir/Tools.cpp.o
 HWW2: CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o
-HWW2: CMakeFiles/HWW2.dir/debug.cpp.o
 HWW2: CMakeFiles/HWW2.dir/Executor.cpp.o
 HWW2: CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o
 HWW2: CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o
 HWW2: CMakeFiles/HWW2.dir/Message.cpp.o
 HWW2: CMakeFiles/HWW2.dir/SmartSocket.cpp.o
 HWW2: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
+HWW2: CMakeFiles/HWW2.dir/Server.cpp.o
 HWW2: CMakeFiles/HWW2.dir/build.make
 HWW2: CMakeFiles/HWW2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable HWW2"
@@ -343,13 +343,13 @@ CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/main.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/HttpWorker.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Tools.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/reversiServer/GameState.cpp.o.requires
-CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/debug.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Executor.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Message.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/SmartSocket.cpp.o.requires
 CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/FileDescriptor.cpp.o.requires
+CMakeFiles/HWW2.dir/requires: CMakeFiles/HWW2.dir/Server.cpp.o.requires
 .PHONY : CMakeFiles/HWW2.dir/requires
 
 CMakeFiles/HWW2.dir/clean:

@@ -6,25 +6,35 @@
 #define HWW2_DEBUG_H
 
 #include <iostream>
+#include <cassert>
 
 #define db(x) cerr << #x << " = " << x << endl
 #define db2(x, y) cerr << "(" << #x << ", " << #y << ") = (" << x << ", " << y << ")\n"
 
-#define MY_ASSERT
+#define MY_RELEASE
 
-#ifdef MY_ASSERT
-#define assertMy(x) if (!(x)) { \
-    std::cerr << "assertion error file: " << __FILE__ << "    line: " \
-    << __LINE__ << "       " << #x << std::endl;  \
-    perror("");  \
-    exit(1); \
-}
+
+#ifdef MY_RELEASE
+    #define myAssert(x) assert(x);
+    #define myCheck(x) assert(x);
 #else
-#define assertMy(x) x
+    #define myAssert(x) x
+    #define myCheck(x)
 #endif
 
 
 
+#endif
+
+//HWW2_DEBUG_H
+
 //void assert(bool result);
 
-#endif //HWW2_DEBUG_H
+//if (!(x)) {
+//    std::cerr << "assertion error file: " << __FILE__ << "    line: "
+//    << __LINE__ << "       " << #x << std::endl;
+//    perror("");
+//    exit(1);
+//}
+
+

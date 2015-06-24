@@ -11,8 +11,6 @@ Executor.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
-MyEpoll.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
 bits/stdc++.h
 -
 sys/epoll.h
@@ -39,8 +37,6 @@ debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp
 HttpWorker.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
-MyClient.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 Message.h
@@ -51,8 +47,6 @@ Tools.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
 bits/stdc++.h
 -
-MyClient.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
 Message.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
 TcpSocketClient.h
@@ -70,30 +64,6 @@ debug.h
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
 bits/stdc++.h
--
-
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
-array
--
-vector
--
-iostream
--
-memory
--
-bits/stdc++.h
--
-MyEpoll.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
-
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
-MyClient.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
-memory
--
-sys/epoll.h
--
-map
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
@@ -133,8 +103,6 @@ unistd.h
 -
 TcpSocketServer.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.h
-MyEpoll.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 Executor.h
@@ -162,18 +130,10 @@ Tools.h
 bits/stdc++.h
 -
 
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp
-stdlib.h
--
-stdio.h
--
-bits/stdc++.h
--
-debug.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
-
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 iostream
+-
+cassert
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/main.cpp
@@ -185,8 +145,6 @@ thread
 -
 fstream
 -
-MyEpoll.h
-/home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
 debug.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 HttpWorker.h
@@ -209,6 +167,8 @@ sys/timerfd.h
 -
 
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.cpp
+bits/stdc++.h
+-
 GameState.h
 /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/reversiServer/GameState.h
 debug.h

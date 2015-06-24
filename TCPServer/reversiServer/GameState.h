@@ -58,7 +58,7 @@ public:
 
     int getCntBlack();
 
-    bool makeMove(int x, int y, GameState &result);
+    bool makeMove(int x, int y, shared_ptr <GameState> result);
 };
 
 

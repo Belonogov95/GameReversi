@@ -4,8 +4,6 @@
 CMakeFiles/HWW2.dir/Executor.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/FileDescriptor.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.cpp
@@ -16,8 +14,6 @@ CMakeFiles/HWW2.dir/HttpWorker.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
@@ -26,11 +22,10 @@ CMakeFiles/HWW2.dir/Message.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
+CMakeFiles/HWW2.dir/Server.cpp.o
 CMakeFiles/HWW2.dir/SmartSocket.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.cpp
@@ -43,8 +38,6 @@ CMakeFiles/HWW2.dir/TcpSocketClient.cpp.o
 CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.cpp
@@ -53,16 +46,11 @@ CMakeFiles/HWW2.dir/TcpSocketServer.cpp.o
 CMakeFiles/HWW2.dir/Tools.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.cpp
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Tools.h
-CMakeFiles/HWW2.dir/debug.cpp.o
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.cpp
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/debug.h
 CMakeFiles/HWW2.dir/main.cpp.o
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Executor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/FileDescriptor.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/HttpWorker.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/Message.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyClient.h
- /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/MyEpoll.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/SmartSocket.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketClient.h
  /home/vanya/Documents/prog/C/homeWorkCpp/TCPServer/TcpSocketServer.h

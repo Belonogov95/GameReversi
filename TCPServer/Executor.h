@@ -8,25 +8,27 @@
 #include <bits/stdc++.h>
 #include <sys/epoll.h>
 
+
 using namespace std;
 
-//typedef std::function < void (int, u_int32_t) > executorCallBackType;
-//typedef unsigned long long ull;
+const int MAX_EVENTS = 1;
+
+typedef u_int32_t uint;
 
 
 class Executor {
 public:
     int epollDescriptor;
-    map < int, function < void (u_int32_t) >  > actionByFD;
+    map < int, function < void (uint) >  > actionByFD;
     bool running;
 
     ~Executor();
 
     Executor();
 
-    void add(int fd, function < void (u_int32_t ) > action, u_int32_t flagMask);
+    void add(int fd, function < void (uint) > action, uint flagMask);
 
-    void changeFlags(int fd, u_int32_t flagMask);
+    void changeFlags(int fd, uint flagMask);
     void del(int fd);
     void run();
 

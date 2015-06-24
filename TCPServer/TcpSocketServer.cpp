@@ -5,7 +5,6 @@
 #include <netdb.h>
 #include <unistd.h>
 #include "TcpSocketServer.h"
-#include "MyEpoll.h"
 #include "debug.h"
 #include "Executor.h"
 #include "TcpSocketClient.h"
@@ -22,18 +21,18 @@ namespace
         hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
         hints.ai_socktype = SOCK_STREAM; /* Datagram socket */
 
-        assertMy(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
+        myAssert(getaddrinfo(ipAddress.data(), to_string(port).data(), &hints, &result) == 0);
 
-        assertMy(result != NULL);
+        myAssert(result != NULL);
         FileDescriptor socketDescriptor(socket(result->ai_family, result->ai_socktype, result->ai_protocol));
         db2("socket client created", socketDescriptor.get());
-        assertMy(socketDescriptor.get() != -1);
+        myAssert(socketDescriptor.get() != -1);
 
         int one = 1;
-        assertMy(setsockopt(socketDescriptor.get(), SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
-        assertMy(bind(socketDescriptor.get(), result->ai_addr, result->ai_addrlen) == 0);
+        myAssert(setsockopt(socketDescriptor.get(), SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) == 0);
+        myAssert(bind(socketDescriptor.get(), result->ai_addr, result->ai_addrlen) == 0);
 
-        assertMy(listen(socketDescriptor.get(), BACK_LOG) == 0);
+        myAssert(listen(socketDescriptor.get(), BACK_LOG) == 0);
         freeaddrinfo(result);           /* No longer needed */
         
         return socketDescriptor;
